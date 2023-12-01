@@ -1,33 +1,18 @@
 import axios from "axios";
 
+const BASE_URL = 'https://youtube-v311.p.rapidapi.com'
+const options = {
+  params: {
+    maxResults: '5',
+  },
+  headers: {
+    'X-RapidAPI-Key': '29f55dc7b6msh323901a186f73ddp1073b2jsn0fe129e159de',
+    'X-RapidAPI-Host': 'youtube-v311.p.rapidapi.com'
+  }
+};
 
-export const fetchYoutubeSearch = (url) => {
-  const BASE_URL = `https://youtube-v311.p.rapidapi.com/search`;
-
-  const options = {
-    params: {
-      part: "snippet",
-      maxResults: "50",
-    },
-
-    headers: {
-      "X-RapidAPI-Key":
-        process.env.REACT_APP_RAPID_API_KEY,
-      "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
-    },
-  };
-
-  axios
-    .get(`${BASE_URL}?${url}`, options)
-    .then((res) => {
-      console.log(res.data);
-      return res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return err.message;
-    })
-    .finally(() => {
-      console.log("Fetched Videos");
-    });
+export const fetchYoutubeSearch = async (url) => {
+  const { data } = await axios.get(`${BASE_URL}/${url}`, options);
+  return data;
+  
 };

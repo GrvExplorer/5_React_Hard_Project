@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.sidebarH {
+  height: calc(100vh - 72px);
+  }
