@@ -3,7 +3,7 @@ import React from "react";
 
 function SideBar() {
   return (
-      <div className=" text-white sidebarH w-full bg-yellow-400">
+      <div className="p-4 text-white sidebarH w-52 bg-Neutral">
         {/* {categories.map(({name, icon}, i) => {
           <div className=" flex gap-5">
             <img src={icon} alt="" srcset="" />

@@ -1,15 +1,18 @@
 import React from "react";
-import { VideosCard } from ".";
+import { Loader, VideosCard } from ".";
 
-function Videos({videos}) {
+
+function Videos({videos, loading}) {
   return (
-    <div className=" w-full bg-red-300 p-10 text-white ">
-      {videos.map((video, i)=> {
-        <div key={i}>
-          {video.id.videoId && <VideosCard video={video} />}
-        </div>
-      })}
+    <>
+    {loading ? <Loader/> : (
+      <div className="pl-60 pt-36 pb-48 w-full bg-Neutral text-white flex gap-4 flex-wrap">
+      {videos.map((v, i) => 
+        <VideosCard key={i} video={v} />
+      )}
     </div>
+    )}
+    </>
   );
 }
 

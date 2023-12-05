@@ -4,5 +4,9 @@ import Feed from './Feed'
 import Videos from './Videos'
 import VideosCard from './VideoCard'
 import SearchBar from "./SearchBar"
+import ChannelDetail from "./ChannelDetail"
+import SearchDetail from './SearchDetail'
+import VideoDetail from "./VideoDetail"
+import Loader from './Loader'
 
-export { NavBar, SideBar, Feed, VideosCard, Videos, SearchBar}
+export { NavBar, SideBar, Feed, VideosCard, Videos, SearchBar, VideoDetail, SearchDetail, ChannelDetail, Loader }

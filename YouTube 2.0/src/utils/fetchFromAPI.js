@@ -3,7 +3,11 @@ import axios from "axios";
 const BASE_URL = 'https://youtube-v311.p.rapidapi.com'
 const options = {
   params: {
-    maxResults: '5',
+    part: 'snippet',
+    maxResults: '50',
+    order: 'relevance',
+    safeSearch: 'moderate',
+    type: 'video'
   },
   headers: {
     'X-RapidAPI-Key': '29f55dc7b6msh323901a186f73ddp1073b2jsn0fe129e159de',
