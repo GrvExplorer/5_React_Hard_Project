@@ -7,7 +7,7 @@ const options = {
     maxResults: '50',
     order: 'relevance',
     safeSearch: 'moderate',
-    type: 'video'
+    type: 'video,channel'
   },
   headers: {
     'X-RapidAPI-Key': '29f55dc7b6msh323901a186f73ddp1073b2jsn0fe129e159de',

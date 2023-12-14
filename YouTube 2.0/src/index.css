@@ -6,3 +6,7 @@
 .sidebarH {
   height: 100vh;
   }
+  
+.change1:hover .change2 {
+  color: white;
+} 

@@ -9,9 +9,8 @@ const SearchBar = () => {
     <div className="relative  text-gray-600">
       <form
         onSubmit={(e) => {
-          navigate(`/search/${e.target.value}`)
-          console.log(e.target.input);
-          ;
+          e.preventDefault()
+          navigate(`/search/${e.target.search.value}`);
         }}
       >
         <input

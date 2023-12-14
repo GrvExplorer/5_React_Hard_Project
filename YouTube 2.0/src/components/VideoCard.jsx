@@ -34,7 +34,7 @@ function VideoCard({ video:{ snippet, statistics, id } }) {
 
 {/* // video play */}
           <Link to={`/video/${id?.videoId}` || demoVideoUrl} onClick={scrollTo(0, 0)}>
-          <p className="w-[300px] text-2xl font-semibold">{snippet?.title || demoVideoTitle}</p>
+          <p className="w-[300px] cursor-pointer text-2xl font-semibold">{snippet?.title || demoVideoTitle}</p>
           </Link>
 
           <div className="flex justify-between">
