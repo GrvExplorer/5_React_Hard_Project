@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Feed from "./components/Feed";
-import { SearchDetail, VideoDetail } from "./components";
+import { Authentication, SearchDetail, VideoDetail } from "./components";
 import { useState } from "react";
+
 
 
 // TODO~ hover one div, icons, channels, Like and views in feed, [title, likes, views, channel = VideosDetails and SearchDetails ] fetch search endpoint, UI 
@@ -14,8 +15,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+        <Route path="/" element={<Authentication  />} />
           <Route
-            path="/"
+            path="/feed"
             element={<Feed loading={loading} setLoading={setLoading} />}
           />
           <Route
