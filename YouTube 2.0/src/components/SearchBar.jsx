@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {
+const SearchBar = ({ setSelectedCategory }) => {
   const navigate = useNavigate();
 
   return (
@@ -10,11 +10,13 @@ const SearchBar = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          navigate(`/search/${e.target.search.value}`);
+          // navigate(`/search/${e.target.search.value}`);
+          setSelectedCategory(e.target.search.value)
+
         }}
       >
         <input
-          className="text-md h-10 w-80 rounded-full border-2 border-gray-300 bg-white px-5 pr-16 font-medium focus:outline-none "
+          className="text-md h-10 w-80 rounded-full border-black border-2 focus:border-gray-300 text-white  px-5 pr-16 font-medium focus:outline-none "
           type="search"
           name="search"
           placeholder="Search..."

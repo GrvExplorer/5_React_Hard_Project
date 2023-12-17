@@ -7,7 +7,7 @@ function SideBar({ setSelectedCategory, selectedCategory}) {
       <div className="p-4 text-Primary h-screen overflow-y-auto flex flex-col gap-8  bg-Neutral mt-20 px-6">
        {
         categories.map((v, i) => (
-          <div key={i} className={`change1 flex gap-5 px-4 py-2 hover:bg-Active  ${v.name=== selectedCategory ? 'bg-Active ': ''} rounded-full`}
+          <div key={i} className={`change1 flex gap-5 px-4 py-2 cursor-pointer hover:bg-Active  ${v.name=== selectedCategory ? 'bg-Active ': ''} rounded-full`}
           onClick={() => {
             setSelectedCategory(v.name)
           }}

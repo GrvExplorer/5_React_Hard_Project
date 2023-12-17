@@ -1,13 +1,34 @@
 import { useEffect, useState } from "react";
-import { Artiest, Poster, Title } from "./demo"; 
+import { Artiest, Poster, Title } from "./demo";
 
 const App = () => {
   const [tracks, setTracks] = useState();
 
   async function Toptracks() {
     // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-    const token =
-      "BQD-9ZPeH9SjYcxDRdIz7M9hLkf4k6wh3Bz65DClveP6NFDQhQel9c2zG6xICs6Ly5pyRKZZFVMjcW9kOG6mxB9oWI8oNOFDwV0pT_bOxNDWonu7uKJuHEdarGJz2JvF_3x8GelqdZAE1qlRpeFVCX5MeTAKLKXkwe8meFJpz_3xGh6DAW2lwIQoFwsaOYpURVikRt1R1-_-kN1z004IpR4QWIzitUbKKVnsqZ_R0iU5jDeRPsbwiUz7NNipJJE9MZuMaRpONn_rIhsDWx_CCaqz";
+
+    function getToken() {
+      fetch("https://accounts.spotify.com/api/token", {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        method: "POST",
+        body: new URLSearchParams({
+          grant_type: "client_credentials",
+          client_id: "7f97b2cc559042fca9d3a248b1aaec01",
+          client_secret: "c6ebd016d68747f8a270783a09421566",
+        }),
+      })
+        .then((res) => {
+          return res;
+        })
+        .catch((err) => console.log(err));
+    }
+
+    const token =     "BQCERs-1teQkh9z9UhgCHSyi3ofAMdbF1AdGJVvBZwrBBR9f_AxSl4YtrKMdQmTKfG-et1CWK8VwZdXQHreL5vXv1TCl7_W4nzVglIct14AIQ7i_Pmw"
+    ;
+    console.log(token);
+
     async function fetchWebApi(endpoint, method, body) {
       const res = await fetch(`https://api.spotify.com/${endpoint}`, {
         headers: {
@@ -20,10 +41,9 @@ const App = () => {
     }
 
     async function getTopTracks() {
-      // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
       return (
         await fetchWebApi(
-          "v1/me/top/tracks?time_range=long_term&limit=20",
+          "v1/me/top/tracks?time_range=long_term&limit=5",
           "GET",
         )
       ).items;
