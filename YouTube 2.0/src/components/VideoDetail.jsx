@@ -1,39 +1,52 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-import { fetchYoutubeSearch } from "../utils/fetchFromAPI";
 import Videos from "./Videos";
-import { NavBar, SideBar } from '.'
+import { request } from "../api/api.config";
 
 function VideoDetail({ loading, setLoading }) {
   const { id } = useParams();
-  const [videos, setVideos] = useState([])
+  const [videos, setVideos] = useState([1, 2])
+
+  console.log(id);
 
   useEffect(() => {
     setLoading(true);
-    fetchYoutubeSearch("search/")
+    request("/videos", {
+      params: {
+        part: 'snippet',
+        id: id,
+        maxResults: 15,
+        type: 'video',
+      },
+    })
       .then((res) => {
         setLoading(false);
-        setVideos(res.items)
+        console.log(res);
+        setVideos(res.data.items);
       })
       .catch((err) => {
-        console.log(err)
-        setLoading(false)
+        console.log(err);
+        setLoading(false);
       });
-  }, []);
-
+  }, [id]);
+  
   return (
     <>
-    <NavBar />
-    <div className="bg-Neutral flex flex-col gap-8 ">
-      <div className="">
-      <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`} width={'100%'} height={'80vh'} controls />
+      <div className=" px-4 flex flex-col gap-10">
+
+        <div>
+           <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${id}`}
+            width={'full'}
+            height={'100vh'}
+            controls
+          /> 
+        </div>
+        <div>
+          <Videos videos={videos} loading={loading} />
+        </div>
       </div>
-     <div className="flex">
-     <SideBar />
-      <Videos videos={videos} loading={loading} />
-     </div>
-    </div>
     </>
   );
 }

@@ -1,34 +1,43 @@
-import { useEffect, useState } from 'react'
-import { fetchYoutubeSearch } from '../utils/fetchFromAPI'
-import { Loader, NavBar, SideBar, Videos } from '.'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ChannelCard, Loader, NavBar, SideBar, Videos } from ".";
+import { request } from "../api/api.config";
 
-function SearchDetail({loading, setLoading}) {
-  const [videos, setVideos] = useState()
+function SearchDetail({ loading, setLoading }) {
+  const [videos, setVideos] = useState([1,2]);
+  const [channels, setChannels] = useState([1]);
+  const { keyword } = useParams();
 
   useEffect(() => {
-    setLoading(true)
-    fetchYoutubeSearch('search/').then(res => {
-      setLoading(false)
-      setVideos(res.items)
-    }).catch(err => {console.log(err)
-    
-    setLoading(false)
+    setLoading(true);
+    request("/search", {
+      params: {
+        part: "snippet",
+        maxResults: 20,
+        q: keyword,
+        type: "video,channel",
+      },
     })
-  
-  }, [])
-  
+      .then((res) => {
+        setLoading(false);
+        console.log(res);
+        setVideos(res.data.items);
+        setChannels(res)
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [keyword]);
+
   return (
- <>
- <NavBar />
-  <div className='flex '>
-  <div className="fixed flex">
-          <SideBar />
-          <div className="h-screen w-[1px] bg-gray-500"></div>
-    </div>
-    <Videos videos={videos} loading={loading} />
-  </div>
- </>
-  )
+    <>
+      <div className="flex">
+        <ChannelCard channel={videos} />
+        <Videos videos={videos} loading={loading} />
+      </div>
+    </>
+  );
 }
 
-export default SearchDetail
+export default SearchDetail;

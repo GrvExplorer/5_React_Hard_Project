@@ -9,5 +9,6 @@ import SearchDetail from './SearchDetail'
 import VideoDetail from "./VideoDetail"
 import Loader from './Loader'
 import Authentication from "./Authentication";
+import ChannelCard from "./ChannelCard";
 
-export { NavBar, SideBar, Feed, VideosCard, Videos, SearchBar, VideoDetail, SearchDetail, ChannelDetail, Loader, Authentication }
+export { NavBar, SideBar, Feed, VideosCard, Videos, SearchBar, VideoDetail, SearchDetail, ChannelDetail, Loader, Authentication, ChannelCard }

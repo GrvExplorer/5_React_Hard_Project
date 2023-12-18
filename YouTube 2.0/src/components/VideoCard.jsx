@@ -10,21 +10,16 @@ import {
 import { Link } from "react-router-dom";
 import { AiTwotoneLike } from 'react-icons/ai'
 
-
-// import { demoProfilePicture } from '../utils/constants'
-
 function VideoCard({ video:{ snippet, statistics, id } }) {
-
-
   return (
     <div className="flex w-fit flex-col ">
       <img src={snippet?.thumbnails?.default?.url || demoThumbnailUrl} alt="" className={`h-[${snippet?.thumbnails?.default?.height || 200}px] w-[${snippet?.thumbnails?.default?.width || 400} px]`} />
 
       <div className="flex pb-4 gap-3 pl-3 pt-4 bg-[#1e1e1e] rounded-md shadow-sm">
 {/* // channel  */}
-        <Link to={demoChannelUrl}>
+        <Link to={`/channel/${snippet?.channelId}` || demoChannelUrl } >
           <img
-            src={demoProfilePicture}
+            src={snippet?.thumbnails?.high?.url ||demoProfilePicture}
             alt=""
             className="h-10 w-10 rounded-full "
           />
@@ -33,14 +28,14 @@ function VideoCard({ video:{ snippet, statistics, id } }) {
         <div>
 
 {/* // video play */}
-          <Link to={`/video/${id?.videoId}` || demoVideoUrl} onClick={scrollTo(0, 0)}>
+          <Link to={`/video/${id}` || demoVideoUrl} onClick={scrollTo(0, 0)}>
           <p className="w-[300px] cursor-pointer text-2xl font-semibold">{snippet?.title || demoVideoTitle}</p>
           </Link>
 
           <div className="flex justify-between">
 
 {/* // channel */}
-          <Link to >
+          <Link to={`/channel/${snippet?.channelId}` || demoChannelUrl} >
           <p className="text-lg font-medium">{snippet?.channelTitle ||demoChannelTitle}</p>
           </Link>
 
