@@ -17,18 +17,18 @@ function VideoCard({ video:{ snippet, statistics, id } }) {
 
       <div className="flex pb-4 gap-3 pl-3 pt-4 bg-[#1e1e1e] rounded-md shadow-sm">
 {/* // channel  */}
-        <Link to={`/channel/${snippet?.channelId}` || demoChannelUrl } >
+        <Link  to={`/channel/${snippet?.channelId}` || demoChannelUrl } >
           <img
             src={snippet?.thumbnails?.high?.url ||demoProfilePicture}
             alt=""
-            className="h-10 w-10 rounded-full "
+            className="rounded-full h-10 w-10 border p-1"
           />
         </Link>
 
         <div>
 
 {/* // video play */}
-          <Link to={`/video/${id}` || demoVideoUrl} onClick={scrollTo(0, 0)}>
+          <Link to={`/video/${id?.videoId}` || demoVideoUrl} onClick={scrollTo(0, 0)}>
           <p className="w-[300px] cursor-pointer text-2xl font-semibold">{snippet?.title || demoVideoTitle}</p>
           </Link>
 

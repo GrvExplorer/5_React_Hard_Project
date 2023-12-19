@@ -8,33 +8,32 @@ function VideoDetail({ loading, setLoading }) {
   const { id } = useParams();
   const [videos, setVideos] = useState([1, 2])
 
-  console.log(id);
-
   useEffect(() => {
     setLoading(true);
-    request("/videos", {
+    request("/search", {
       params: {
         part: 'snippet',
-        id: id,
+        relatedToVideo: id,
+        regionCode: 'IN',
         maxResults: 15,
         type: 'video',
       },
     })
       .then((res) => {
-        setLoading(false);
-        console.log(res);
         setVideos(res.data.items);
+        setLoading(false);
+
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
+        console.log(err);
       });
-  }, [id]);
+
+  }, []);
   
   return (
     <>
       <div className=" px-4 flex flex-col gap-10">
-
         <div>
            <ReactPlayer
             url={`https://www.youtube.com/watch?v=${id}`}

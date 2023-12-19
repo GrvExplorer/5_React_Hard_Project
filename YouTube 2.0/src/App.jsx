@@ -5,16 +5,7 @@ import Feed from "./components/Feed";
 import { Authentication, ChannelDetail, SearchDetail, VideoDetail, Videos } from "./components";
 import { useState } from "react";
 
-// : hover one div, icons, 
-// : channels, Like and views in feed, [title, likes, views, channel = VideosDetails and SearchDetails ] fetch search endpoint, UI 
-
-
-// TODO: feed - searchChannel, videoChannel = channelPage recommendation, 
-
-// TODO: SectionWapperComponent 
-// TODO: API call for feed 
-// TODO: Redirect to video player and recommendation 
-// TODO: API call for channel View 
+// TODO: Search channelAvatar display 
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -27,12 +18,14 @@ function App() {
   loading={data.loading} setLoading={data.setLoading}
   />
 
+  const setupChannel = (data) => <ChannelDetail loading={data.loading} setLoading={data.setLoading} videos={data.videos} />
+
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Authentication  />} />
+        <Route path="/auth" element={<Authentication  />} />
           <Route
             path="/feed"
             element={<Feed loading={loading} Videos={setupVideos} setLoading={setLoading} />}
@@ -44,7 +37,9 @@ function App() {
           <Route path="/search/:keyword" element={<Feed 
           setLoading={setLoading} Videos={setupSearch}
           />} /> 
-          <Route path="/channel/:id" element={<ChannelDetail />} />
+          <Route path="/channel/:id" element={<Feed 
+          setLoading={setLoading} Videos={setupChannel}
+          />} />
         </Routes>
       </BrowserRouter>
     </>

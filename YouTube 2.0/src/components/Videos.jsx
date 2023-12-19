@@ -2,7 +2,6 @@ import { Loader, VideosCard } from ".";
 
 
 function Videos({videos, loading}) {
-  console.log(videos);
   return (
     <>
     {loading ? <Loader/> : (

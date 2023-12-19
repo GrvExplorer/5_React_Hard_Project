@@ -29,13 +29,10 @@ function Feed({ loading, setLoading, Videos }) {
           setVideos(res.data.items);
           setLoading(false);
           console.log(videos);
-          navigate("/feed");
         },
       )
       .catch((err) => {
         console.log(err);
-        navigate("/feed");
-
         setLoading(false);
       });
   }, [selectedCategory]);
