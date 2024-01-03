@@ -2,7 +2,7 @@ import Body from "./Body";
 import CurrentTrack from "./CurrentTrack";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import PlayerControls from "./PlayerControles";
+import PlayerControl from "./PlayerControl";
 import Playlist from "./Playlist";
 import Sidebar from "./Sidebar";
 import Volume from "./Volume";
@@ -12,7 +12,7 @@ export {
   CurrentTrack,
   Footer,
   Navbar,
-  PlayerControls,
+  PlayerControl,
   Playlist,
   Sidebar,
   Volume,
