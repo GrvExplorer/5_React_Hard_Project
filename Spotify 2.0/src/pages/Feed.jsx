@@ -1,10 +1,11 @@
 import styled from "styled-components";
 // import { Footer, Navbar, Sidebar } from '../Components';
 
-import Body from "../Components/Body";
+import SpotifyBody from "../Components/SpotifyBody";
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import Sidebar from '../Components/Sidebar'
+
 // Endpoint: https://api.spotify.com/v1/me;
 // Endpoint: https://api.spotify.com/v1/me/player;
 
@@ -16,7 +17,7 @@ function Feed() {
         <div className="body">
           <Navbar />
           <div className="body__contents">
-            <Body />
+            <SpotifyBody />
           </div>
         </div>
       </div>
