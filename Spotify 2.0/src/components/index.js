@@ -1,25 +1,19 @@
-import Sidebar from './Sidebar';
-import Searchbar from './Searchbar';
-import SongCard from './SongCard';
-import TopPlay from './TopPlay';
-import ArtistCard from './ArtistCard';
-import DetailsHeader from './DetailsHeader';
-import SongBar from './SongBar';
-import RelatedSongs from './RelatedSongs';
-import MusicPlayer from './MusicPlayer';
-import Loader from './Loader';
-import Error from './Error';
+import Body from "./Body";
+import CurrentTrack from "./CurrentTrack";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
+import PlayerControls from "./PlayerControles";
+import Playlist from "./Playlist";
+import Sidebar from "./Sidebar";
+import Volume from "./Volume";
 
 export {
-  TopPlay,
+  Body,
+  CurrentTrack,
+  Footer,
+  Navbar,
+  PlayerControls,
+  Playlist,
   Sidebar,
-  SongCard,
-  Searchbar,
-  ArtistCard,
-  DetailsHeader,
-  SongBar,
-  RelatedSongs,
-  MusicPlayer,
-  Loader,
-  Error,
+  Volume,
 };
