@@ -1,4 +1,4 @@
-import Body from "./Body";
+import SpotifyBody from "./SpotifyBody";
 import CurrentTrack from "./CurrentTrack";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -8,7 +8,7 @@ import Sidebar from "./Sidebar";
 import Volume from "./Volume";
 
 export {
-  Body,
+  SpotifyBody,
   CurrentTrack,
   Footer,
   Navbar,

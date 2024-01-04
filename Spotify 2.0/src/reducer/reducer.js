@@ -11,6 +11,36 @@ const reducer = (state, action) => {
         ...state,
         token: action.token,
       }
+    case actionTypes.SET_PLAYLIST:
+      return {
+        ...state,
+        playlist: action.playlist,
+      }
+    case actionTypes.SET_USER:
+      return {
+        ...state,
+        userInfo: action.userInfo,
+      }
+    case actionTypes.SET_PLAYING:
+      return {
+        ...state,
+        currentPlaying: action.currentPlaying,
+      }
+    case actionTypes.SET_PLAYLIST_ID:
+      return {
+        ...state,
+        playlistID: action.playlistID,
+      }
+    case actionTypes.SET_PLAYLISTS:
+      return {
+        ...state,
+        playlists: action.playlists,
+      }
+    case actionTypes.SET_PLAYER_STATE:
+      return {
+        ...state,
+        playerState: action.plyerState,
+      }
     default:
       return state
   }
