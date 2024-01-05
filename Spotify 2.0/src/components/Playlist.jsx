@@ -12,7 +12,7 @@ function Playlist() {
     const getPlaylist = async () => {
       try {
         const {data} = await axios.get(
-          `${baseURL}/artists/4Z8W4fKeB5YxbusRsdQVPb`,
+          `${baseURL}/me/playlist`,
           {
             headers: {
               Authorization: "Bearer " + token,

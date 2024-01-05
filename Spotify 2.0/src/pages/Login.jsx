@@ -14,6 +14,7 @@ const handelLogin = (e) => {
     "user-read-currently-playing",
     "user-read-recently-played",
     "user-top-read",
+    "playlist-read-private",
   ]
   window.location.href = `${api_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope.join(
     " "

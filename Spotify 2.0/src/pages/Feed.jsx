@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import { Footer, Navbar, Sidebar, SpotifyBody } from "../Components";
+import { useEffect } from "react";
+import axios from "axios";
+import { baseURL } from "../utils/constant";
+import { useStateProvider } from "../Context/useState";
+import { actionTypes } from "../action/action.type";
 
 // TODO: style the feed component + fun
 // TODO: UI + fun
@@ -7,6 +12,29 @@ import { Footer, Navbar, Sidebar, SpotifyBody } from "../Components";
 
 // Endpoint: https://api.spotify.com/v1/me;
 // Endpoint: https://api.spotify.com/v1/me/player;
+
+const [{token}, dispatch] = useStateProvider()
+
+useEffect(() => {
+  const getUserInfo = async () => {
+    const {data} = await axios.get(`${baseURL}/me`, {
+      headers: {
+        Authorization: 'Bearer'+ token;
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(data);
+    const {display_name, id} = data
+    const userInfo = {
+      userId: id,
+      userName: display_name,
+    }
+    dispatch({type: actionTypes.SET_USER, userInfo})
+  }
+
+}, [token, dispatch])
+
+
 
 function Feed() {
   return (
