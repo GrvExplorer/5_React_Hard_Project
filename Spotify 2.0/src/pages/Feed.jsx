@@ -24,7 +24,7 @@ function Feed() {
           Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
-      });
+      });     
       console.log(data);
       const { display_name, id } = data;
       const userInfo = {
