@@ -1,7 +1,7 @@
 import axios from "axios";
 import styled from "styled-components";
 import { Playlist } from "../Components";
-import { login_logo, spotify_categories } from "../utils/constant";
+import { spotify_categories } from "../utils/constant";
 
 function Sidebar() {
   return (
@@ -51,19 +51,23 @@ const Container = styled.div`
     gap: 20px;
     margin-left: 16px;
 
-    :hover {
-      color: white;
-      cursor: pointer;
-      .category__logo {
-        color: white;
-        cursor: pointer;
-      }
-    }
-    .category {
+  }
+  .category {
+ 
       display: flex;
       font-size: 19px;
       gap: 8px;
       color: #b3b3b3;
+      transition: 0.3s ease-in-out;
+      &:hover {
+        color: white;
+        cursor: pointer;
+    
+        .category__logo {
+          color: white;
+          cursor: pointer;
+    
+        }
     }
   }
   .spotify__playlist {
