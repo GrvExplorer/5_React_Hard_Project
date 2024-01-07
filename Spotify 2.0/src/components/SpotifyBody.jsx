@@ -29,9 +29,7 @@ function SpotifyBody() {
         tracks: data.tracks.items.map(({ track }) => ({
           id: track.id,
           name: track.name == undefined ? '': track.name,
-          artists: track.artists.map(({ name }) => {
-            name;
-          }),
+          artists: track.artists.map(({ name }) => (name)),
           image: track.album.images[2].url,
           duration: track.duration_ms,
           album: track.album.uri,
@@ -39,15 +37,16 @@ function SpotifyBody() {
           track_number: track.track_number,
         })),
       };
-
+      
+      console.log(selectedPlaylist);
       dispatch({ type: actionTypes.SET_PLAYLIST, selectedPlaylist });
     };
     getInitialPlaylist();
   }, [token, selectedPlaylistId, dispatch]);
 
-console.log(selectedPlaylist);
 
-  return <Container></Container>;
+  return <Container>
+  </Container>;
 }
 
 const Container = styled.div``;
