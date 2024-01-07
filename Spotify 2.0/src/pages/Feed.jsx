@@ -69,20 +69,21 @@ const Container = styled.div`
   .body {
     grid-area: body;
     background: linear-gradient(transparent, rgb(0, 0, 0));
-    height: 85vh;
+    height: 88vh;
     background-color: #163d46;
+    overflow: auto;
   }
   .spotify__sidebar {
     background-color: #000000;
     grid-area: sidebar;
-    height: 85vh;
+    height: 88vh;
   }
   .spotify__footer {
     grid-area: footer;
     background-color: #181818;
     opacity: 90%;
     width: 100%;
-    height: 15vh;
+    height: 12vh;
   }
 `;
 
