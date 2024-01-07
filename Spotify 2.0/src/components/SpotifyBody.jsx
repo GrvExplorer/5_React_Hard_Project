@@ -23,7 +23,6 @@ function SpotifyBody() {
           },
         }
       );
-      console.log(data);
 
       const selectedPlaylist = {
         id: data.id,
@@ -43,7 +42,6 @@ function SpotifyBody() {
         })),
       };
 
-      console.log(selectedPlaylist);
       dispatch({ type: actionTypes.SET_SELECTED_PLAYLIST, selectedPlaylist });
     };
     getInitialPlaylist();
@@ -53,6 +51,38 @@ function SpotifyBody() {
     var min = Math.floor((ms / 1000 / 60) << 0);
     var sec = Math.floor((ms / 1000) % 60);
     return min + ":" + sec;
+  }
+
+  const playTrack = async ({ id, context_uri, track_number, name, artists, image}) => {
+    const response = await axios.put(`${baseURL}/me/player/play`,{
+      "context_uri": context_uri,
+      "offset": {
+          "position": track_number - 1
+      },
+      "position_ms": 0
+    }, 
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    }
+    )
+    if (response.status === 204) {
+      const currentPlaying = {
+         id,
+         name,
+        image,
+        artists,
+        context_uri,
+      }
+      dispatch({ type: actionTypes.SET_PLAYING, currentPlaying });
+      dispatch({ type: actionTypes.SET_PLAYER_STATE, playerState: true });
+      
+    }else {
+      dispatch({ type: actionTypes.SET_PLAYER_STATE, playerState: true });
+      
+    }
   }
 
   return (
@@ -70,7 +100,7 @@ function SpotifyBody() {
         </ul>
         <div className="playlist_content">
           {selectedPlaylist?.tracks?.map((track, i) => (
-            <ul className="playlist_table_content" key={track.id}>
+            <ul className="playlist_table_content" onClick={() => playTrack(track)} key={track.id}>
               <li>{i+1}</li>
               <div className="title">
                 <li>
@@ -107,6 +137,10 @@ const Container = styled.div`
     grid-template-columns: 8% 45% 30% 10%;
   }
   .playlist_head {
+    img {
+      width: 280px;
+      height: 280px;
+    }
     display: flex;
     margin-top: 210px;
     gap: 40px;
@@ -125,6 +159,7 @@ const Container = styled.div`
       height: 80px;
     }
    .playlist_content {
+    cursor: pointer;
     display: flex;
   padding-left: 40px;
 

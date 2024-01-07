@@ -1,23 +1,19 @@
-import { BsFillPauseCircleFill, BsFillPlayCircleFill } from "react-icons/bs";
-import { CgPlayTrackNext } from "react-icons/cg";
-import { FiRepeat } from 'react-icons/fi'
-import { MdSkipPrevious } from "react-icons/md";
-import { BiSolidSkipPreviousCircle } from "react-icons/bi";
 import styled from "styled-components";
-
 
 import axios from "axios";
 import { useEffect } from "react";
 import { actionTypes } from "../action/action.type";
 import { useStateProvider } from "../context/useState";
 import { baseURL } from "../utils/constant";
+import PlayerControl from "./PlayerControl";
+import Volume from "./Volume";
 
 function CurrentTrack() {
-  const [{ token, currentPlaying, playerState }, dispatch] = useStateProvider();
+  const [{ token, currentPlaying}, dispatch] = useStateProvider();
 
   useEffect(() => {
     async function getCurrentPlaying() {
-      const res = await axios.get(
+      const { data } = await axios.get(
         `${baseURL}/me/player/currently-playing`,
         {
           headers: {
@@ -26,49 +22,38 @@ function CurrentTrack() {
           },
         }
       );
-      console.log(res);
       const currentPlaying = {
-        name: res.name,
-        image: res,
-        artists: res,
+        id: data.item.id,
+        name: data.item.name,
+        image: data.item.album.images[0].url,
+        artists: data.item.artists,
+        context_uri: data.context.uri
       };
-      const playerState = res.is_playing;
+      const playerState = data.is_playing;
       dispatch({ type: actionTypes.SET_PLAYER_STATE, playerState });
       dispatch({ type: actionTypes.SET_PLAYING, currentPlaying });
     }
-    getCurrentPlaying()
-  }, []);
+    getCurrentPlaying();
+  }, [token, currentPlaying, dispatch]);
+
 
   return (
     <Container>
       <div className="display">
         <div className="track_image">
-          <img src={currentPlaying.image} alt="track image" />
+          <img src={currentPlaying?.image} alt="track image" />
         </div>
         <div className="title">
           <p className="name">{currentPlaying?.name}</p>
-          <p className="artist">{currentPlaying?.artist}</p>
+          <p className="artist">
+            {currentPlaying?.artists.map(({name}, i) => (
+              <p key={`${name}-${i}`}>{name}</p>
+            ))}
+          </p>
         </div>
       </div>
-      <div className="player_control">
-       <div className="main">
-       <div className="previous">
-        <MdSkipPrevious />
-        </div>
-        <div className="state">
-          {playerState ? <BsFillPauseCircleFill /> : <BsFillPlayCircleFill />}
-        </div>
-        <div className="next">
-          <CgPlayTrackNext />
-        </div>
-       </div>
-        <div className="repeat">
-          <FiRepeat />
-        </div>
-      </div>
-      <div className="player_volume">
-        volume
-      </div>
+     <PlayerControl />
+     <Volume />
     </Container>
   );
 }
@@ -105,25 +90,17 @@ const Container = styled.div`
   }
   .player_control {
     padding: 0px 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 28px;
     .main {
-gap: 18px;
+    font-size: 36px;
+      gap: 18px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    color: white;
-    font-size: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 28px;
-  }
-  .player_volume {
-    padding-right: 34px;
-
-    display: flex;
-      justify-content: center;
-      align-items: center;
   }
 `;
 

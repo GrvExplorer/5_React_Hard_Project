@@ -24,7 +24,7 @@ const reducer = (state, action) => {
     case actionTypes.SET_PLAYLIST_ID:
       return {
         ...state,
-        playlistID: action.playlistID,
+        selectedPlaylistId: action.selectedPlaylistId,
       };
     case actionTypes.SET_SELECTED_PLAYLIST:
       return {
@@ -39,7 +39,7 @@ const reducer = (state, action) => {
     case actionTypes.SET_PLAYER_STATE:
       return {
         ...state,
-        playerState: action.plyerState,
+        playerState: action.playerState,
       };
     
       default:

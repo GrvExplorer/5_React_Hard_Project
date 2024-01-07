@@ -17,13 +17,11 @@ function Playlist() {
             "Content-Type": "application/json",
           },
         });
-        console.log(data);
         const { items } = data;
         const playlists = items.map(({ name, id }) => {
           return { name, id };
         });
         dispatch({ type: actionTypes.SET_PLAYLISTS, playlists });
-        console.log(playlists);
       } catch (error) {
         console.log(error);
       }
@@ -31,11 +29,17 @@ function Playlist() {
     getPlaylist();
   }, [token, dispatch]);
 
+  const changePlaylist = (selectedPlaylistId) => {
+    dispatch({ type: actionTypes.SET_PLAYLIST_ID, selectedPlaylistId });
+  };
+
   return (
     <Container>
       <ul>
         {playlists.map(({ name, id }) => (
-          <li key={id}>{name}</li>
+          <li key={id} onClick={() => changePlaylist(id)}>
+            {name}
+          </li>
         ))}
       </ul>
     </Container>
