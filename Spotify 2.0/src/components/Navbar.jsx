@@ -4,14 +4,13 @@ import styled from "styled-components";
 import { useStateProvider } from "../Context/useState";
 
 function Navbar() {
-  const [{ userInfo }, dispatch] = useStateProvider();
+  const [{ userInfo }] = useStateProvider();
 
   return (
     <Container>
       <div className="search_bar">
         <FaSearch />
-        <input type="text"
-        placeholder="Artists, sony's or podcasts" />
+        <input type="text" placeholder="Artists, songs or podcasts" />
       </div>
       <div className="avatar">
         <a href="a">
@@ -24,9 +23,11 @@ function Navbar() {
 }
 
 const Container = styled.div`
+  background-color: #0000008c;
+  position: fixed;
   display: flex;
+  width: calc(100% - 25vh);
   justify-content: space-between;
-  width: 100%;
   padding: 4rem 2rem;
   .search_bar {
     background-color: #fff;
@@ -54,11 +55,16 @@ const Container = styled.div`
     border-radius: 28px;
     width: 10rem;
     text-align: center;
+    padding: 4px 8px;
     a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
       outline: none;
       border: none;
       color: #b3b3b3;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
       span {
         color: #fff;
