@@ -1,21 +1,21 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Router from '../components/Router'
-import { useState } from 'react';
+import { useState } from "react";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import Router from "./components/Router";
 function App() {
+  const [darkTheme, setDarkTheme] = useState(true);
 
-  const [darkTheme, setDarkTheme] = useState(false)
-
-  return <>
-<div className={darkTheme ? 'dark' : ''}>
-
-<div className="bg-gray-100 dark:bg-gray-900">
-  <Navbar /> 
-</div>
-
-</div>
-  
-  </>;
+  return (
+    <>
+      <div className={darkTheme ? "dark" : ""}>
+        <div className="min-h-screen bg-gray-100">
+          <Navbar />
+          <Footer />
+          <Router />
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default App;

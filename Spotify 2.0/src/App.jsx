@@ -12,7 +12,7 @@ function App() {
       const token = hash.substring(1).split("&")[0].split("=")[1];
       dispatch({ type: actionTypes.SET_TOKEN, token });
       console.log(state.token);
-    }
+    
   }, [state.token, dispatch]);
 
   return <div>{state.token ? <Feed /> : <Login />}</div>;
