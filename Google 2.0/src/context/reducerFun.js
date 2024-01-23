@@ -1,8 +1,8 @@
 export const initialState = {
-  
+  token: null
 }
 
-export const reducer = (state, action) => {
+export const reducer = (state=initialState, action) => {
   switch (action.type) {
     case 'ACTION_TYPE_1':
       return state

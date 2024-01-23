@@ -2,7 +2,9 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div>
+      <p className='text-4xl font-bold space-x-1'>Related searches :</p>
+    </div>
   )
 }
 

@@ -3,15 +3,14 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Router from "./components/Router";
 function App() {
-  const [darkTheme, setDarkTheme] = useState(true);
-
+  const [darkTheme, setDarkTheme] = useState(false);
   return (
     <>
-      <div className={darkTheme ? "dark" : ""}>
-        <div className="min-h-screen bg-gray-100">
+      <div className={`bg-gray-100`}>
+        <div className="flex max-w-10xl mx-auto flex-col justify-between min-h-screen">
           <Navbar />
-          <Footer />
           <Router />
+          <Footer />
         </div>
       </div>
     </>
