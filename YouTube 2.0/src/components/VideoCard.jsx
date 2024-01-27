@@ -12,10 +12,11 @@ import { AiTwotoneLike } from 'react-icons/ai'
 
 function VideoCard({ video:{ snippet, statistics, id } }) {
   return (
-    <div className="flex w-fit flex-col ">
-      <img src={snippet?.thumbnails?.default?.url || demoThumbnailUrl} alt="" className={`h-[${snippet?.thumbnails?.default?.height || 200}px] w-[${snippet?.thumbnails?.default?.width || 400} px]`} />
+<>
+<div className="flex w-fit flex-col ">
+      <img src={snippet?.thumbnails?.default?.url || demoThumbnailUrl} alt="" className={`h-[${snippet?.thumbnails?.default?.height || 200}px] w-[${snippet?.thumbnails?.default?.width || 400} px] h-60`}  />
 
-      <div className="flex pb-4 gap-3 pl-3 pt-4 bg-[#1e1e1e] rounded-md shadow-sm">
+      <div className="flex pb-4 pl-3 pt-4 justify-between bg-[#1e1e1e] rounded-md shadow-sm">
 {/* // channel  */}
         <Link  to={`/channel/${snippet?.channelId}` || demoChannelUrl } >
           <img
@@ -29,18 +30,18 @@ function VideoCard({ video:{ snippet, statistics, id } }) {
 
 {/* // video play */}
           <Link to={`/video/${id?.videoId}` || demoVideoUrl} onClick={scrollTo(0, 0)}>
-          <p className="w-[300px] cursor-pointer text-2xl font-semibold">{snippet?.title || demoVideoTitle}</p>
+          <p className="w-[366px] pl-2 cursor-pointer text-lg font-semibold">{snippet?.title || demoVideoTitle}</p>
           </Link>
 
-          <div className="flex justify-between">
+          <div className="flex justify-between px-2">
 
 {/* // channel */}
           <Link to={`/channel/${snippet?.channelId}` || demoChannelUrl} >
-          <p className="text-lg font-medium">{snippet?.channelTitle ||demoChannelTitle}</p>
+          <p className="text-md text-gray-400 font-medium">{snippet?.channelTitle ||demoChannelTitle}</p>
           </Link>
 
-            <p className="text-md text-gray-400 font-medium flex justify-center items-center gap-2 ">{
-              statistics?.likeCount || 12
+            <p className="text-md text-gray-400 font-medium flex justify-center items-center gap-2  ">{
+              statistics?.likeCount || '63k'
             }
             <span className="text-xl text-gray-400 "><AiTwotoneLike /></span>
             </p>
@@ -49,6 +50,8 @@ function VideoCard({ video:{ snippet, statistics, id } }) {
       </div>
 
     </div>
+ 
+</>
   );
 
 }

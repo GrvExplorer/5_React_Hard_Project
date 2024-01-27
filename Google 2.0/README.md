@@ -37,6 +37,7 @@
 
 ## Acknowledgments
 
+### [Video](https://www.youtube.com/watch?v=0p01b74Y2X4&t=2567s)
 ### [JS Mastery](https://youtu.be/I1cpb0tYV74?si=F4XPeY96fOiy3FR9)
 
 # Feedback for me
