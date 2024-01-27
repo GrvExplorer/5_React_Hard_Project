@@ -1,9 +1,9 @@
 import { createContext, useReducer } from "react";
 
-export const StateProvider = createContext()
+export const StateContext = createContext();
 
-export const Wrapper = ({initialState, reducer, children}) => {
-<StateProvider.Provider value={useReducer(reducer,initialState)}>
-  {children}
-</StateProvider.Provider>
-}
+export const StateContextProvider = ({ initialState, reducer, children }) => (
+  <StateContext.Provider value={useReducer(reducer, initialState)}>
+    {children}
+  </StateContext.Provider>
+);

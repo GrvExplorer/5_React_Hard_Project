@@ -1,13 +1,19 @@
 export const initialState = {
-  token: null
+  theme: 'light',
+  searchQ: '',
+  loading: false,
+  results: [],
+  token: null,
 }
 
-export const reducer = (state=initialState, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
-    case 'ACTION_TYPE_1':
-      return state
-    case 'ACTION_TYPE_2':
-      return state
+    case 'TOGGLE':
+      return { ...state, theme: action.payload }
+    case 'SEARCH_Q':
+      return {...state, searchQ: action.payload }
+    case 'RESULTS':
+      return { ...state, results: action.payload }
     default:
       return state
   }

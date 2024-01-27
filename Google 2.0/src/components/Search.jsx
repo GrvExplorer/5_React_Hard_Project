@@ -1,21 +1,35 @@
-import { useState } from 'react'
-import { MdClear } from 'react-icons/md'
+import { MdClear } from "react-icons/md";
+import { useStateProvider } from "../context/useStateProvider";
 function Search() {
-const [search, setSearch] = useState('')
+  const [state, dispatch] = useStateProvider();
 
   return (
-    <div className='bg-white rounded-full'>
-      <label htmlFor="search" className='flex items-center pr-4'>
-
-      <input type="text" id='search' value={search}
-      onChange={(e) => {
-        setSearch(e.target.value)
-      }}
-      className='focus:outline-none cursor-pointer rounded-full text-2xl px-4 py-1' />
-      <MdClear className='text-xl font-semibold' onClick={() => setSearch('')} />
+    <div className="rounded-full bg-white">
+      <label htmlFor="search" className="flex items-center pr-4">
+        <input
+          type="text"
+          id="search"
+          value={state.searchQ}
+          onChange={(e) => {
+            dispatch({
+              type: "SEARCH_Q",
+              payload: e.target.value,
+            })
+          }}
+          className="cursor-pointer rounded-full px-4 py-1 text-2xl focus:outline-none"
+        />
+        <MdClear
+          className="text-xl font-semibold"
+          onClick={() =>
+            dispatch({
+              type: "SEARCH_Q",
+              payload: "",
+            })
+          }
+        />
       </label>
     </div>
-  )
+  );
 }
 
-export default Search
+export default Search;

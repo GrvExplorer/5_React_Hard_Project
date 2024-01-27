@@ -1,0 +1,1231 @@
+{
+
+  kind: 'customsearch#search',
+
+  url: {
+
+    type: 'application/json',
+
+    template: 
+
+      'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json'
+
+  },
+
+  queries: {
+
+    request: [
+
+      {
+
+        title: 'Google Custom Search - coding',
+
+        totalResults: '1440000000',
+
+        searchTerms: 'coding',
+
+        count: 10,
+
+        startIndex: 1,
+
+        inputEncoding: 'utf8',
+
+        outputEncoding: 'utf8',
+
+        safe: 'off',
+
+        cx: '50178ba5d5cb84d78'
+
+      }
+
+    ],
+
+    nextPage: [
+
+      {
+
+        title: 'Google Custom Search - coding',
+
+        totalResults: '1440000000',
+
+        searchTerms: 'coding',
+
+        count: 10,
+
+        startIndex: 11,
+
+        inputEncoding: 'utf8',
+
+        outputEncoding: 'utf8',
+
+        safe: 'off',
+
+        cx: '50178ba5d5cb84d78'
+
+      }
+
+    ]
+
+  },
+
+  context: { title: 'google 2.0' },
+
+  searchInformation: {
+
+    searchTime: 0.163348,
+
+    formattedSearchTime: '0.16',
+
+    totalResults: '1440000000',
+
+    formattedTotalResults: '1,440,000,000'
+
+  },
+
+  items: Array(10) [
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'Code.org: Learn today, build a brighter tomorrow.',
+
+      htmlTitle: 'Code.org: Learn today, build a brighter tomorrow.',
+
+      link: 'https://code.org/',
+
+      displayLink: 'code.org',
+
+      snippet: 
+
+        'Every student in every school deserves the opportunity to study computer science.',
+
+      htmlSnippet: 
+
+        'Every student in every school deserves the opportunity to study computer science.',
+
+      cacheId: 'Q1Z52-NVyXsJ',
+
+      formattedUrl: 'https://code.org/',
+
+      htmlFormattedUrl: 'https://code.org/',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTq1hVtOoUdPk11l1Zraa1IwB1yPiw5vsqwKJCVybMf8cRT7Djm2_bBIAwh',
+
+            width: '310',
+
+            height: '163'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'og:image': 'https://code.org/images/default-og-image.png',
+
+            'og:type': 'article',
+
+            'twitter:title': 'Learn computer science. Change the world.',
+
+            'og:image:width': '1220',
+
+            'twitter:card': 'photo',
+
+            'og:site_name': 'Code.org',
+
+            'twitter:url': 'https://code.org/',
+
+            'og:title': 'Learn computer science. Change the world.',
+
+            'og:image:height': '640',
+
+            'og:description': 
+
+              'Every student in every school deserves the opportunity to study computer science.',
+
+            'article:publisher': 'https://www.facebook.com/Code.org',
+
+            'twitter:image:src': 'https://code.org/images/default-og-image.png',
+
+            'fb:app_id': '500177453358606',
+
+            'twitter:site': '@codeorg',
+
+            viewport: 
+
+              'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
+
+            'twitter:description': 
+
+              'Every student in every school deserves the opportunity to study computer science.',
+
+            'og:url': 'https://code.org/'
+
+          }
+
+        ],
+
+        cse_image: [ { src: 'https://code.org/images/default-og-image.png' } ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'Codecademy: Learn to Code - for Free',
+
+      htmlTitle: 'Codecademy: Learn to Code - for Free',
+
+      link: 'https://www.codecademy.com/',
+
+      displayLink: 'www.codecademy.com',
+
+      snippet: 
+
+        'Prompt Engineering for Software Engineers. Want to use AI programming tools to improve your coding? Learn the basics of prompt engineering and write quality ...',
+
+      htmlSnippet: 
+
+        'Prompt Engineering for Software Engineers. Want to use AI programming tools to improve your <b>coding</b>? Learn the basics of prompt engineering and write quality&nbsp;...',
+
+      cacheId: '1nxLl9E7OVoJ',
+
+      formattedUrl: 'https://www.codecademy.com/',
+
+      htmlFormattedUrl: 'https://www.codecademy.com/',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSeSIzcQrS7QZR5tfWx0hp68RbiAbhL4M6L3ex3chvuPb_xApS7BXx19h5w',
+
+            width: '310',
+
+            height: '163'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'apple-itunes-app': 'app-id=1376029326',
+
+            'og:image': 
+
+              'https://images.codecademy.com/social/logo-codecademy-social.png',
+
+            'theme-color': '#10162F',
+
+            'fb:profile_id': 'codecademy',
+
+            'og:type': 'article',
+
+            'twitter:card': 'summary',
+
+            'twitter:title': 'Learn to Code - for Free | Codecademy',
+
+            'og:site_name': 'Codecademy',
+
+            'og:title': 'Learn to Code - for Free | Codecademy',
+
+            'csrf-param': 'authenticity_token',
+
+            'og:description': 
+
+              'Learn the technical skills to get the job you want. Join over 50 million people choosing Codecademy to start a new career (or advance in their current one).',
+
+            'twitter:image': 
+
+              'https://images.codecademy.com/social/logo-codecademy-social.png',
+
+            'fb:app_id': '212500508799908',
+
+            'twitter:site': '@codecademy',
+
+            viewport: 'width=device-width, initial-scale=1.0',
+
+            'twitter:description': 
+
+              'Learn the technical skills to get the job you want. Join over 50 million people choosing Codecademy to start a new career (or advance in their current one).',
+
+            'csrf-token': 
+
+              'o0n7/FReDf7RMhWBlFUzl50QSrmJpadSAysjv5hYF18ETPlk4oLanYTXGhvt7ZIy7yn2ZtaeEeQsxia3Bj8REQ==',
+
+            'og:rich_attachment': 'true',
+
+            'og:url': 'https://www.codecademy.com/'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 'https://images.codecademy.com/social/logo-codecademy-social.png'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'Learn Computer Science - Code.org',
+
+      htmlTitle: 'Learn Computer Science - Code.org',
+
+      link: 'https://studio.code.org/',
+
+      displayLink: 'studio.code.org',
+
+      snippet: 
+
+        'Get started coding today. Our courses and activities are free! It\'s easier - and way more fun - than you ever thought. Create an account to save your ...',
+
+      htmlSnippet: 
+
+        'Get started <b>coding</b> today. Our courses and activities are free! It&#39;s easier - and way more fun - than you ever thought. Create an account to save your&nbsp;...',
+
+      cacheId: 'llUsDF1IkO4J',
+
+      formattedUrl: 'https://studio.code.org/',
+
+      htmlFormattedUrl: 'https://studio.code.org/',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQr-NGN-KeeptyQTcxxUhPh4n3aiZbkPhoabD5VZxQxotZL9CJZMoNLRB3f',
+
+            width: '310',
+
+            height: '163'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'og:image': 
+
+              'https://studio.code.org/shared/images/share/girl_cropped.jpg',
+
+            viewport: 
+
+              'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
+
+            'csrf-token': 
+
+              'bLf2FF27uq80uRHnFK9GOPvpv-0Uq9j69oOHdJA_9KcMRJO4FLW_qU7tANH6t84uJjYqVfeZ570szeey8Xe42Q',
+
+            'og:title': 'Learn Computer Science - Code.org',
+
+            'csrf-param': 'authenticity_token',
+
+            'og:description': 
+
+              'Anyone can learn computer science. Make games, apps and art with code.'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 'https://studio.code.org/shared/images/share/girl_cropped.jpg'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'Learn',
+
+      htmlTitle: 'Learn',
+
+      link: 'https://hourofcode.com/learn',
+
+      displayLink: 'hourofcode.com',
+
+      snippet: 
+
+        'Creativity with AI · Create a 3D T-Rex Game · Dance Party: AI Edition · Hello World · Rodocodo: Code Hour · CodeMonkey Jr.: Pre-coding for Preschoolers · MyQ Pixel - ...',
+
+      htmlSnippet: 
+
+        'Creativity with AI &middot; Create a 3D T-Rex Game &middot; Dance Party: AI Edition &middot; Hello World &middot; Rodocodo: Code Hour &middot; CodeMonkey Jr.: Pre-<b>coding</b> for Preschoolers &middot; MyQ Pixel -&nbsp;...',
+
+      formattedUrl: 'https://hourofcode.com/learn',
+
+      htmlFormattedUrl: 'https://hourofcode.com/learn',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS256lM5cwtcOhNDMhfdfqv6gUgX2ofPcEdE9QdVs5dPBVvmitz-QTM_k8',
+
+            width: '310',
+
+            height: '163'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'msapplication-tilecolor': '#ffc40d',
+
+            'og:image': 
+
+              'https://hourofcode.com/shared/images/social-media/hoc2023_social.png',
+
+            'msapplication-config': '/images/icons/browserconfig.xml',
+
+            'og:type': 'article',
+
+            'twitter:card': 'photo',
+
+            'og:image:width': '1200',
+
+            'twitter:title': 'Hour of Code - What will you create?',
+
+            'og:site_name': 'Code.org',
+
+            'og:title': 'Hour of Code - What will you create?',
+
+            'og:image:height': '630',
+
+            'msapplication-tileimage': '/images/icons/mstile-144x144.png',
+
+            'og:description': 
+
+              'Use computer science to explore and learn about AI!',
+
+            'article:publisher': 'https://www.facebook.com/Code.org',
+
+            'twitter:image:src': 
+
+              'https://hourofcode.com/shared/images/social-media/hoc2023_social.png',
+
+            'fb:app_id': '500177453358606',
+
+            'twitter:site': '@codeorg',
+
+            viewport: 'width=device-width, initial-scale=1',
+
+            'twitter:description': 
+
+              'Use computer science to explore and learn about AI!',
+
+            'og:url': 'https://hourofcode.com/learn'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 
+
+              'https://hourofcode.com/shared/images/social-media/hoc2023_social.png'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'What Is Coding and What Is It Used For? | ComputerScience.org',
+
+      htmlTitle: 
+
+        'What Is <b>Coding</b> and What Is It Used For? | ComputerScience.org',
+
+      link: 'https://www.computerscience.org/resources/what-is-coding-used-for/',
+
+      displayLink: 'www.computerscience.org',
+
+      snippet: 
+
+        'Coding tells a machine which actions to perform and how to complete tasks. Programming languages provide the rules for building websites, apps, and other ...',
+
+      htmlSnippet: 
+
+        '<b>Coding</b> tells a machine which actions to perform and how to complete tasks. Programming languages provide the rules for building websites, apps, and other&nbsp;...',
+
+      cacheId: 'gFT-_NZNpi8J',
+
+      formattedUrl: 
+
+        'https://www.computerscience.org/resources/what-is-coding-used-for/',
+
+      htmlFormattedUrl: 
+
+        'https://www.computerscience.org/resources/what-is-<b>coding</b>-used-for/',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSwV8eb-C7AzMjNuXhpWZ4uKGzoYn61lIE8P51AIlMNv4wisZ7yupP4m9g',
+
+            width: '275',
+
+            height: '183'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'og:image': 
+
+              'https://res.cloudinary.com/highereducation/images/w_1024,h_683,c_scale/f_auto,q_auto/v1662131195/ComputerScience.org/CompSci_Resources_What-Coding-_50339eae3/CompSci_Resources_What-Coding--1024x683.jpg',
+
+            'og:image:width': '1024',
+
+            'article:published_time': '2022-01-21T00:17:08+00:00',
+
+            'twitter:card': 'summary_large_image',
+
+            'og:site_name': 'Code a New Career | ComputerScience.org',
+
+            'twitter:label1': 'Written by',
+
+            'twitter:label2': 'Time to read',
+
+            'og:image:type': 'image/jpeg',
+
+            postid: '5031',
+
+            'msapplication-tileimage': 
+
+              'https://res.cloudinary.com/highereducation/images/w_270,h_270,c_scale/f_auto,q_auto/v1662131258/ComputerScience.org/cropped-favicon_1890d948d/cropped-favicon-270x270.png?_i=AA',
+
+            'og:description': 
+
+              'What is coding? Learn how coding works, and explore everyday uses of the skill for creating websites and apps.',
+
+            'og:image:secure_url': 
+
+              'https://res.cloudinary.com/highereducation/images/w_1024,h_683,c_scale/f_auto,q_auto/v1662131195/ComputerScience.org/CompSci_Resources_What-Coding-_50339eae3/CompSci_Resources_What-Coding--1024x683.jpg',
+
+            'twitter:image': 
+
+              'https://res.cloudinary.com/highereducation/images/w_1024,h_683,c_scale/f_auto,q_auto/v1662131195/ComputerScience.org/CompSci_Resources_What-Coding-_50339eae3/CompSci_Resources_What-Coding--1024x683.jpg',
+
+            'twitter:data1': 'Alaina McCartney',
+
+            'twitter:data2': '5 minutes',
+
+            'article:modified_time': '2023-11-08T19:20:25+00:00',
+
+            'og:type': 'article',
+
+            'article:section': 'Uncategorized',
+
+            'og:image:alt': 'Woman looking at code on computer',
+
+            'twitter:title': 
+
+              'What Is Coding and What Is It Used For? | ComputerScience.org',
+
+            'og:title': 
+
+              'What Is Coding and What Is It Used For? | ComputerScience.org',
+
+            'og:image:height': '683',
+
+            'og:updated_time': '2023-11-08T19:20:25+00:00',
+
+            viewport: 'width=device-width, initial-scale=1',
+
+            'twitter:description': 
+
+              'What is coding? Learn how coding works, and explore everyday uses of the skill for creating websites and apps.',
+
+            'og:locale': 'en_US',
+
+            'og:url': 
+
+              'https://www.computerscience.org/resources/what-is-coding-used-for/'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 
+
+              'https://res.cloudinary.com/highereducation/images/w_1024,h_683,c_scale/f_auto,q_auto/v1662131195/ComputerScience.org/CompSci_Resources_What-Coding-_50339eae3/CompSci_Resources_What-Coding--1024x683.jpg'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 
+
+        'The hardest part of building software is not coding, it\'s requirements ...',
+
+      htmlTitle: 
+
+        'The hardest part of building software is not <b>coding</b>, it&#39;s requirements ...',
+
+      link: 
+
+        'https://stackoverflow.blog/2023/12/29/the-hardest-part-of-building-software-is-not-coding-its-requirements/',
+
+      displayLink: 'stackoverflow.blog',
+
+      snippet: 
+
+        'Dec 29, 2023 ... The real problems are usually centered around what the software is supposed to do. The hardest part about creating software is not writing code— ...',
+
+      htmlSnippet: 
+
+        'Dec 29, 2023 <b>...</b> The real problems are usually centered around what the software is supposed to do. The hardest part about creating software is not writing code—&nbsp;...',
+
+      cacheId: 'pw7typSGzloJ',
+
+      formattedUrl: 
+
+        'https://stackoverflow.blog/.../the-hardest-part-of-building-software-is-not-c...',
+
+      htmlFormattedUrl: 
+
+        'https://stackoverflow.blog/.../the-hardest-part-of-building-software-is-not-<b>c</b>...',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnL_wWWG5nNrJJaeQsGYd7H9-L0eKldAbs1uUkeJSoeZjkWafTJgm_qYYY',
+
+            width: '310',
+
+            height: '163'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'og:image': 
+
+              'https://cdn.stackoverflow.co/images/jo7n4k8s/production/cdf357e1d2df3af2d771981b5597c1a222b5606b-2400x1260.jpg?w=1200&fm=png&auto=format',
+
+            'theme-color': '#f48024',
+
+            'twitter:card': 'summary_large_image',
+
+            'og:type': 'website',
+
+            'twitter:site': '@stackoverflow',
+
+            viewport: 'width=device-width, initial-scale=1',
+
+            'og:url': 
+
+              'https://stackoverflow.blog/2023/12/29/the-hardest-part-of-building-software-is-not-coding-its-requirements/',
+
+            'format-detection': 'telephone=no'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 
+
+              'https://cdn.stackoverflow.co/images/jo7n4k8s/production/cdf357e1d2df3af2d771981b5597c1a222b5606b-2400x1260.jpg?w=1200&fm=png&auto=format'
+
+          }
+
+        ],
+
+        article: Array(6) [
+
+          {
+
+            image: 
+
+              'https://cdn.stackoverflow.co/images/jo7n4k8s/production/cdf357e1d2df3af2d771981b5597c1a222b5606b-2400x1260.jpg?w=1200&h=630&auto=format&dpr=2',
+
+            articlebody: 
+
+              '[Ed. note: While we take some time to rest up over the holidays and prepare for next year, we are re-publishing our top ten posts for the year. Please enjoy our favorite work this year and...',
+
+            name: 
+
+              'The hardest part of building software is not coding, it\'s requirements',
+
+            abstract: 'Why replacing programmers with AI won’t be so easy.',
+
+            datepublished: '2023-12-29T14:04:48.758Z'
+
+          },
+
+          {
+
+            name: 'Stack Gives Back 2023!',
+
+            datepublished: '2024-01-22T15:00:10.509Z'
+
+          },
+
+          {
+
+            name: 'The path to socially responsible AI',
+
+            datepublished: '2024-01-18T15:00:00.000Z'
+
+          },
+
+          {
+
+            name: 'Self-healing code is the future of software development',
+
+            datepublished: '2023-12-28T15:18:36.583Z'
+
+          },
+
+          {
+
+            name: 'Stop saying “technical debt”',
+
+            datepublished: '2023-12-27T18:22:59.011Z'
+
+          },
+
+          {
+
+            name: 
+
+              'Hacking the hamburger: How a pentester exposed holes in hundreds of fast-food chains',
+
+            datepublished: '2024-01-23T08:40:00.000Z'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'What Is Coding and What Is It Used For? | BestColleges',
+
+      htmlTitle: 'What Is <b>Coding</b> and What Is It Used For? | BestColleges',
+
+      link: 
+
+        'https://www.bestcolleges.com/bootcamps/guides/what-is-coding-used-for/',
+
+      displayLink: 'www.bestcolleges.com',
+
+      snippet: 
+
+        'Coding creates a set of instructions for computers to follow. These instructions determine what actions a computer can and cannot take. Coding allows ...',
+
+      htmlSnippet: 
+
+        '<b>Coding</b> creates a set of instructions for computers to follow. These instructions determine what actions a computer can and cannot take. <b>Coding</b> allows&nbsp;...',
+
+      cacheId: 'QFB4AIrvO08J',
+
+      formattedUrl: 
+
+        'https://www.bestcolleges.com/bootcamps/guides/what-is-coding-used-for/',
+
+      htmlFormattedUrl: 
+
+        'https://www.bestcolleges.com/bootcamps/guides/what-is-<b>coding</b>-used-for/',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTy9aEMifMfFSmVkJb_T5Ete_DJMj0yAtq3Sx7j9YIP7d_LArelqW9nOoM',
+
+            width: '300',
+
+            height: '168'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'og:image': 
+
+              'https://res.cloudinary.com/highereducation/images/f_auto,q_auto/v1667843801/BestColleges.com/young-female-software-developer-working/young-female-software-developer-working.jpg',
+
+            'og:type': 'article',
+
+            'article:section': 'Bootcamps',
+
+            'og:image:width': '2000',
+
+            'og:image:alt': 
+
+              'Asian American female student sitting at a desk in a coding bootcamp classroom. She smiles as she types a software program on her desktop computer.',
+
+            'twitter:card': 'summary_large_image',
+
+            'twitter:title': 
+
+              'What Is Coding and What Is It Used For? | BestColleges',
+
+            'og:site_name': 'BestColleges.com',
+
+            'og:title': 'What Is Coding and What Is It Used For? | BestColleges',
+
+            'og:image:height': '1124',
+
+            'og:image:type': 'image/jpeg',
+
+            postid: '15015',
+
+            'og:updated_time': '2023-10-17T15:11:01+00:00',
+
+            'msapplication-tileimage': 
+
+              'https://www.bestcolleges.com/wp-content/uploads/2022/11/cropped-logo-social-512-clear-300x300.png',
+
+            'og:description': 
+
+              'Learning to code might seem intimidating at first, but there are numerous benefits for both personal and career development for those who learn.',
+
+            'og:image:secure_url': 
+
+              'https://res.cloudinary.com/highereducation/images/f_auto,q_auto/v1667843801/BestColleges.com/young-female-software-developer-working/young-female-software-developer-working.jpg',
+
+            'twitter:image': 
+
+              'https://res.cloudinary.com/highereducation/images/f_auto,q_auto/v1667843801/BestColleges.com/young-female-software-developer-working/young-female-software-developer-working.jpg',
+
+            'ahrefs-site-verification': 
+
+              'b8052781d9f282310f725ade67af8fc55d8cf318e5f74770a11b29216d6bfcc1',
+
+            viewport: 'width=device-width, initial-scale=1',
+
+            'twitter:description': 
+
+              'Learning to code might seem intimidating at first, but there are numerous benefits for both personal and career development for those who learn.',
+
+            'og:locale': 'en_US',
+
+            'og:url': 
+
+              'https://www.bestcolleges.com/bootcamps/guides/what-is-coding-used-for/'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 
+
+              'https://res.cloudinary.com/highereducation/images/f_auto,q_auto/v1667843801/BestColleges.com/young-female-software-developer-working/young-female-software-developer-working.jpg'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'What is Coding? - Code Conquest',
+
+      htmlTitle: 'What is <b>Coding</b>? - Code Conquest',
+
+      link: 'https://www.codeconquest.com/what-is-coding/',
+
+      displayLink: 'www.codeconquest.com',
+
+      snippet: 
+
+        'In programming, we first write a program in high level programming language like C++, Java, etc. After writing the program, we compile it. After compilation, a ...',
+
+      htmlSnippet: 
+
+        'In programming, we first write a program in high level programming language like C++, Java, etc. After writing the program, we compile it. After compilation, a&nbsp;...',
+
+      cacheId: '2eBvUN-ZKcgJ',
+
+      formattedUrl: 'https://www.codeconquest.com/what-is-coding/',
+
+      htmlFormattedUrl: 'https://www.codeconquest.com/what-is-<b>coding</b>/',
+
+      pagemap: {
+
+        metatags: [
+
+          {
+
+            'og:type': 'article',
+
+            'twitter:card': 'summary_large_image',
+
+            'og:site_name': 'Code Conquest',
+
+            'article:modified_time': '2023-02-12T20:28:20+00:00',
+
+            viewport: 'width=device-width, initial-scale=1',
+
+            'og:title': 'What is Coding? - Code Conquest',
+
+            'og:locale': 'en_US',
+
+            'twitter:label1': 'Est. reading time',
+
+            'og:url': 'https://www.codeconquest.com/what-is-coding/',
+
+            'og:description': 
+
+              'What is coding? You’ve seen the craze for learning code. Coding is what makes it possible for us to create computer software, apps and websites. Your browser, your OS, the apps on your phone, Facebook, and this website – they’re all made with code.',
+
+            'twitter:data1': '4 minutes'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 'Coding Dojo - Software Development Coding Bootcamp',
+
+      htmlTitle: 
+
+        '<b>Coding</b> Dojo - Software Development <b>Coding</b> Bootcamp',
+
+      link: 'https://www.codingdojo.com/',
+
+      displayLink: 'www.codingdojo.com',
+
+      snippet: 
+
+        'Interested in starting your new career in tech? Learn to code at one of the top coding bootcamps. Build your first website and app in a matter of weeks.',
+
+      htmlSnippet: 
+
+        'Interested in starting your new career in tech? Learn to code at one of the top <b>coding</b> bootcamps. Build your first website and app in a matter of weeks.',
+
+      cacheId: 'z7jU9XMwkxAJ',
+
+      formattedUrl: 'https://www.codingdojo.com/',
+
+      htmlFormattedUrl: 'https://www.<b>coding</b>dojo.com/',
+
+      pagemap: {
+
+        metatags: [
+
+          {
+
+            viewport: 'width=device-width, initial-scale=1 minimum-scale=1.0',
+
+            title: 'Coding Dojo - Software Development Coding Bootcamp'
+
+          }
+
+        ]
+
+      }
+
+    },
+
+    {
+
+      kind: 'customsearch#result',
+
+      title: 
+
+        'My favorite coding question to give candidates (and why) | by Carlos ...',
+
+      htmlTitle: 
+
+        'My favorite <b>coding</b> question to give candidates (and why) | by Carlos ...',
+
+      link: 
+
+        'https://carloarg02.medium.com/my-favorite-coding-question-to-give-candidates-17ea4758880c',
+
+      displayLink: 'carloarg02.medium.com',
+
+      snippet: 
+
+        'Nov 12, 2023 ... There\'s a naive solution that is O(n²) in running time, but only uses O(1) of memory. There\'s a better solution that has running time of O(n) ...',
+
+      htmlSnippet: 
+
+        'Nov 12, 2023 <b>...</b> There&#39;s a naive solution that is O(n²) in running time, but only uses O(1) of memory. There&#39;s a better solution that has running time of O(n)&nbsp;...',
+
+      cacheId: '44gh2CkNKvMJ',
+
+      formattedUrl: 
+
+        'https://carloarg02.medium.com/my-favorite-coding-question-to-give-candi...',
+
+      htmlFormattedUrl: 
+
+        'https://carloarg02.medium.com/my-favorite-<b>coding</b>-question-to-give-candi...',
+
+      pagemap: {
+
+        cse_thumbnail: [
+
+          {
+
+            src: 
+
+              'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTGD4_eA0HKYAgI6JkEd-ahkDfQE74yL7xW28pnerzHMED5JYXWDQnL0sAI',
+
+            width: '315',
+
+            height: '160'
+
+          }
+
+        ],
+
+        metatags: [
+
+          {
+
+            'og:image': 
+
+              'https://miro.medium.com/v2/resize:fit:970/1*-7bzkDSy1LUNcgPDFCqaHg.png',
+
+            'twitter:app:url:iphone': 'medium://p/17ea4758880c',
+
+            'theme-color': '#000000',
+
+            'article:published_time': '2023-12-01T15:54:10.567Z',
+
+            'twitter:card': 'summary_large_image',
+
+            'og:site_name': 'Medium',
+
+            'al:android:package': 'com.medium.reader',
+
+            'twitter:label1': 'Reading time',
+
+            'twitter:tile:template:testing': '2',
+
+            'twitter:app:id:iphone': '828256236',
+
+            title: 
+
+              'My favorite coding question to give candidates (and why) | by Carlos Arguelles | Medium',
+
+            'al:ios:url': 'medium://p/17ea4758880c',
+
+            'og:description': 
+
+              'A coding question, from the viewpoint of an Google/Amazon/Microsoft interviewer',
+
+            'twitter:creator': '@carloarg02',
+
+            'al:ios:app_store_id': '828256236',
+
+            'twitter:data1': '11 min read',
+
+            'twitter:site': '@Medium',
+
+            'twitter:tile:info1:text': 'Carlos Arguelles',
+
+            'twitter:tile:info1:icon': 'Person',
+
+            'og:type': 'article',
+
+            'twitter:title': 'My favorite coding question to give candidates',
+
+            'al:ios:app_name': 'Medium',
+
+            'twitter:cta': 'Read on Medium',
+
+            author: 'Carlos Arguelles',
+
+            'og:title': 'My favorite coding question to give candidates',
+
+            'al:web:url': 
+
+              'https://carloarg02.medium.com/my-favorite-coding-question-to-give-candidates-17ea4758880c',
+
+            'article:author': 'https://carloarg02.medium.com',
+
+            'twitter:tile:info2:text': 'Dec 1, 2023',
+
+            'twitter:image:src': 
+
+              'https://miro.medium.com/v2/resize:fit:970/1*-7bzkDSy1LUNcgPDFCqaHg.png',
+
+            'al:android:url': 'medium://p/17ea4758880c',
+
+            referrer: 'unsafe-url',
+
+            'fb:app_id': '542599432471018',
+
+            viewport: 
+
+              'width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1',
+
+            'twitter:tile:info2:icon': 'Calendar',
+
+            'twitter:description': 
+
+              'A coding question, from the viewpoint of an Google/Amazon/Microsoft interviewer',
+
+            'twitter:tile:image': 
+
+              'https://miro.medium.com/v2/resize:fit:970/1*-7bzkDSy1LUNcgPDFCqaHg.png',
+
+            'og:url': 
+
+              'https://carloarg02.medium.com/my-favorite-coding-question-to-give-candidates-17ea4758880c',
+
+            'twitter:app:name:iphone': 'Medium',
+
+            'al:android:app_name': 'Medium'
+
+          }
+
+        ],
+
+        cse_image: [
+
+          {
+
+            src: 
+
+              'https://miro.medium.com/v2/resize:fit:970/1*-7bzkDSy1LUNcgPDFCqaHg.png'
+
+          }
+
+        ]
+
+      }
+
+    }
+
+  ]
+
+}

@@ -1,6 +1,5 @@
 import { useContext } from "react"
-import { StateProvider } from "./StateContextProvider"
+import { StateContext } from "./StateContextProvider"
 
-const useStateProvider = () => useContext(StateProvider)
+export const useStateProvider = () => useContext(StateContext)
 
-export default useStateProvider
