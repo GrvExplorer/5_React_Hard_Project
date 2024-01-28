@@ -6,7 +6,7 @@ import { NavBar, SideBar } from "./index";
 
 function Feed({ loading, setLoading, Videos }) {
   const [selectedCategory, setSelectedCategory] = useState("New");
-  const [videos, setVideos] = useState([1, 2]);
+  const [videos, setVideos] = useState([1, 2, 2, 4, 5, 5, 8, 9, 9]);
   const navigate = useNavigate();
 
   useEffect(() => {

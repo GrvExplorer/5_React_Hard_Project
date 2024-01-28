@@ -4,7 +4,7 @@ import { IoSchoolSharp } from "react-icons/io5";
 
 export const categories = [
   { name: "New", icon: <FaHome /> },
-  { name: "JS Mastery", icon: <FaCode /> },
+  { name: "GrvExplorer", icon: <FaCode /> },
   { name: "Coding", icon: <FaCode /> },
   { name: "ReactJS", icon: <FaCode /> },
   { name: "NextJS", icon: <FaCode /> },
