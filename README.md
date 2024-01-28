@@ -2,7 +2,7 @@
     Give it a ⭐ if you like this project.
 
 ### 1. YouTube 2.0
-<p align="left"> <a href="" target="_blank" rel="noreferrer"> <img src="./assets/youtube_banner.png" alt="banner" /> </a> </p>
+<p align="left"> <a href="https://youtube-2-0.vercel.app/" target="_blank" rel="noreferrer"> <img src="./assets/youtube_banner.png" alt="banner" /> </a> </p>
 Basic Stage Completed Add Features Later On ( refactor )
 
 ### 2. Spotify 2.0

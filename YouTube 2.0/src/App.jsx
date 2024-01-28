@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Feed from "./components/Feed";
 
 import { Authentication, ChannelDetail, SearchDetail, VideoDetail, Videos } from "./components";
 import { useState } from "react";
 
+// TODO: fix search display when empty
 // TODO: Search channelAvatar display 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path="/auth" element={<Authentication  />} />
+        <Route index element={<Navigate to='/feed' />} />
           <Route
             path="/feed"
             element={<Feed loading={loading} Videos={setupVideos} setLoading={setLoading} />}

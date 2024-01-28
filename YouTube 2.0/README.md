@@ -1,5 +1,6 @@
 # Welcome! To 👋 Youtube 2.0
-    
+
+  <p align="left"> <a href="https://deploy-youtube-2-0.vercel.app/" target="_blank" rel="noreferrer"> <img src="./assets/banner.png" alt="banner" /> </a> </p>
 
 # Live Website and My Social medial
 
