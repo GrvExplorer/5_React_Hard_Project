@@ -13,14 +13,17 @@
 # My Learning
 
 - Making layout using react-router-dom
+- Form validation using react-hook-form
 
 ### Continued development
 
-## Acknowledgments
+- sign functionality ( Auth )
 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')
 
 # My Progress
+
+-  signup UI
 
 # Feedback for me
 
