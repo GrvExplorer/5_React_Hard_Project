@@ -8,16 +8,15 @@ function AuthLayout() {
         <Navigate to="/" />
       ) : (
         <div className="flex h-screen justify-between">
-          <section className="flex flex-1 justify-center items-center flex-col py-10">
+          <section className="flex flex-1 flex-col items-center justify-center py-10">
             <Outlet />
           </section>
 
-            <img
-              className="hidden xl:block object-cover bg-no-repeat w-1/2"
-              src="/assets/images/side-img.svg"
-              alt="side img"
-            />
-
+          <img
+            className="hidden w-1/2 bg-no-repeat object-cover xl:block"
+            src="/assets/images/side-img.svg"
+            alt="side img"
+          />
         </div>
       )}
     </div>

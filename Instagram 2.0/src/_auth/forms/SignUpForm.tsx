@@ -15,8 +15,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignupValidation } from "@/lib/validation";
 import { createUserAccount } from "@/lib/appwrite/api";
+import { useToast } from "@/components/ui/use-toast";
 
 function SignUpForm() {
+
+  const {toast} = useToast()
+
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
     //random
@@ -29,7 +33,20 @@ function SignUpForm() {
   });
  async function onSubmit(values: z.infer<typeof SignupValidation>) {
     const newUser = await createUserAccount(values);
-    console.log(newUser);
+
+    if (!newUser) {
+      toast({
+        title: "Error while saving to db.",
+        variant: "destructive",
+      })
+      return;
+    }
+
+    toast({
+      title: "Account created successfully.",
+      description: "We've created your account for you.",
+    })
+
   }
 
   return (
@@ -123,7 +140,7 @@ function SignUpForm() {
               </FormItem>
             )}
           ></FormField>
-          <Button className="mt-8" type="submit">
+          <Button className="mt-8 bg-purple-300 font-semibold" type="submit">
             Sign up
           </Button>
         </form>
