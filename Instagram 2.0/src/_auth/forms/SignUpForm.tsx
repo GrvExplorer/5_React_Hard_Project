@@ -13,13 +13,25 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SignupValidation } from "@/lib/validation";
-import { createUserAccount } from "@/lib/appwrite/api";
+import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from "@/lib/react-query/queriesAndMutations";
+import { SignupValidation } from "@/lib/validation";
+import { Loader } from "lucide-react";
+import { useUserContext } from "@/context/AuthContext";
 
 function SignUpForm() {
+  const { toast } = useToast();
+  // const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
-  const {toast} = useToast()
+
+  const { mutateAsync: createUserAccount, isLoading: isCreatingNewUser } =
+    useCreateUserAccount();
+  const { mutateAsync: signInAccount, isLoading: isSigningInUser } =
+    useSignInAccount();
 
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -31,22 +43,52 @@ function SignUpForm() {
       password: "",
     },
   });
- async function onSubmit(values: z.infer<typeof SignupValidation>) {
+
+  async function onSubmit(values: z.infer<typeof SignupValidation>) {
     const newUser = await createUserAccount(values);
 
     if (!newUser) {
       toast({
         title: "Error while saving to db.",
         variant: "destructive",
-      })
+      });
       return;
     }
 
     toast({
       title: "Account created successfully.",
       description: "We've created your account for you.",
-    })
+    });
 
+    const session = await signInAccount({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (!session) {
+      toast({
+        title: "Error while signing in.",
+        description: "We've created your account for you.",
+        variant: "destructive",
+        action: (
+          <ToastAction
+            altText="Try again"
+            onClick={() =>
+              signInAccount({
+                email: values.email,
+                password: values.password,
+              })
+            }
+          />
+        ),
+      });
+      return;
+    }
+
+    toast({
+      title: "Account signed in successfully.",
+      description: "You can use the app now.",
+    });
   }
 
   return (
@@ -141,7 +183,11 @@ function SignUpForm() {
             )}
           ></FormField>
           <Button className="mt-8 bg-purple-300 font-semibold" type="submit">
-            Sign up
+            {isCreatingNewUser || isSigningInUser ? (
+              <Loader className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              "Sign up"
+            )}
           </Button>
         </form>
       </div>

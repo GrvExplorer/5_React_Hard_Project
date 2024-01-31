@@ -1,17 +1,19 @@
+import { useUserContext } from "@/context/AuthContext";
+import { Loader } from "lucide-react";
 import { Navigate, Outlet } from "react-router-dom";
 
 function AuthLayout() {
-  const Authenticated = false;
+  const { isAuthenticated, isLoading: isUserLoading } = useUserContext();
   return (
     <div>
-      {Authenticated ? (
+      {isAuthenticated ? (
         <Navigate to="/" />
-      ) : (
-        <div className="flex h-screen justify-between">
+      ) : <>
+      {isUserLoading ? <Loader className="m-auto animate-spin" /> : (
+          <div className="flex h-screen justify-between">
           <section className="flex flex-1 flex-col items-center justify-center py-10">
             <Outlet />
           </section>
-
           <img
             className="hidden w-1/2 bg-no-repeat object-cover xl:block"
             src="/assets/images/side-img.svg"
@@ -19,6 +21,9 @@ function AuthLayout() {
           />
         </div>
       )}
+      </>
+      
+      }
     </div>
   );
 }

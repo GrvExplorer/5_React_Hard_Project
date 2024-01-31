@@ -1,8 +1,8 @@
+import { Navigate } from "react-router-dom";
 
 function Home() {
-  return (
-    <div>Home</div>
-  )
+  const Authenticated = false;
+  return <div>{Authenticated ? <Navigate to="/sign-up" /> : <>Home</>}</div>;
 }
 
-export default Home
+export default Home;
