@@ -17,19 +17,23 @@
 - Form validation using zod
 - appwrite authentication
 - appwrite database and storage
-- TanStack Query for Mutations
+- TanStack Query for Mutations and Queries
 - State management using context api 
 
 ### Continued development
 
-- sign functionality ( Auth )
+- Root layout 
+- Home page
+- Profile Page
 
 ### Acknowledgements 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')
 
 # My Progress
 
--  signup UI
+-  Signup UI and functionality
+-  Login UI and functionality
+-  Logout functionality
 
 # Feedback for me
 

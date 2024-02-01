@@ -1,6 +1,7 @@
 import { INewUser, IUser } from "@/types";
 import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases } from "./config";
+import { useUserContext } from "@/context/AuthContext";
 
 export async function saveUserToDB(user: {
   accountId: string;
@@ -54,6 +55,9 @@ export async function createUserAccount(user: INewUser) {
 
 export async function signInAccount(user: { email: string; password: string }) {
   try {
+
+
+
     const loginAccount = await account.createEmailSession(
       user.email,
       user.password,
@@ -64,10 +68,11 @@ export async function signInAccount(user: { email: string; password: string }) {
   }
 }
 
+
+// TODO: Get current user right 
 export async function getCurrentUser() {
   try {
     const currentAccount = await account.get();
-
     if (!currentAccount) throw Error;
 
     const currentUser = await databases.listDocuments(
@@ -75,11 +80,21 @@ export async function getCurrentUser() {
       appwriteConfig.userCollectionId,
       [Query.equal("accountId", currentAccount.$id)],
     );
-
+    
     if (!currentUser) throw Error;
     return currentUser.documents[0];
   } catch (error) {
     console.log(error);
     return false;
   }
+}
+
+export async function signOutAccount() {
+try {
+  const logoutAccount = await account.deleteSession("current");
+  return logoutAccount;
+} catch (error) {
+  console.log(error);
+  
+}
 }

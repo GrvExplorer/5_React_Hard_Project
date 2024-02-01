@@ -37,6 +37,7 @@ export const AuthContextProvider = ({
     setIsLoading(true);
     try {
       const currentAccount = await getCurrentUser();
+
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
@@ -46,10 +47,12 @@ export const AuthContextProvider = ({
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
         });
-        setIsAuthenticated(true);
 
+        setIsAuthenticated(true);
+        setIsLoading(false);
         return true;
       }
+      setIsLoading(false);
       return false;
     } catch (error) {
       console.error(error);
@@ -60,17 +63,16 @@ export const AuthContextProvider = ({
   };
 
   useEffect(() => {
-    const cookieFallback = localStorage.getItem("cookieFallback");
+    const checkAuth = async () => {
+      const cookieFallback = localStorage.getItem("cookieFallback");
+      // cookieFallback === null ||
 
-    if (
-      cookieFallback === "[]" ||
-      cookieFallback === null ||
-      cookieFallback === undefined
-    ) {
-      navigate("/sign-in");
-    }
-    checkAuthUser();
-
+      // if (cookieFallback === "[]" || cookieFallback === undefined) {
+      //   navigate("/sign-in");
+      // }
+      // checkAuthUser();
+    };
+    checkAuth();
   }, []);
 
   const value = {
@@ -85,4 +87,4 @@ export const AuthContextProvider = ({
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useUserContext = () => useContext(AuthContext)
+export const useUserContext = () => useContext(AuthContext);
