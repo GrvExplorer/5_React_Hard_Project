@@ -2,14 +2,18 @@ import { useToast } from "@/components/ui/use-toast";
 import { sidebarLinks } from "@/constants";
 import { useUserContext } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
+import { INavLink } from "@/types";
 import { Loader } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function RootLayout() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user, setIsAuthenticated } = useUserContext();
   const { mutateAsync: signOut, isLoading: isSigningOut } = useSignOutAccount();
+
+  const location = useLocation();
+  console.log("🚀 ~ RootLayout ~ location:", location);
 
   const handelSignOut = async () => {
     try {
@@ -33,33 +37,68 @@ function RootLayout() {
     }
   };
 
+  console.log(user);
+
   return (
     <div className="grid">
-      <div className="flex h-screen w-80 flex-col justify-between  bg-dark-3 pb-4 pl-8 pt-10 ">
+      <div className="hidden h-screen w-80 flex-col justify-between bg-dark-3  pb-4 pl-8 pt-10 md:flex ">
         <div className="mr-8 flex flex-col gap-20">
-          <img src="/assets/images/logo.svg" alt="logo" />
+          <Link to="/" className="w-80">
+            <img src="/assets/images/logo.svg" alt="logo" />
+          </Link>
 
-          {/* <div className="h-1"></div> */}
+          <div className="flex h-1 items-center gap-4">
+            <Link to={`/profile/${user?.id}`}>
+              <div className="w-16">
+                <img
+                  className="rounded-full object-cover"
+                  src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
+                  alt="profile picture"
+                />
+              </div>
+            </Link>
+
+            <div className=" w-full">
+              <p className="text-lg font-bold">{user?.name}</p>
+              <p className="text-sm text-gray-600">@{user?.username} </p>
+            </div>
+          </div>
 
           <div className="flex flex-col gap-8">
-            {sidebarLinks.map((link) => (
-              <Link to={link.route} key={link.label}>
-                <div className=" flex w-full cursor-pointer gap-4 rounded-md p-4 py-4 hover:bg-primary-600">
-                  <img src={link.imgURL} alt="" />
-                  <p>{link.label} </p>
-                </div>
-              </Link>
-            ))}
+            {sidebarLinks.map((link: INavLink) => {
+              const isActiveRoute = location.pathname === link.route;
+
+              return (
+                <>
+                  <Link to={link.route} key={link.label}>
+                    <div
+                      className={` group flex w-full cursor-pointer gap-4 rounded-md p-4 py-4 ${isActiveRoute && "bg-primary-600"} hover:bg-primary-600`}
+                    >
+                      <img
+                        className={`group-hover:invert-white ${isActiveRoute && "invert-white"}`}
+                        src={link.imgURL}
+                        alt=""
+                      />
+                      <p className="font-semibold">{link.label} </p>
+                    </div>
+                  </Link>
+                </>
+              );
+            })}
           </div>
         </div>
 
         <div className="mr-8">
           <div
-            className="flex w-full cursor-pointer gap-4 rounded-md p-4 py-4 hover:bg-primary-600"
+            className="group flex w-full cursor-pointer gap-4 rounded-md p-4 py-4 hover:bg-primary-600"
             onClick={handelSignOut}
           >
-            <img src="/assets/icons/logout.svg" alt="" />
-            <p>
+            <img
+              src="/assets/icons/logout.svg"
+              className="group-hover:invert-white"
+              alt=""
+            />
+            <p className="font-semibold">
               {isSigningOut ? (
                 <Loader className="m-auto animate-spin" />
               ) : (

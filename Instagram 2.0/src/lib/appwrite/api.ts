@@ -36,7 +36,7 @@ export async function createUserAccount(user: INewUser) {
     if (!newAccount)
       throw new Error("Something went wrong while creating account");
 
-    const avatarUrl = avatars.getInitials(user.name, 256, 256, "white");
+    const avatarUrl = avatars.getInitials(user.name, 256, 256);
 
     const newUser = await saveUserToDB({
       name: user.name,

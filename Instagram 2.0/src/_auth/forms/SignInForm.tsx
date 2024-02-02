@@ -41,7 +41,7 @@ function SignInForm() {
     },
   });
 
-  const onSubmit = async (values: { email: string; password: string }) => {
+  const onSubmit = async (values: z.infer<typeof SignInValidation>) => {
     try {
       const session = await signInAccount({
         email: values.email,
@@ -63,7 +63,9 @@ function SignInForm() {
                   password: values.password,
                 })
               }
-            >Try Again</ToastAction>
+            >
+              Try Again
+            </ToastAction>
           ),
         });
         throw new Error("No able to sign in");
@@ -76,7 +78,7 @@ function SignInForm() {
       //   session.providerUid
       // );
       // console.log(userDetails);
-      
+
       const isLoggedIn = await checkAuthUser();
       if (isLoggedIn) {
         form.reset();
@@ -99,7 +101,9 @@ function SignInForm() {
                   password: values.password,
                 })
               }
-            >Try Again</ToastAction>
+            >
+              Try Again
+            </ToastAction>
           ),
         });
       }
@@ -112,10 +116,18 @@ function SignInForm() {
     <Form {...form}>
       <div className="flex-center flex-col gap-8">
         <div className="sm:w-42 flex flex-col text-center">
-          <img src="/assets/images/logo.svg" alt="logo" />
-          <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Welcome back</h2>
+          <div className="flex w-96 justify-center">
+            <img
+              src="/assets/images/logo.svg"
+              className="object-contain"
+              alt="logo"
+            />
+          </div>
+          <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
+            Log in to your account
+          </h2>
           <p className="small-medium md:base-regular mt-2 text-light-3">
-            To use Snapgram enter your account{" "}
+            Welcome back! enter your details{" "}
           </p>
         </div>
 

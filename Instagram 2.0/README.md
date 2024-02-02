@@ -22,9 +22,17 @@
 
 ### Continued development
 
-- Root layout 
+- Create Post UI and functionality
+- Post UI and functionality ( CRUD )
 - Home page
-- Profile Page
+- User fun likes and saves 
+- User Profile page
+- People Pages 
+- Follow and unfollow
+- See others save and likes
+- Root layout 
+- Explore Page
+- 
 
 ### Acknowledgements 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')
@@ -34,6 +42,7 @@
 -  Signup UI and functionality
 -  Login UI and functionality
 -  Logout functionality
+-  User Details 
 
 # Feedback for me
 

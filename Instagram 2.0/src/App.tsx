@@ -4,7 +4,7 @@ import AuthLayout from "./_auth/AuthLayout";
 import SignInForm from "./_auth/forms/SignInForm";
 import SignUpForm from "./_auth/forms/SignUpForm";
 import RootLayout from "./_root/RootLayout";
-import { Home } from "./_root/pages";
+import { Home, NotFound } from "./_root/pages";
 
 function App() {
   return (
@@ -18,6 +18,8 @@ function App() {
         <Route element={<RootLayout />}>
           <Route index element={<Home />}></Route>
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
