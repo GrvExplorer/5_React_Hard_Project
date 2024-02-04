@@ -22,7 +22,6 @@
 
 ### Continued development
 
-- Create Post UI and functionality
 - Post UI and functionality ( CRUD )
 - Home page
 - User fun likes and saves 
@@ -43,6 +42,7 @@
 -  Login UI and functionality
 -  Logout functionality
 -  User Details 
+-  Create Post UI and functionality
 
 # Feedback for me
 

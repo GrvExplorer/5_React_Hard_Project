@@ -9,7 +9,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 function RootLayout() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, setIsAuthentic̥ated } = useUserContext();
+  const { user, setIsAuthenticated } = useUserContext();
 
   const { mutateAsync: signOut, isLoading: isSigningOut } = useSignOutAccount();
 

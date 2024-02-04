@@ -1,6 +1,6 @@
-import { INewPost, INewUser, IUser } from "@/types";
+import { INewPost, INewUser } from "@/types";
 import { ID, Query } from "appwrite";
-import { account, appwriteConfig, avatars, databases, storage } from "./config";
+import { account, appwriteConfig, avatars, databases,  storage } from "./config";
 
 export async function saveUserToDB(user: {
   accountId: string;
@@ -38,7 +38,7 @@ export async function uploadFile(file: File) {
 
 export async function getFilePreview(fileId: string) {
   try {
-    const fileUrl = storage.getFilePreview(
+    const fileUrl =  storage.getFilePreview(
       appwriteConfig.storageId,
       fileId,
       2000,
@@ -56,7 +56,7 @@ export async function getFilePreview(fileId: string) {
 
 export async function deleteFile(fileId: string) {
   try {
-    const deleteFile = storage.deleteFile(appwriteConfig.storageId, fileId);
+    const deleteFile = await storage.deleteFile(appwriteConfig.storageId, fileId);
     return deleteFile;
   } catch (error) {
     console.log(error);
@@ -102,7 +102,6 @@ export async function signInAccount(user: { email: string; password: string }) {
     console.log(error);
   }
 }
-
 // TODO: Get current user right
 export async function getCurrentUser() {
   try {
@@ -136,12 +135,10 @@ export async function createPost(post: INewPost) {
   try {
     // TODO: upload image to storage
     const uploadedFile = await uploadFile(post.file[0]);
-    console.log(uploadedFile);
 
     if (!uploadedFile) throw Error;
 
-    const fileUrl = getFilePreview(uploadedFile.$id);
-    console.log(fileUrl);
+    const fileUrl = await getFilePreview(uploadedFile.$id);
 
     if (!fileUrl) throw Error;
 

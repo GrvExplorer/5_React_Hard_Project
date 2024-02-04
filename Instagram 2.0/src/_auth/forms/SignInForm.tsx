@@ -12,11 +12,9 @@ import { Input } from "@/components/ui/input";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
-import { appwriteConfig, databases } from "@/lib/appwrite/config";
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { SignInValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Query } from "appwrite";
 import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +25,6 @@ function SignInForm() {
   const navigate = useNavigate();
   const {
     checkAuthUser,
-    setUser,
     isLoading: isCheckUserLoading,
   } = useUserContext();
   const { mutateAsync: signInAccount, isLoading: isSigningInUser } =
@@ -71,13 +68,6 @@ function SignInForm() {
         throw new Error("No able to sign in");
       }
 
-      // TODO: get user details and setUser
-      // const userDetails = await databases.getDocument(
-      //   appwriteConfig.databaseId,
-      //   appwriteConfig.userCollectionId,
-      //   session.providerUid
-      // );
-      // console.log(userDetails);
 
       const isLoggedIn = await checkAuthUser();
       if (isLoggedIn) {
