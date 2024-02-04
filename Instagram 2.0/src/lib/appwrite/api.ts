@@ -1,7 +1,6 @@
-import { INewUser, IUser } from "@/types";
+import { INewPost, INewUser, IUser } from "@/types";
 import { ID, Query } from "appwrite";
-import { account, appwriteConfig, avatars, databases } from "./config";
-import { useUserContext } from "@/context/AuthContext";
+import { account, appwriteConfig, avatars, databases, storage } from "./config";
 
 export async function saveUserToDB(user: {
   accountId: string;
@@ -24,6 +23,45 @@ export async function saveUserToDB(user: {
   }
 }
 
+export async function uploadFile(file: File) {
+  try {
+    const uploadFile = await storage.createFile(
+      appwriteConfig.storageId,
+      ID.unique(),
+      file,
+    );
+    return uploadFile;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getFilePreview(fileId: string) {
+  try {
+    const fileUrl = storage.getFilePreview(
+      appwriteConfig.storageId,
+      fileId,
+      2000,
+      2000,
+      "top",
+      100,
+    );
+
+    if (!fileUrl) throw Error;
+    return fileUrl;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteFile(fileId: string) {
+  try {
+    const deleteFile = storage.deleteFile(appwriteConfig.storageId, fileId);
+    return deleteFile;
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function createUserAccount(user: INewUser) {
   try {
     const newAccount = await account.create(
@@ -55,9 +93,6 @@ export async function createUserAccount(user: INewUser) {
 
 export async function signInAccount(user: { email: string; password: string }) {
   try {
-
-
-
     const loginAccount = await account.createEmailSession(
       user.email,
       user.password,
@@ -68,8 +103,7 @@ export async function signInAccount(user: { email: string; password: string }) {
   }
 }
 
-
-// TODO: Get current user right 
+// TODO: Get current user right
 export async function getCurrentUser() {
   try {
     const currentAccount = await account.get();
@@ -80,7 +114,7 @@ export async function getCurrentUser() {
       appwriteConfig.userCollectionId,
       [Query.equal("accountId", currentAccount.$id)],
     );
-    
+
     if (!currentUser) throw Error;
     return currentUser.documents[0];
   } catch (error) {
@@ -90,11 +124,49 @@ export async function getCurrentUser() {
 }
 
 export async function signOutAccount() {
-try {
-  const logoutAccount = await account.deleteSession("current");
-  return logoutAccount;
-} catch (error) {
-  console.log(error);
-  
+  try {
+    const logoutAccount = await account.deleteSession("current");
+    return logoutAccount;
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+export async function createPost(post: INewPost) {
+  try {
+    // TODO: upload image to storage
+    const uploadedFile = await uploadFile(post.file[0]);
+    console.log(uploadedFile);
+
+    if (!uploadedFile) throw Error;
+
+    const fileUrl = getFilePreview(uploadedFile.$id);
+    console.log(fileUrl);
+
+    if (!fileUrl) throw Error;
+
+    const tags = post.tags?.replace(/ /g, "").split(",") || [];
+
+    const newPost = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      ID.unique(),
+      {
+        creator: post.userId,
+        caption: post.caption,
+        imageUrl: fileUrl,
+        imageId: uploadedFile.$id,
+        location: post.location,
+        tags: tags,
+      },
+    );
+    if (!newPost) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    return newPost;
+  } catch (error) {
+    console.log(error);
+  }
 }

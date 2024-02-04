@@ -4,16 +4,16 @@ import { useUserContext } from "@/context/AuthContext";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
 import { INavLink } from "@/types";
 import { Loader } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 function RootLayout() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, setIsAuthenticated } = useUserContext();
+  const { user, setIsAuthentic̥ated } = useUserContext();
+
   const { mutateAsync: signOut, isLoading: isSigningOut } = useSignOutAccount();
 
   const location = useLocation();
-  console.log("🚀 ~ RootLayout ~ location:", location);
 
   const handelSignOut = async () => {
     try {
@@ -37,11 +37,10 @@ function RootLayout() {
     }
   };
 
-  console.log(user);
 
   return (
-    <div className="grid">
-      <div className="hidden h-screen w-80 flex-col justify-between bg-dark-3  pb-4 pl-8 pt-10 md:flex ">
+    <div className="grid grid-cols-2 gap-10 ">
+      <div className="hidden w-80 flex-col justify-between bg-dark-3  pb-4 pl-8 pt-10 md:flex fixed h-screen left-0 top-0">
         <div className="mr-8 flex flex-col gap-20">
           <Link to="/" className="w-80">
             <img src="/assets/images/logo.svg" alt="logo" />
@@ -67,7 +66,6 @@ function RootLayout() {
           <div className="flex flex-col gap-8">
             {sidebarLinks.map((link: INavLink) => {
               const isActiveRoute = location.pathname === link.route;
-
               return (
                 <>
                   <Link to={link.route} key={link.label}>
@@ -107,6 +105,10 @@ function RootLayout() {
             </p>
           </div>
         </div>
+      </div>
+      <div className=""></div>
+      <div className="mt-10 mb-8 w-full">
+        <Outlet />
       </div>
     </div>
   );

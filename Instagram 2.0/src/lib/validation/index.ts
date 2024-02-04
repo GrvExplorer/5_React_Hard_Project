@@ -19,3 +19,10 @@ export const SignInValidation = z.object({
   password: z.string()
   .min(1, { message: "Please enter your password" })
 });
+
+export const CreatePostValidation = z.object({
+  caption: z.string().min(5, { message: "Caption must be at least 5 characters" }).max(2200, { message: "Caption must be less than 2200 characters" }),
+  file: z.custom<File[]>(),
+  location: z.string().min(1, {message: 'This field is required'}).max(1000, {message: 'Maximum 1000 characters.'}),
+  tags: z.string()
+})
