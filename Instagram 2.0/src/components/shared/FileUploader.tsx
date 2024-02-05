@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
-import { Button } from "./button";
+import { Button } from "../ui/button";
 
 type FileUploaderPropsType = {
   fieldChange: (files: File[]) => void;
@@ -20,7 +20,6 @@ function FileUploader({ fieldChange, mediaUrl }: FileUploaderPropsType) {
     [file],
   );
 
-  
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
@@ -34,10 +33,14 @@ function FileUploader({ fieldChange, mediaUrl }: FileUploaderPropsType) {
       className="flex-center flex cursor-pointer flex-col rounded-xl bg-dark-3"
     >
       <input {...getInputProps()} className="cursor-pointer" />
-      {isFileUrl || mediaUrl? (
+      {isFileUrl || mediaUrl ? (
         <>
           <div className="flex w-full flex-1 justify-center p-5 lg:p-10">
-            <img src={isFileUrl || mediaUrl} alt="image" className="file-uploader-img" />
+            <img
+              src={isFileUrl || mediaUrl}
+              alt="image"
+              className="file-uploader-img"
+            />
           </div>
           <p className="file_uploader-label">Click or drag photo to replace</p>
         </>

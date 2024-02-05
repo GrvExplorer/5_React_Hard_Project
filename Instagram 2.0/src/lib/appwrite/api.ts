@@ -71,8 +71,7 @@ export async function createUserAccount(user: INewUser) {
       user.name,
     );
 
-    if (!newAccount)
-      throw new Error("Something went wrong while creating account");
+    if (!newAccount) throw new Error("Something went wrong while creating account");
 
     const avatarUrl = avatars.getInitials(user.name, 256, 256);
 
@@ -165,5 +164,23 @@ export async function createPost(post: INewPost) {
     return newPost;
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getPosts() {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+    )
+    console.log(posts);
+    
+    if (!posts) {
+      return [];
+    }
+    return posts.documents;
+  } catch (error) {
+    console.log(error);
+    
   }
 }

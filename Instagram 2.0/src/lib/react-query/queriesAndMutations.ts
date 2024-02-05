@@ -5,7 +5,7 @@ import {
   // useQuery,
   // useQueryClient,
 } from "@tanstack/react-query";
-import { createPost, createUserAccount, signInAccount, signOutAccount } from "../appwrite/api";
+import { createPost, createUserAccount, getPosts, signInAccount, signOutAccount } from "../appwrite/api";
 
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -27,5 +27,11 @@ export const useSignOutAccount = () => {
 export const useCreatePost = () => {
   return useMutation({
     mutationFn: (details: INewPost) => createPost(details),
+  })
+}
+
+export const useGetPosts = () => {
+  return useMutation({
+    mutationFn: () => getPosts(),
   })
 }

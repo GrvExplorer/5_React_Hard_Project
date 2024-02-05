@@ -1,8 +1,16 @@
+import PostCard from "@/components/shared/PostCard";
+import { useUserContext } from "@/context/AuthContext";
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 function Home() {
-  const Authenticated = false;
-  return <div>{Authenticated ? <Navigate to="/sign-up" /> : <>Home</>}</div>;
+  const { isAuthenticated } = useUserContext()
+
+  return <div>{isAuthenticated ? (
+    <>
+    <PostCard />
+    </>
+  ) : <Navigate to="/sign-up" />}</div>;
 }
 
 export default Home;

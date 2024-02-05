@@ -1,6 +1,6 @@
 # Google 2.0
 
-<p align="left"> <a href="https://5-react-hard-project-s33n.vercel.app/" target="_blank" rel="noreferrer"> <img src="./src/assets/banner.png" alt="banner" /> </a> </p>
+<p align="left"> <a href="https://google-2-0-grvexplorer.vercel.app/search" target="_blank" rel="noreferrer"> <img src="./src/assets/banner.png" alt="banner" /> </a> </p>
 
 # Technologies Used
 

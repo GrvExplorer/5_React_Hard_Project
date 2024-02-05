@@ -1,4 +1,4 @@
-import FileUploader from "@/components/ui/FileUploader";
+import FileUploader from "@/components/shared/FileUploader";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -103,10 +103,7 @@ function CreatePost() {
                   <FormControl className="file_uploader-box border-none bg-dark-3">
                     {/* TODO: File preview */}
 
-                    <FileUploader
-                      fieldChange={field.onChange}
-                      mediaUrl={''}
-                    />
+                    <FileUploader fieldChange={field.onChange} mediaUrl={""} />
 
                     {/* <Input
                       className="file_uploader-box"

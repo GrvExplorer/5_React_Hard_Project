@@ -4,7 +4,7 @@ This Project uses Spotify API to get the json format of music details. It uses y
 
     Give it a ⭐ if you like this project.
 
-<p align="left"> <a href="https://5-react-hard-project-pearl.vercel.app/" target="_blank" rel="noreferrer"> <img src="./src/assets/banner.png" alt="banner" /> </a> </p>
+<p align="left"> <a href="https://spotify-2-0-grvexplorer.vercel.app/" target="_blank" rel="noreferrer"> <img src="./src/assets/banner.png" alt="banner" /> </a> </p>
 
 # Technologies used
 <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>  <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vitejs-logo.svg" alt="vite" width="40" height="40"/> </a> 

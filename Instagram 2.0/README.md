@@ -19,6 +19,8 @@
 - appwrite database and storage
 - TanStack Query for Mutations and Queries
 - State management using context api 
+- React-dropzone for file uploading
+- Shadcn UI
 
 ### Continued development
 

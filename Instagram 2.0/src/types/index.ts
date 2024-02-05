@@ -60,3 +60,12 @@ export type IContextType = {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   checkAuthUser: () => Promise<boolean>;
 };
+
+export type IPost = {
+  $id: string;
+  caption: string;
+  imageId: string;
+  imageUrl: URL;
+  location: string;
+  tags: string[];
+};
