@@ -1,5 +1,5 @@
 import { INewPost, INewUser } from "@/types";
-import { ID, Query } from "appwrite";
+import { ID, Models, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases,  storage } from "./config";
 
 export async function saveUserToDB(user: {
@@ -62,6 +62,8 @@ export async function deleteFile(fileId: string) {
     console.log(error);
   }
 }
+
+// User
 export async function createUserAccount(user: INewUser) {
   try {
     const newAccount = await account.create(
@@ -130,6 +132,43 @@ export async function signOutAccount() {
   }
 }
 
+export async function getUserPosts(userId: string) {
+  if (!userId) return;
+  
+    try {
+      const posts = await databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.postCollectionId,
+        [Query.equal('creator', userId), Query.orderDesc('$createdAt')]
+      )
+      console.log(posts);
+      
+      if (!posts) throw Error;
+  
+      return posts;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+export async function getUserDetails() {
+  
+}
+
+export async function setUserDetails() {
+  
+}
+
+export async function getUserSaves() {
+  
+}
+
+export async function getUserLikes() {
+  
+}
+
+
+// Posts
 export async function createPost(post: INewPost) {
   try {
     // TODO: upload image to storage
@@ -167,20 +206,50 @@ export async function createPost(post: INewPost) {
   }
 }
 
-export async function getPosts() {
+export async function getRecentPosts() {
+
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
+      [Query.orderDesc('$createdAt'), Query.limit(10)]
     )
     console.log(posts);
     
-    if (!posts) {
-      return [];
-    }
-    return posts.documents;
+    if (!posts) throw Error;
+
+    return posts;
   } catch (error) {
     console.log(error);
-    
   }
+}
+
+export async function getPopularPosts() {
+  
+}
+
+export async function setPostLikes(post: Models.Document, userId: string) {
+try {
+  post.likes.append(userId)
+  const setLike = await databases.updateDocument(
+    appwriteConfig.databaseId,
+    appwriteConfig.postCollectionId,
+    ID.unique(),
+    {
+...post
+    }
+  )
+
+  console.log(setLike);
+  
+  if (!setLike) throw new Error("Not able to set the like");
+  
+  return setLike
+} catch (error) {
+  console.log(error);
+  
+}
+}
+export async function setPostSaves() {
+  
 }

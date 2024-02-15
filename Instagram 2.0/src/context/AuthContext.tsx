@@ -71,7 +71,6 @@ export const AuthContextProvider = ({
       //   navigate("/sign-in");
       // }
       const res = await checkAuthUser();
-      console.log(res);
       
     };
     checkAuth();

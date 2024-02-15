@@ -2,7 +2,7 @@
 
   <p align="left"> <a href="https://instagram-bxnkrpmfi-gauravs-projects-a90941d1.vercel.app/" target="_blank" rel="noreferrer"> <img src="./public/assets//images//banner.png" alt="banner" /></a> </p>
 
-  <div style='display: flex; justify-content: center; gap: 10px; flex-wrap: wrap'>
+  <div style='display: flex; justify-content: center; gap: 10px; flex-wrap: wrap'> 
     <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="reactjs" />
     <img src="https://img.shields.io/badge/-Appwrite-black?style=for-the-badge&logoColor=white&logo=appwrite&color=FD366E" alt="appwrite" />
     <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
