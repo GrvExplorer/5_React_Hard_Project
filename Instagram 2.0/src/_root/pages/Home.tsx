@@ -6,7 +6,6 @@ import { Navigate } from "react-router-dom";
 function Home() {
   const { isAuthenticated } = useUserContext();
   const { data: posts, isLoading: isPostLoading } = useGetRecentPosts();
-console.log(posts);
 
   return (
     <div>

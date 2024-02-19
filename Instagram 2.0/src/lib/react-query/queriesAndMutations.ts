@@ -15,6 +15,7 @@ import {
   signOutAccount,
 } from "../appwrite/api";
 import { QUERY_KEYS } from "./queryKeys";
+import { string } from "zod";
 
 // User
 export const useCreateUserAccount = () => {
@@ -74,7 +75,10 @@ export const useGetPopularPosts = () => {
 };
 export const useSetPostLikes = () => {
   return useMutation({
-    mutationFn: (post: Models.Document, userId: string) => setPostLikes(post, userId),
+    mutationFn: ({postId, likesArray}: {
+      postId: string;
+      likesArray: string[];
+    }) => setPostLikes(postId, likesArray),
   });
 };
 export const useSetPostSaves = () => {

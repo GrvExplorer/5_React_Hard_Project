@@ -214,7 +214,6 @@ export async function getRecentPosts() {
       appwriteConfig.postCollectionId,
       [Query.orderDesc('$createdAt'), Query.limit(10)]
     )
-    console.log(posts);
     
     if (!posts) throw Error;
 
@@ -228,19 +227,16 @@ export async function getPopularPosts() {
   
 }
 
-export async function setPostLikes(post: Models.Document, userId: string) {
+export async function setPostLikes(postId: string, likesArray: string[]) {
 try {
-  post.likes.append(userId)
   const setLike = await databases.updateDocument(
     appwriteConfig.databaseId,
     appwriteConfig.postCollectionId,
-    ID.unique(),
-    {
-...post
-    }
+    postId,
+  {
+    likes: likesArray
+  }
   )
-
-  console.log(setLike);
   
   if (!setLike) throw new Error("Not able to set the like");
   

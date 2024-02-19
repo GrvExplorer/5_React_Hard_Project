@@ -1,6 +1,9 @@
 import { useSetPostLikes } from "@/lib/react-query/queriesAndMutations";
+import { checkLiked } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
+import React, { useState } from "react";
+import { string } from "zod";
 
 type PostStatsProp = {
   post: Models.Document;
@@ -8,26 +11,47 @@ type PostStatsProp = {
 };
 
 function PostStats({ post, userId }: PostStatsProp) {
+
+  const likesList = post.likes.map((user: Models.Document) => user.$id);
+  const [likes, setLikes] = useState<string[]>(likesList);
+
   const { mutateAsync: setPostLike, isLoading: isLikeing } = useSetPostLikes();
+
+
+  function handlePostLike(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+    e.stopPropagation();
+    let likesArray = [...likes];
+    if (likesArray.includes(userId)) {
+    likesArray = likesArray.filter(Id => Id !== userId)
+    } else {
+      likesArray.push(userId);      
+    }
+    setLikes(likesArray);
+    setPostLike({postId: post.$id, likesArray})
+  }
+  function handlePostSave(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+    
+  }
 
   return (
     <div className={`z-20 flex w-full items-center justify-between`}>
       <div className="mr-5 flex gap-2">
         <img
           src={`${
-            // checkIsLiked(likes, userId)
-            false ? "/assets/icons/liked.svg" : "/assets/icons/like.svg"
+            checkLiked(likes, userId)
+             ? "/assets/icons/liked.svg" : "/assets/icons/like.svg"
           }`}
           alt="like"
           width={20}
           height={20}
-          onClick={() => setPostLike(post, userId)}
+          onClick={(e) => handlePostLike(e)}
           className="cursor-pointer"
         />
-                <p className="small-medium lg:base-medium">{
-                isLikeing ? <Loader />: ''
-                }</p>
+        <p className="small-medium lg:base-medium">
+          {isLikeing ? <Loader className="w-4 animate-spin" /> : likes.length}
+        </p>
       </div>
+
       <div className="flex gap-2">
         <img
           src={false ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
@@ -35,7 +59,7 @@ function PostStats({ post, userId }: PostStatsProp) {
           width={20}
           height={20}
           className="cursor-pointer"
-          // onClick={(e) => handleSavePost(e)}
+          onClick={(e) => handlePostSave(e)}
         />
       </div>
     </div>
