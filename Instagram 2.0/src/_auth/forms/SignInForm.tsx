@@ -23,10 +23,7 @@ import { z } from "zod";
 function SignInForm() {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const {
-    checkAuthUser,
-    isLoading: isCheckUserLoading,
-  } = useUserContext();
+  const { checkAuthUser, isLoading: isCheckUserLoading } = useUserContext();
   const { mutateAsync: signInAccount, isLoading: isSigningInUser } =
     useSignInAccount();
 
@@ -49,7 +46,7 @@ function SignInForm() {
       if (!session) {
         toast({
           title: "Error while signing in.",
-          description: "We've created your account for you.",
+          description: "Check Your Email and Password.",
           variant: "destructive",
           action: (
             <ToastAction
@@ -68,8 +65,8 @@ function SignInForm() {
         throw new Error("No able to sign in");
       }
 
-
       const isLoggedIn = await checkAuthUser();
+
       if (isLoggedIn) {
         form.reset();
         navigate("/");
@@ -80,7 +77,6 @@ function SignInForm() {
       } else {
         return toast({
           title: "Error while signing in.",
-          description: "We've created your account for you can sign in now.",
           variant: "destructive",
           action: (
             <ToastAction

@@ -11,6 +11,7 @@ import {
   createUserAccount,
   getRecentPosts,
   setPostLikes,
+  setPostSaves,
   signInAccount,
   signOutAccount,
 } from "../appwrite/api";
@@ -82,5 +83,12 @@ export const useSetPostLikes = () => {
   });
 };
 export const useSetPostSaves = () => {
-  return;
+  return useMutation({
+    mutationFn: (
+      {postId, savesArray}: {
+        postId: string;
+        savesArray: string[];
+      }
+    ) => setPostSaves(postId, savesArray)
+  })
 };

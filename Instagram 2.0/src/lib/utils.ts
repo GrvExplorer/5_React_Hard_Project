@@ -9,6 +9,10 @@ export function checkLiked(likeList: string[], userId: string) {
   return likeList.includes(userId)
 }
 
+export function checkSave(saveList: string[], userId: string) {
+  return saveList.includes(userId)
+}
+
 export const multiFormatDateString = (timestamp: string = ""): string => {
   const timestampNum = Math.round(new Date(timestamp).getTime() / 1000);
   const date: Date = new Date(timestampNum * 1000);

@@ -1,6 +1,6 @@
 import { INewPost, INewUser } from "@/types";
 import { ID, Models, Query } from "appwrite";
-import { account, appwriteConfig, avatars, databases,  storage } from "./config";
+import { account, appwriteConfig, avatars, databases, storage } from "./config";
 
 export async function saveUserToDB(user: {
   accountId: string;
@@ -38,7 +38,7 @@ export async function uploadFile(file: File) {
 
 export async function getFilePreview(fileId: string) {
   try {
-    const fileUrl =  storage.getFilePreview(
+    const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
       fileId,
       2000,
@@ -56,7 +56,10 @@ export async function getFilePreview(fileId: string) {
 
 export async function deleteFile(fileId: string) {
   try {
-    const deleteFile = await storage.deleteFile(appwriteConfig.storageId, fileId);
+    const deleteFile = await storage.deleteFile(
+      appwriteConfig.storageId,
+      fileId,
+    );
     return deleteFile;
   } catch (error) {
     console.log(error);
@@ -73,7 +76,8 @@ export async function createUserAccount(user: INewUser) {
       user.name,
     );
 
-    if (!newAccount) throw new Error("Something went wrong while creating account");
+    if (!newAccount)
+      throw new Error("Something went wrong while creating account");
 
     const avatarUrl = avatars.getInitials(user.name, 256, 256);
 
@@ -134,39 +138,30 @@ export async function signOutAccount() {
 
 export async function getUserPosts(userId: string) {
   if (!userId) return;
-  
-    try {
-      const posts = await databases.listDocuments(
-        appwriteConfig.databaseId,
-        appwriteConfig.postCollectionId,
-        [Query.equal('creator', userId), Query.orderDesc('$createdAt')]
-      )
-      console.log(posts);
-      
-      if (!posts) throw Error;
-  
-      return posts;
-    } catch (error) {
-      console.log(error);
-    }
+
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.equal("creator", userId), Query.orderDesc("$createdAt")],
+    );
+    console.log(posts);
+
+    if (!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error);
   }
-  
-export async function getUserDetails() {
-  
 }
 
-export async function setUserDetails() {
-  
-}
+export async function getUserDetails() {}
 
-export async function getUserSaves() {
-  
-}
+export async function setUserDetails() {}
 
-export async function getUserLikes() {
-  
-}
+export async function getUserSaves() {}
 
+export async function getUserLikes() {}
 
 // Posts
 export async function createPost(post: INewPost) {
@@ -207,14 +202,13 @@ export async function createPost(post: INewPost) {
 }
 
 export async function getRecentPosts() {
-
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      [Query.orderDesc('$createdAt'), Query.limit(10)]
-    )
-    
+      [Query.orderDesc("$createdAt"), Query.limit(10)],
+    );
+
     if (!posts) throw Error;
 
     return posts;
@@ -223,29 +217,42 @@ export async function getRecentPosts() {
   }
 }
 
-export async function getPopularPosts() {
-  
-}
+export async function getPopularPosts() {}
 
 export async function setPostLikes(postId: string, likesArray: string[]) {
-try {
-  const setLike = await databases.updateDocument(
-    appwriteConfig.databaseId,
-    appwriteConfig.postCollectionId,
-    postId,
-  {
-    likes: likesArray
+  try {
+    const setLike = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      {
+        likes: likesArray,
+      },
+    );
+
+    if (!setLike) throw new Error("Not able to set the like");
+
+    return setLike;
+  } catch (error) {
+    console.log(error);
   }
-  )
-  
-  if (!setLike) throw new Error("Not able to set the like");
-  
-  return setLike
-} catch (error) {
-  console.log(error);
-  
 }
-}
-export async function setPostSaves() {
-  
+export async function setPostSaves(postId: string, savesArray: string[]) {
+  try {
+    const setSave = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      {
+        save: savesArray,
+      },
+    );
+
+    if (!setSave) throw new Error("Not able to set the like");
+console.log(setSave);
+
+    return setSave;
+  } catch (error) {
+    console.log(error);
+  }
 }
