@@ -57,6 +57,10 @@ export const useGetUserLikes = () => {
   return;
 };
 
+export const useGetCurrentUser = () => {
+  return 
+}
+
 // Posts
 export const useCreatePost = () => {
   return useMutation({
@@ -85,10 +89,10 @@ export const useSetPostLikes = () => {
 export const useSetPostSaves = () => {
   return useMutation({
     mutationFn: (
-      {postId, savesArray}: {
+      {postId, userId}: {
         postId: string;
-        savesArray: string[];
+        userId: string
       }
-    ) => setPostSaves(postId, savesArray)
+    ) => setPostSaves(postId, userId)
   })
 };

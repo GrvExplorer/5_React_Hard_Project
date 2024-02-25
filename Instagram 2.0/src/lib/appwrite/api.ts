@@ -237,21 +237,39 @@ export async function setPostLikes(postId: string, likesArray: string[]) {
     console.log(error);
   }
 }
-export async function setPostSaves(postId: string, savesArray: string[]) {
+export async function setPostSaves(postId: string, userId: string) {
   try {
-    const setSave = await databases.updateDocument(
+    const updatedPost = await databases.createDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
-      postId,
+      appwriteConfig.saveCollectionsID,
+      ID.unique(),
       {
-        save: savesArray,
+      user: userId,
+      post: postId,
       },
     );
 
-    if (!setSave) throw new Error("Not able to set the like");
-console.log(setSave);
+    if (!updatedPost) throw new Error("Not able to set the like");
+console.log(updatedPost);
 
-    return setSave;
+    return updatedPost;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function deleteSavedPost(savedRecordId:string) {
+  try {
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.saveCollectionsID,
+      savedRecordId
+    )
+
+    if (!statusCode) throw new Error
+    
+    return { status: 'Ok'};
   } catch (error) {
     console.log(error);
   }

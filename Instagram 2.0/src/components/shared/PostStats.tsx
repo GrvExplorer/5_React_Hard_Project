@@ -13,18 +13,15 @@ type PostStatsProp = {
 function PostStats({ post, userId }: PostStatsProp) {
 
   const likesList = post.likes.map((user: Models.Document) => user.$id);
-  const savesList = post.save.map((user: Models.Document) => user.$id);
-
-
+  
   const [likes, setLikes] = useState<string[]>(likesList);
-  const [saves, setSaves] = useState<string[]>(savesList)
-
-console.log(likes);
-console.log(saves);
-
-
+  const [isSaved, setIsSaved] = useState(false)
+  
   const { mutateAsync: setPostLike, isLoading: isLikeing } = useSetPostLikes();
-  const { mutateAsync: setPostSave , isLoading: isSaving } = useSetPostSaves()
+  const { mutateAsync: setPostSave } = useSetPostSaves()
+  
+  const { data: currentUser } = useGetCurrentUser();
+  const savedPostRecord = currentUser?.save.find()
 
   function handlePostLike(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     e.stopPropagation();
@@ -40,14 +37,7 @@ console.log(saves);
 
   function handlePostSave(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     e.stopPropagation()
-    let savesArray = [...saves];
-    if (savesArray.includes(userId)) {
-    savesArray = savesArray.filter(Id => Id !== userId)
-    } else {
-      savesArray.push(userId);      
-    }
-    setSaves(savesArray);
-    setPostSave({postId: post.$id, savesArray})
+
   }
 
   return (
