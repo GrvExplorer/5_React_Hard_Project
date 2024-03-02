@@ -107,7 +107,6 @@ export async function signInAccount(user: { email: string; password: string }) {
     console.log(error);
   }
 }
-// TODO: Get current user right
 export async function getCurrentUser() {
   try {
     const currentAccount = await account.get();
@@ -166,7 +165,6 @@ export async function getUserLikes() {}
 // Posts
 export async function createPost(post: INewPost) {
   try {
-    // TODO: upload image to storage
     const uploadedFile = await uploadFile(post.file[0]);
 
     if (!uploadedFile) throw Error;
@@ -259,18 +257,24 @@ console.log(updatedPost);
 }
 
 
-export async function deleteSavedPost(savedRecordId:string) {
-  try {
-    const statusCode = await databases.deleteDocument(
-      appwriteConfig.databaseId,
-      appwriteConfig.saveCollectionsID,
-      savedRecordId
-    )
+// export async function deleteSavedPost() {
+//   try {
 
-    if (!statusCode) throw new Error
+//     const deletedPhoto = deleteFile(post.imageId)    
+
+//     if (!deletedPhoto) throw new Error("No able to delete the post due to photo");
     
-    return { status: 'Ok'};
-  } catch (error) {
-    console.log(error);
-  }
-}
+
+//     const statusCode = await databases.deleteDocument(
+//       appwriteConfig.databaseId,
+//       appwriteConfig.postCollectionId,
+      
+//     )
+
+//     if (!statusCode) throw new Error
+    
+//     return { status: 'Ok'};
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }

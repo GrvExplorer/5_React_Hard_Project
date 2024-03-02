@@ -41,7 +41,7 @@ const { user } = useUserContext();
           </div>
         </div>
 
-        <Link to="" className={`${user.id !== post.creator.$id && "hidden"}`}>
+        <Link to="/create-post" className={`${user.id !== post.creator.$id && "hidden"}`}>
           <img
             src={"/assets/icons/edit.svg"}
             alt="edit"

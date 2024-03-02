@@ -1,4 +1,4 @@
-import { useSetPostLikes, useSetPostSaves } from "@/lib/react-query/queriesAndMutations";
+import { useGetCurrentUser, useSetPostLikes, useSetPostSaves } from "@/lib/react-query/queriesAndMutations";
 import { checkLiked, checkSave } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
@@ -20,8 +20,8 @@ function PostStats({ post, userId }: PostStatsProp) {
   const { mutateAsync: setPostLike, isLoading: isLikeing } = useSetPostLikes();
   const { mutateAsync: setPostSave } = useSetPostSaves()
   
-  const { data: currentUser } = useGetCurrentUser();
-  const savedPostRecord = currentUser?.save.find()
+  // const { data: currentUser } = useGetCurrentUser();
+  // const savedPostRecord = currentUser?.save.find()
 
   function handlePostLike(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     e.stopPropagation();
@@ -62,7 +62,8 @@ function PostStats({ post, userId }: PostStatsProp) {
       <div className="flex gap-2">
         <img
           src={
-            checkSave(saves, userId)
+            // checkSave(saves, userId)
+            false
             ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
           alt="share"
           width={20}
@@ -71,7 +72,7 @@ function PostStats({ post, userId }: PostStatsProp) {
           onClick={(e) => handlePostSave(e)}
         />
                 <p className="small-medium lg:base-medium">
-          {isSaving ? <Loader className="w-4 animate-spin" /> : saves.length}
+          {false ? <Loader className="w-4 animate-spin" /> : ''}
         </p>
       </div>
     </div>

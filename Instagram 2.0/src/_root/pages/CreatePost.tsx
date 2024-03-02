@@ -101,7 +101,7 @@ function CreatePost() {
                 <FormItem>
                   <FormLabel>Add Photos</FormLabel>
                   <FormControl className="file_uploader-box border-none bg-dark-3">
-                    {/* TODO: File preview */}
+             
 
                     <FileUploader fieldChange={field.onChange} mediaUrl={""} />
 

@@ -46,6 +46,13 @@
 -  User Details 
 -  Create Post UI and functionality
 
+# TODO's: 
+
+  - TODO: Rebuild the post collection in Appwrite
+  - TODO: Basic TanstackQuery and Appwrite 
+
+
+
 # Feedback for me
 
 # Useful Resources
