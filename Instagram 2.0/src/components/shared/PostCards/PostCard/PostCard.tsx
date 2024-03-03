@@ -1,15 +1,15 @@
 import { useUserContext } from "@/context/AuthContext";
+import { multiFormatDateString } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
-import { multiFormatDateString } from "@/lib/utils";
 
 type PostCardProps = {
   post: Models.Document;
 };
 
 function PostCard({ post }: PostCardProps) {
-const { user } = useUserContext();
+  const { user } = useUserContext();
   return (
     <div className="post-card">
       <div className="flex-between">
@@ -41,7 +41,10 @@ const { user } = useUserContext();
           </div>
         </div>
 
-        <Link to="/create-post" className={`${user.id !== post.creator.$id && "hidden"}`}>
+        <Link
+          to="/create-post"
+          className={`${user.id !== post.creator.$id && "hidden"}`}
+        >
           <img
             src={"/assets/icons/edit.svg"}
             alt="edit"
@@ -51,29 +54,28 @@ const { user } = useUserContext();
         </Link>
       </div>
 
-      <Link to=''>
+      <Link to="">
         <div className="small-medium lg:base-medium py-5">
           <p className="">{post.caption}</p>
-          <ul className="flex gap-1 my-2">
+          <ul className="my-2 flex gap-1">
             {post?.tags?.map((tag: string, i: string) => (
-              <li key={`${tag}${i}`} className="text-light-3 small-regular">
+              <li key={`${tag}${i}`} className="small-regular text-light-3">
                 #{tag}
               </li>
             ))}
           </ul>
-          
-        <img
-          src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
-          alt="post image"
-          className="post-card_img"
-        />
+
+          <img
+            src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
+            alt="post image"
+            className="post-card_img"
+          />
         </div>
       </Link>
 
-<PostStats post={post} userId={user.id} />
+      <PostStats post={post} userId={user.id} />
     </div>
   );
-
 }
 
 export default PostCard;

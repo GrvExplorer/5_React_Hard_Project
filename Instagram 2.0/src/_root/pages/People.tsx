@@ -1,8 +1,22 @@
+import UserCards from "@/components/shared/UserCards/UserCards"
+import { useGetAllUsers } from "@/lib/react-query/queriesAndMutations"
+import { Loader } from "lucide-react"
 
 function People() {
+
+  const {data:users, isLoading:gettingUsers} = useGetAllUsers()
+
   return (
-    <div>People</div>
-  )
+<>
+<h1 className="text-3xl font-bold mb-10">People Feed</h1>
+    {
+gettingUsers ? <Loader className="mr-2 h-4 w-4 animate-spin" /> : <>
+<UserCards users={users} />
+</>
+
+    }
+</>
+    )
 }
 
 export default People

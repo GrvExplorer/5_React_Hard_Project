@@ -9,6 +9,7 @@ import { Models } from "appwrite";
 import {
   createPost,
   createUserAccount,
+  getAllUsers,
   getRecentPosts,
   setPostLikes,
   setPostSaves,
@@ -60,6 +61,13 @@ export const useGetUserLikes = () => {
 export const useGetCurrentUser = () => {
   return 
 }
+
+export const useGetAllUsers = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: getAllUsers,
+  });
+};
 
 // Posts
 export const useCreatePost = () => {

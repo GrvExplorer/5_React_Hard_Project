@@ -1,4 +1,4 @@
-import PostCards from "@/components/shared/PostCards";
+import PostCards from "@/components/shared/PostCards/PostCards";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Navigate } from "react-router-dom";
@@ -11,7 +11,7 @@ function Home() {
     <div>
       {isAuthenticated ? (
         <>
-        <h1 className="text-3xl font-bold mb-10">Home Feed</h1>
+          <h1 className="mb-10 text-3xl font-bold">Home Feed</h1>
           <PostCards posts={posts} />
         </>
       ) : (

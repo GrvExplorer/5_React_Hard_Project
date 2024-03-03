@@ -148,7 +148,7 @@ function CreatePost() {
               <Button className="shad-button_primary" type="submit">
                 {isCreatePostIsLoading ? (
                   <div className="flex-center gap-2">
-                    <Loader /> Loading...
+                    <Loader className="mr-2 h-4 w-4 animate-spin" /> Loading...
                   </div>
                 ) : (
                   "Create Post"
