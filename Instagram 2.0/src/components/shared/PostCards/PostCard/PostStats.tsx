@@ -1,5 +1,5 @@
-import { useGetCurrentUser, useSetPostLikes, useSetPostSaves } from "@/lib/react-query/queriesAndMutations";
-import { checkLiked, checkSave } from "@/lib/utils";
+import { useSetPostLikes, useSetPostSaves } from "@/lib/react-query/queriesAndMutations";
+import { checkLiked } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
 import React, { useState } from "react";

@@ -1,4 +1,4 @@
-import { INewPost, INewUser } from "@/types";
+import { INewPost, INewUser, updatePostProp } from "@/types";
 import { ID, Models, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 
@@ -154,6 +154,27 @@ export async function getUserPosts(userId: string) {
   }
 }
 
+export async function getPostById(postId: string) {
+  if (!postId) return;
+
+  try {
+    const post = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    );
+    console.log(post);
+
+    if (!post) throw Error;
+
+    return post;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 export async function getUserDetails() {}
 
 export async function setUserDetails() {}
@@ -227,6 +248,44 @@ export async function getRecentPosts() {
     if (!posts) throw Error;
 
     return posts;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+export async function updatePost({post, postId}: updatePostProp) {
+  try {
+    const uploadedFile = await uploadFile(post.file[0]);
+
+    if (!uploadedFile) throw Error;
+
+    const fileUrl = await getFilePreview(uploadedFile.$id);
+
+    if (!fileUrl) throw Error;
+
+    const tags = post.tags?.replace(/ /g, "").split(",") || [];
+
+    const updatePost = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      {
+        creator: post.userId,
+        caption: post.caption,
+        imageUrl: fileUrl,
+        imageId: uploadedFile.$id,
+        location: post.location,
+        tags: tags,
+      },
+    );
+    if (!updatePost) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    return updatePost;
   } catch (error) {
     console.log(error);
   }

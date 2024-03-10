@@ -42,7 +42,7 @@ function PostCard({ post }: PostCardProps) {
         </div>
 
         <Link
-          to="/create-post"
+          to={`/update-post/${post.$id}`}
           className={`${user.id !== post.creator.$id && "hidden"}`}
         >
           <img

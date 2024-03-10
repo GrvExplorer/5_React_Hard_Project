@@ -12,20 +12,38 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
-import { useCreatePost } from "@/lib/react-query/queriesAndMutations";
+import { getPostById, updatePost } from "@/lib/appwrite/api";
+import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations";
+import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 import { CreatePostValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
-function CreatePost() {
-  const navigate = useNavigate();
-  const { toast } = useToast();
+function CreatePost({ isUpdate }) {
   const { user } = useUserContext();
+  const { postId } = useParams()
+
+    const {data} = useQuery({
+      queryKey: [QUERY_KEYS.GET_POST_BY_ID],
+      queryFn: () => getPostById(postId),
+    })
+
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+
   const { mutateAsync: createPost, isLoading: isCreatePostIsLoading } =
     useCreatePost();
+
+
+  const { mutateAsync: updatePost, isLoading: isUpdatePostIsLoading } =
+    useUpdatePost();
+
+
 
   async function handelCreatePost(
     details: z.infer<typeof CreatePostValidation>,
@@ -53,14 +71,41 @@ function CreatePost() {
       console.log(error);
     }
   }
+  
+  async function handelUpdatePost(
+    details: z.infer<typeof CreatePostValidation>,
+  ) {
+    try {
+      const getUpdatePost = await updatePost({
+        ...details,
+        postId: postId,
+      });
+
+      if (!getUpdatePost) {
+        toast({
+          title: `post failed. Please try again.`,
+        });
+        throw new Error("Something went wrong while creating post");
+      }
+      toast({
+        title: "Post Updated",
+        description: "Your post has been updated successfully",
+      });
+      navigate("/");
+
+      return getUpdatePost;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const form = useForm({
     resolver: zodResolver(CreatePostValidation),
     defaultValues: {
-      caption: "",
+      caption: isUpdate ? data?.caption : "",
       file: [],
-      location: "",
-      tags: "",
+      location: isUpdate ? data?.location : "",
+      tags: isUpdate ? data?.tags.join(',') : "",
     },
   });
 
@@ -73,13 +118,13 @@ function CreatePost() {
             src="/assets/icons/gallery-add.svg"
             alt=""
           />
-          Create Post
+          {postId ? 'Update': 'Create'} Post
         </h1>
 
         <Form {...form}>
           <form
             className="flex flex-col gap-10"
-            onSubmit={form.handleSubmit(handelCreatePost)}
+            onSubmit={form.handleSubmit(isUpdate ? handelUpdatePost : handelCreatePost)}
           >
             <FormField
               control={form.control}
@@ -103,7 +148,7 @@ function CreatePost() {
                   <FormControl className="file_uploader-box border-none bg-dark-3">
              
 
-                    <FileUploader fieldChange={field.onChange} mediaUrl={""} />
+                    <FileUploader fieldChange={field.onChange} mediaUrl={isUpdate ? data?.imageUrl : ''} />
 
                     {/* <Input
                       className="file_uploader-box"
@@ -146,12 +191,14 @@ function CreatePost() {
             <div className="flex items-center justify-end gap-4">
               <Button className="shad-button_dark_4">Cancel</Button>
               <Button className="shad-button_primary" type="submit">
-                {isCreatePostIsLoading ? (
+                {isCreatePostIsLoading || isUpdatePostIsLoading ? (
                   <div className="flex-center gap-2">
                     <Loader className="mr-2 h-4 w-4 animate-spin" /> Loading...
                   </div>
                 ) : (
-                  "Create Post"
+                  <>
+                  {postId ? 'Update': 'Create'} Post
+                  </>
                 )}
               </Button>
             </div>

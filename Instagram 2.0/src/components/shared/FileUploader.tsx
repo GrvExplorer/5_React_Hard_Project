@@ -17,7 +17,7 @@ function FileUploader({ fieldChange, mediaUrl }: FileUploaderPropsType) {
       setFile(acceptedFiles);
       fieldChange(acceptedFiles);
     },
-    [file],
+    [fieldChange],
   );
 
   const { getRootProps, getInputProps } = useDropzone({

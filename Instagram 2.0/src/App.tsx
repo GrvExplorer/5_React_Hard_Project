@@ -20,7 +20,8 @@ function App() {
           <Route path='/explore' element={<Explore />} />
           <Route path='/all-users' element={<People />} />
           <Route path='/saved' element={<Saved />} />
-          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/create-post" element={<CreatePost isUpdate={false} />} />
+          <Route path="/update-post/:postId" element={<CreatePost isUpdate={true} />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

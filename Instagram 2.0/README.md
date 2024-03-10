@@ -24,6 +24,7 @@
 
 ### Continued development
 
+- update post 
 - Post UI and functionality ( CRUD )
 - Home page
 - User fun likes and saves 

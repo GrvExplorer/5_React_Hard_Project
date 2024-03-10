@@ -1,4 +1,4 @@
-import { INewPost, INewUser } from "@/types";
+import { INewPost, INewUser, updatePostProp } from "@/types";
 import {
   // useInfiniteQuery,
   useMutation,
@@ -10,11 +10,13 @@ import {
   createPost,
   createUserAccount,
   getAllUsers,
+  getPostById,
   getRecentPosts,
   setPostLikes,
   setPostSaves,
   signInAccount,
   signOutAccount,
+  updatePost,
 } from "../appwrite/api";
 import { QUERY_KEYS } from "./queryKeys";
 import { string } from "zod";
@@ -106,5 +108,7 @@ export const useSetPostSaves = () => {
 };
 
 export const useUpdatePost = () => {
-  return 
+  return useMutation({
+    mutationFn: ({post, postId}: updatePostProp) => updatePost({post, postId}),
+  });
 }

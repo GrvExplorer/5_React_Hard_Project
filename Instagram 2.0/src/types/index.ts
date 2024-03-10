@@ -69,3 +69,8 @@ export type IPost = {
   location: string;
   tags: string[];
 };
+
+export type updatePostProp = {
+  post: INewPost;
+  postId: string
+}
