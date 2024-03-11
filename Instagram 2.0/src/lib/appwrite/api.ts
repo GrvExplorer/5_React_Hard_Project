@@ -1,4 +1,4 @@
-import { INewPost, INewUser, updatePostProp } from "@/types";
+import { INewPost, INewUser, IUpdatePost, updatePostProp } from "@/types";
 import { ID, Models, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 
@@ -34,6 +34,18 @@ export async function uploadFile(file: File) {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getUploadedFile(fileId:string) {
+ try {
+  const storedFile = await storage.getFile(
+    appwriteConfig.storageId,
+    fileId
+  )
+  return storedFile;
+ } catch (error) {
+  console.log(error);
+ } 
 }
 
 export async function getFilePreview(fileId: string) {
@@ -155,15 +167,14 @@ export async function getUserPosts(userId: string) {
 }
 
 export async function getPostById(postId: string) {
-  if (!postId) return;
-
+  
   try {
+    if (!postId) return null;
     const post = await databases.getDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
       postId
     );
-    console.log(post);
 
     if (!post) throw Error;
 
@@ -203,6 +214,7 @@ export async function getAllUsers() {
 // Posts
 export async function createPost(post: INewPost) {
   try {
+    console.log(post.file);
     const uploadedFile = await uploadFile(post.file[0]);
 
     if (!uploadedFile) throw Error;
@@ -255,35 +267,62 @@ export async function getRecentPosts() {
 
 
 
-export async function updatePost({post, postId}: updatePostProp) {
+export async function updatePost(post: IUpdatePost ) {
   try {
-    const uploadedFile = await uploadFile(post.file[0]);
+    
+    if (post.file.length !== 0 ) {
 
-    if (!uploadedFile) throw Error;
+      const uploadedFile = await uploadFile(post.file[0]);
+      if (!uploadedFile) throw Error;
+  
+      // const getFile = await getUploadedFile(post.imageId)
+  
+      const fileUrl = await getFilePreview(uploadedFile.$id);
+      if (!fileUrl) throw Error;
 
-    const fileUrl = await getFilePreview(uploadedFile.$id);
+      const tags = post.tags?.replace(/ /g, "").split(",") || [];
 
-    if (!fileUrl) throw Error;
+      const updatePost = await databases.updateDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.postCollectionId,
+        post.postId,
+        {
+          creator: post.userId,
+          caption: post.caption,
+          location: post.location,
+          tags: tags,
+          imageUrl: fileUrl,
+          imageId: uploadedFile.$id,
+        },
+      );
+  
+      if (!updatePost) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+  
+      return updatePost;
+
+
+
+    }
+    
 
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
 
     const updatePost = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      postId,
+      post.postId,
       {
         creator: post.userId,
         caption: post.caption,
-        imageUrl: fileUrl,
-        imageId: uploadedFile.$id,
         location: post.location,
         tags: tags,
+        imageUrl: post.imageUrl,
+        imageId: post.imageId,
       },
     );
-    if (!updatePost) {
-      await deleteFile(uploadedFile.$id);
-      throw Error;
-    }
 
     return updatePost;
   } catch (error) {
@@ -305,28 +344,31 @@ export async function setPostLikes(postId: string, likesArray: string[]) {
     );
 
     if (!setLike) throw new Error("Not able to set the like");
+console.log(setLike);
+
 
     return setLike;
   } catch (error) {
     console.log(error);
   }
 }
-export async function setPostSaves(postId: string, userId: string) {
+export async function setPostSaves(postId: string, savedArray: string[]) {
   try {
-    const updatedPost = await databases.createDocument(
+    console.log(savedArray);
+    
+    const postSaved = await databases.updateDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.saveCollectionsID,
-      ID.unique(),
+      appwriteConfig.postCollectionId,
+      postId,
       {
-      user: userId,
-      post: postId,
+     save: savedArray
       },
     );
 
-    if (!updatedPost) throw new Error("Not able to set the like");
-console.log(updatedPost);
+    if (!postSaved) throw new Error("Not able to set the like");
+console.log(postSaved);
 
-    return updatedPost;
+    return postSaved;
   } catch (error) {
     console.log(error);
   }

@@ -23,14 +23,16 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
-function CreatePost({ isUpdate }) {
+function CreatePost({ isUpdate }: { isUpdate: boolean}) {
   const { user } = useUserContext();
   const { postId } = useParams()
+
 
     const {data} = useQuery({
       queryKey: [QUERY_KEYS.GET_POST_BY_ID],
       queryFn: () => getPostById(postId),
     })
+
 
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -66,6 +68,9 @@ function CreatePost({ isUpdate }) {
       });
       navigate("/");
 
+console.log(newPost);
+
+
       return newPost;
     } catch (error) {
       console.log(error);
@@ -76,16 +81,19 @@ function CreatePost({ isUpdate }) {
     details: z.infer<typeof CreatePostValidation>,
   ) {
     try {
-      const getUpdatePost = await updatePost({
-        ...details,
-        postId: postId,
+      const getUpdatePost = await updatePost({    
+          ...details,
+          postId: postId,
+          imageId: data?.imageId,
+          imageUrl: data?.imageUrl,
+          userId: data?.userId
       });
 
       if (!getUpdatePost) {
         toast({
           title: `post failed. Please try again.`,
         });
-        throw new Error("Something went wrong while creating post");
+        throw new Error("Something went wrong while updating post");
       }
       toast({
         title: "Post Updated",
@@ -99,15 +107,27 @@ function CreatePost({ isUpdate }) {
     }
   }
 
-  const form = useForm({
+  let form = useForm({
     resolver: zodResolver(CreatePostValidation),
     defaultValues: {
       caption: isUpdate ? data?.caption : "",
-      file: [],
+      file: isUpdate? [] : [],
       location: isUpdate ? data?.location : "",
       tags: isUpdate ? data?.tags.join(',') : "",
     },
   });
+
+  // if (data) {
+  //   form = useForm({
+  //     resolver: zodResolver(CreatePostValidation),
+  //     defaultValues: {
+  //       caption: data?.caption ,
+  //       file: [],
+  //       location: data?.location ,
+  //       tags: data?.tags.join(',') ,
+  //     },
+  //   });
+  // }
 
   return (
     <div className="flex justify-center">

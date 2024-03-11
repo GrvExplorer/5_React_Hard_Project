@@ -24,8 +24,7 @@
 
 ### Continued development
 
-- update post 
-- Post UI and functionality ( CRUD )
+- Save of post 
 - Home page
 - User fun likes and saves 
 - User Profile page
@@ -46,6 +45,9 @@
 -  Logout functionality
 -  User Details 
 -  Create Post UI and functionality
+-  Post UI 
+-  update post 
+
 
 # TODO's: 
 

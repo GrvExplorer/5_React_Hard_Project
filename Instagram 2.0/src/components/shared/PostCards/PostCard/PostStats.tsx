@@ -1,4 +1,7 @@
-import { useSetPostLikes, useSetPostSaves } from "@/lib/react-query/queriesAndMutations";
+import {
+  useSetPostLikes,
+  useSetPostSaves,
+} from "@/lib/react-query/queriesAndMutations";
 import { checkLiked } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
@@ -11,15 +14,15 @@ type PostStatsProp = {
 };
 
 function PostStats({ post, userId }: PostStatsProp) {
-
   const likesList = post.likes.map((user: Models.Document) => user.$id);
-  
+  const savedList = post.save.map((user: Models.Document) => user.$id);
+
   const [likes, setLikes] = useState<string[]>(likesList);
-  const [isSaved, setIsSaved] = useState(false)
-  
+  const [isSaved, setIsSaved] = useState<string[]>(savedList);
+
   const { mutateAsync: setPostLike, isLoading: isLikeing } = useSetPostLikes();
-  const { mutateAsync: setPostSave } = useSetPostSaves()
-  
+  const { mutateAsync: setPostSave } = useSetPostSaves();
+
   // const { data: currentUser } = useGetCurrentUser();
   // const savedPostRecord = currentUser?.save.find()
 
@@ -27,17 +30,24 @@ function PostStats({ post, userId }: PostStatsProp) {
     e.stopPropagation();
     let likesArray = [...likes];
     if (likesArray.includes(userId)) {
-    likesArray = likesArray.filter(Id => Id !== userId)
+      likesArray = likesArray.filter((Id) => Id !== userId);
     } else {
-      likesArray.push(userId);      
+      likesArray.push(userId);
     }
-    setLikes(likesArray);    
-    setPostLike({postId: post.$id, likesArray})
+    setLikes(likesArray);
+    setPostLike({ postId: post.$id, likesArray });
   }
 
   function handlePostSave(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    e.stopPropagation()
-
+    e.stopPropagation();
+    let savedArray = [...isSaved];
+    if (savedArray.includes(userId)) {
+      savedArray = savedArray.filter((Id) => Id !== userId);
+    } else {
+      savedArray.push(userId);
+    }
+    setPostSave({ postId: post.$id, savedArray });
+    setIsSaved(savedArray);
   }
 
   return (
@@ -46,7 +56,8 @@ function PostStats({ post, userId }: PostStatsProp) {
         <img
           src={`${
             checkLiked(likes, userId)
-             ? "/assets/icons/liked.svg" : "/assets/icons/like.svg"
+              ? "/assets/icons/liked.svg"
+              : "/assets/icons/like.svg"
           }`}
           alt="like"
           width={20}
@@ -63,16 +74,16 @@ function PostStats({ post, userId }: PostStatsProp) {
         <img
           src={
             // checkSave(saves, userId)
-            false
-            ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}
+            false ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"
+          }
           alt="share"
           width={20}
           height={20}
           className="cursor-pointer"
           onClick={(e) => handlePostSave(e)}
         />
-                <p className="small-medium lg:base-medium">
-          {false ? <Loader className="w-4 animate-spin" /> : ''}
+        <p className="small-medium lg:base-medium">
+          {false ? <Loader className="w-4 animate-spin" /> : ""}
         </p>
       </div>
     </div>

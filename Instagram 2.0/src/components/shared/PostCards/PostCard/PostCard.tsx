@@ -3,6 +3,7 @@ import { multiFormatDateString } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
+import { useQueryClient } from "@tanstack/react-query";
 
 type PostCardProps = {
   post: Models.Document;
@@ -10,6 +11,8 @@ type PostCardProps = {
 
 function PostCard({ post }: PostCardProps) {
   const { user } = useUserContext();
+  const cache = useQueryClient()
+
   return (
     <div className="post-card">
       <div className="flex-between">
@@ -44,6 +47,9 @@ function PostCard({ post }: PostCardProps) {
         <Link
           to={`/update-post/${post.$id}`}
           className={`${user.id !== post.creator.$id && "hidden"}`}
+          onClick={() => {cache.invalidateQueries({
+            queryKey: ['getPostById']
+          })}}
         >
           <img
             src={"/assets/icons/edit.svg"}

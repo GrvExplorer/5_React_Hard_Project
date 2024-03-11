@@ -25,6 +25,7 @@ export type INewPost = {
 
 
 export type IUpdatePost = {
+  userId: string;
   postId: string;
   caption: string;
   imageId: string;
@@ -71,6 +72,6 @@ export type IPost = {
 };
 
 export type updatePostProp = {
-  post: INewPost;
+  post: IUpdatePost;
   postId: string
 }

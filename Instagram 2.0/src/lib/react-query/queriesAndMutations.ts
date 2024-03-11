@@ -1,4 +1,4 @@
-import { INewPost, INewUser, updatePostProp } from "@/types";
+import { INewPost, INewUser, IUpdatePost, updatePostProp } from "@/types";
 import {
   // useInfiniteQuery,
   useMutation,
@@ -99,16 +99,16 @@ export const useSetPostLikes = () => {
 export const useSetPostSaves = () => {
   return useMutation({
     mutationFn: (
-      {postId, userId}: {
+      {postId, savedArray}: {
         postId: string;
-        userId: string
+        savedArray: string[];
       }
-    ) => setPostSaves(postId, userId)
+    ) => setPostSaves(postId, savedArray)
   })
 };
 
 export const useUpdatePost = () => {
   return useMutation({
-    mutationFn: ({post, postId}: updatePostProp) => updatePost({post, postId}),
+    mutationFn: (post: IUpdatePost) => updatePost(post),
   });
 }
