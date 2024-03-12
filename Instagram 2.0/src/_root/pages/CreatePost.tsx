@@ -17,7 +17,7 @@ import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutati
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 import { CreatePostValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -27,10 +27,16 @@ function CreatePost({ isUpdate }: { isUpdate: boolean}) {
   const { user } = useUserContext();
   const { postId } = useParams()
 
+  const cache = useQueryClient()
 
     const {data} = useQuery({
-      queryKey: [QUERY_KEYS.GET_POST_BY_ID],
+      queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
       queryFn: () => getPostById(postId),
+      onSuccess: (data) => {
+        cache.invalidateQueries({
+          queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id]
+        })
+      }
     })
 
 
@@ -86,7 +92,6 @@ console.log(newPost);
           postId: postId,
           imageId: data?.imageId,
           imageUrl: data?.imageUrl,
-          userId: data?.userId
       });
 
       if (!getUpdatePost) {
@@ -166,16 +171,9 @@ console.log(newPost);
                 <FormItem>
                   <FormLabel>Add Photos</FormLabel>
                   <FormControl className="file_uploader-box border-none bg-dark-3">
-             
-
+        
                     <FileUploader fieldChange={field.onChange} mediaUrl={isUpdate ? data?.imageUrl : ''} />
 
-                    {/* <Input
-                      className="file_uploader-box"
-                      id="file"
-                      type="file"
-                      {...field}
-                    /> */}
                   </FormControl>
                   <FormMessage />
                 </FormItem>

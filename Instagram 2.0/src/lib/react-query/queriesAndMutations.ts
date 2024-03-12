@@ -4,6 +4,7 @@ import {
   useMutation,
   useQueries,
   useQuery,
+  useQueryClient,
 } from "@tanstack/react-query";
 import { Models } from "appwrite";
 import {
@@ -108,7 +109,17 @@ export const useSetPostSaves = () => {
 };
 
 export const useUpdatePost = () => {
+  const cache = useQueryClient()
   return useMutation({
     mutationFn: (post: IUpdatePost) => updatePost(post),
+    onSuccess: (data) => {
+      cache.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id]
+      })
+    }
   });
+}
+
+export async function useGetPostById(postId: string) {
+  return 
 }

@@ -169,7 +169,6 @@ export async function getUserPosts(userId: string) {
 export async function getPostById(postId: string) {
   
   try {
-    if (!postId) return null;
     const post = await databases.getDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
@@ -183,8 +182,6 @@ export async function getPostById(postId: string) {
     console.log(error);
   }
 }
-
-
 
 export async function getUserDetails() {}
 
@@ -265,8 +262,6 @@ export async function getRecentPosts() {
   }
 }
 
-
-
 export async function updatePost(post: IUpdatePost ) {
   try {
     
@@ -287,7 +282,7 @@ export async function updatePost(post: IUpdatePost ) {
         appwriteConfig.postCollectionId,
         post.postId,
         {
-          creator: post.userId,
+
           caption: post.caption,
           location: post.location,
           tags: tags,
@@ -315,7 +310,6 @@ export async function updatePost(post: IUpdatePost ) {
       appwriteConfig.postCollectionId,
       post.postId,
       {
-        creator: post.userId,
         caption: post.caption,
         location: post.location,
         tags: tags,
@@ -375,7 +369,7 @@ console.log(postSaved);
 }
 
 
-// export async function deleteSavedPost() {
+// export async function deletePost() {
 //   try {
 
 //     const deletedPhoto = deleteFile(post.imageId)    

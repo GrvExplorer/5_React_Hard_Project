@@ -24,7 +24,9 @@
 
 ### Continued development
 
+- Form component , edit component, updatePost Api function , deletePost, post details, 
 - Save of post 
+
 - Home page
 - User fun likes and saves 
 - User Profile page

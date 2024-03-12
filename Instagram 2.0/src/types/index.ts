@@ -25,7 +25,6 @@ export type INewPost = {
 
 
 export type IUpdatePost = {
-  userId: string;
   postId: string;
   caption: string;
   imageId: string;

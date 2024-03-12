@@ -9,7 +9,7 @@ type FileUploaderPropsType = {
 
 function FileUploader({ fieldChange, mediaUrl }: FileUploaderPropsType) {
   const [file, setFile] = useState<File[]>([]);
-  const [isFileUrl, setIsFileUrl] = useState<string>("");
+  const [isFileUrl, setIsFileUrl] = useState<string>(mediaUrl);
 
   const onDrop = useCallback(
     (acceptedFiles: FileWithPath[]) => {
@@ -33,11 +33,11 @@ function FileUploader({ fieldChange, mediaUrl }: FileUploaderPropsType) {
       className="flex-center flex cursor-pointer flex-col rounded-xl bg-dark-3"
     >
       <input {...getInputProps()} className="cursor-pointer" />
-      {isFileUrl || mediaUrl ? (
+      {isFileUrl ? (
         <>
           <div className="flex w-full flex-1 justify-center p-5 lg:p-10">
             <img
-              src={isFileUrl || mediaUrl}
+              src={isFileUrl}
               alt="image"
               className="file-uploader-img"
             />
