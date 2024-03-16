@@ -1,3 +1,4 @@
+import { useToast } from "@/components/ui/use-toast";
 import { INewPost, INewUser, IUpdatePost, updatePostProp } from "@/types";
 import {
   // useInfiniteQuery,
@@ -7,12 +8,14 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { Models } from "appwrite";
+import { string } from "zod";
 import {
   createPost,
   createUserAccount,
   getAllUsers,
   getPostById,
   getRecentPosts,
+  setDeletePostSaves,
   setPostLikes,
   setPostSaves,
   signInAccount,
@@ -20,7 +23,6 @@ import {
   updatePost,
 } from "../appwrite/api";
 import { QUERY_KEYS } from "./queryKeys";
-import { string } from "zod";
 
 // User
 export const useCreateUserAccount = () => {
@@ -62,8 +64,8 @@ export const useGetUserLikes = () => {
 };
 
 export const useGetCurrentUser = () => {
-  return 
-}
+  return;
+};
 
 export const useGetAllUsers = () => {
   return useQuery({
@@ -91,7 +93,10 @@ export const useGetPopularPosts = () => {
 };
 export const useSetPostLikes = () => {
   return useMutation({
-    mutationFn: ({postId, likesArray}: {
+    mutationFn: ({
+      postId,
+      likesArray,
+    }: {
       postId: string;
       likesArray: string[];
     }) => setPostLikes(postId, likesArray),
@@ -99,27 +104,38 @@ export const useSetPostLikes = () => {
 };
 export const useSetPostSaves = () => {
   return useMutation({
-    mutationFn: (
-      {postId, savedArray}: {
-        postId: string;
-        savedArray: string[];
-      }
-    ) => setPostSaves(postId, savedArray)
-  })
+    mutationFn: ({ post, user }: { post: string; user: string }) =>
+      setPostSaves(post, user),
+  });
+};
+export const useSetDeletePostSaves = () => {
+  return useMutation({
+    mutationFn: (postId: string) => setDeletePostSaves(postId),
+  });
 };
 
 export const useUpdatePost = () => {
-  const cache = useQueryClient()
+  const cache = useQueryClient();
   return useMutation({
     mutationFn: (post: IUpdatePost) => updatePost(post),
     onSuccess: (data) => {
       cache.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id]
-      })
-    }
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+    },
   });
-}
+};
 
-export async function useGetPostById(postId: string) {
-  return 
+export function useGetPostById(postId: string) {
+  const cache = useQueryClient();
+
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
+    queryFn: () => getPostById(postId),
+    onSuccess: (data) => {
+      cache.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+    },
+  });
 }

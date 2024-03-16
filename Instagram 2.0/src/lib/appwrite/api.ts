@@ -1,3 +1,4 @@
+import { useToast } from "@/components/ui/use-toast";
 import { INewPost, INewUser, IUpdatePost, updatePostProp } from "@/types";
 import { ID, Models, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
@@ -36,16 +37,13 @@ export async function uploadFile(file: File) {
   }
 }
 
-export async function getUploadedFile(fileId:string) {
- try {
-  const storedFile = await storage.getFile(
-    appwriteConfig.storageId,
-    fileId
-  )
-  return storedFile;
- } catch (error) {
-  console.log(error);
- } 
+export async function getUploadedFile(fileId: string) {
+  try {
+    const storedFile = await storage.getFile(appwriteConfig.storageId, fileId);
+    return storedFile;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getFilePreview(fileId: string) {
@@ -167,12 +165,11 @@ export async function getUserPosts(userId: string) {
 }
 
 export async function getPostById(postId: string) {
-  
   try {
     const post = await databases.getDocument(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      postId
+      postId,
     );
 
     if (!post) throw Error;
@@ -196,22 +193,20 @@ export async function getAllUsers() {
     const users = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
-      [Query.orderDesc("$createdAt"), Query.limit(10)]
-    )
+      [Query.orderDesc("$createdAt"), Query.limit(10)],
+    );
 
     if (!users) throw new Error("user not found");
-  
-    return users
+
+    return users;
   } catch (error) {
     console.log(error);
-    
   }
 }
 
 // Posts
 export async function createPost(post: INewPost) {
   try {
-    console.log(post.file);
     const uploadedFile = await uploadFile(post.file[0]);
 
     if (!uploadedFile) throw Error;
@@ -262,16 +257,14 @@ export async function getRecentPosts() {
   }
 }
 
-export async function updatePost(post: IUpdatePost ) {
+export async function updatePost(post: IUpdatePost) {
   try {
-    
-    if (post.file.length !== 0 ) {
-
+    if (post.file.length !== 0) {
       const uploadedFile = await uploadFile(post.file[0]);
       if (!uploadedFile) throw Error;
-  
+
       // const getFile = await getUploadedFile(post.imageId)
-  
+
       const fileUrl = await getFilePreview(uploadedFile.$id);
       if (!fileUrl) throw Error;
 
@@ -282,7 +275,6 @@ export async function updatePost(post: IUpdatePost ) {
         appwriteConfig.postCollectionId,
         post.postId,
         {
-
           caption: post.caption,
           location: post.location,
           tags: tags,
@@ -290,18 +282,14 @@ export async function updatePost(post: IUpdatePost ) {
           imageId: uploadedFile.$id,
         },
       );
-  
+
       if (!updatePost) {
         await deleteFile(uploadedFile.$id);
         throw Error;
       }
-  
+
       return updatePost;
-
-
-
     }
-    
 
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
 
@@ -338,53 +326,63 @@ export async function setPostLikes(postId: string, likesArray: string[]) {
     );
 
     if (!setLike) throw new Error("Not able to set the like");
-console.log(setLike);
-
+    console.log(setLike);
 
     return setLike;
   } catch (error) {
     console.log(error);
   }
 }
-export async function setPostSaves(postId: string, savedArray: string[]) {
+export async function setPostSaves(post: string, user: string) {
   try {
-    console.log(savedArray);
-    
-    const postSaved = await databases.updateDocument(
+    const postSaved = await databases.createDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
-      postId,
+      appwriteConfig.saveCollectionsID,
+      ID.unique(),
       {
-     save: savedArray
+        user,
+        post,
       },
     );
 
-    if (!postSaved) throw new Error("Not able to set the like");
-console.log(postSaved);
+    if (!postSaved) throw new Error("Not able to Save");
 
     return postSaved;
   } catch (error) {
     console.log(error);
   }
 }
+export async function setDeletePostSaves(postId: string) {
+  try {
+    const deletePostSave = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.saveCollectionsID,
+      postId,
+    );
 
+    if (!deletePostSave) throw new Error("Not able to Save");
+
+    return deletePostSave;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // export async function deletePost() {
 //   try {
 
-//     const deletedPhoto = deleteFile(post.imageId)    
+//     const deletedPhoto = deleteFile(post.imageId)
 
 //     if (!deletedPhoto) throw new Error("No able to delete the post due to photo");
-    
 
 //     const statusCode = await databases.deleteDocument(
 //       appwriteConfig.databaseId,
 //       appwriteConfig.postCollectionId,
-      
+
 //     )
 
 //     if (!statusCode) throw new Error
-    
+
 //     return { status: 'Ok'};
 //   } catch (error) {
 //     console.log(error);

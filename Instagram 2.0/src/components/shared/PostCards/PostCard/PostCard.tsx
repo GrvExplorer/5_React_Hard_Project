@@ -60,7 +60,7 @@ function PostCard({ post }: PostCardProps) {
         </Link>
       </div>
 
-      <Link to="">
+      <Link to={`/post-details/${post.$id}`}>
         <div className="small-medium lg:base-medium py-5">
           <p className="">{post.caption}</p>
           <ul className="my-2 flex gap-1">

@@ -1,12 +1,15 @@
+import { useUserContext } from "@/context/AuthContext";
+import { setDeletePostSaves } from "@/lib/appwrite/api";
 import {
+  useGetCurrentUser,
+  useSetDeletePostSaves,
   useSetPostLikes,
   useSetPostSaves,
 } from "@/lib/react-query/queriesAndMutations";
 import { checkLiked } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
-import React, { useState } from "react";
-import { string } from "zod";
+import React, { useEffect, useState } from "react";
 
 type PostStatsProp = {
   post: Models.Document;
@@ -15,16 +18,24 @@ type PostStatsProp = {
 
 function PostStats({ post, userId }: PostStatsProp) {
   const likesList = post.likes.map((user: Models.Document) => user.$id);
-  const savedList = post.save.map((user: Models.Document) => user.$id);
+  const saveList = post.save.map((user: Models.Document) => user.$id );
+  const saveArray = [...saveList]
 
   const [likes, setLikes] = useState<string[]>(likesList);
-  const [isSaved, setIsSaved] = useState<string[]>(savedList);
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    if (saveArray.includes(userId)) {
+      setIsSaved(true)
+    }
+  }, [])
 
   const { mutateAsync: setPostLike, isLoading: isLikeing } = useSetPostLikes();
-  const { mutateAsync: setPostSave } = useSetPostSaves();
 
-  // const { data: currentUser } = useGetCurrentUser();
-  // const savedPostRecord = currentUser?.save.find()
+
+  const { mutateAsync: setPostSave } = useSetPostSaves();
+  const { mutateAsync: setDeletePostSave } = useSetDeletePostSaves()
+
 
   function handlePostLike(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     e.stopPropagation();
@@ -38,16 +49,19 @@ function PostStats({ post, userId }: PostStatsProp) {
     setPostLike({ postId: post.$id, likesArray });
   }
 
-  function handlePostSave(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+  console.log(isSaved);
+  
+
+  async function  handlePostSave(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
     e.stopPropagation();
-    let savedArray = [...isSaved];
-    if (savedArray.includes(userId)) {
-      savedArray = savedArray.filter((Id) => Id !== userId);
-    } else {
-      savedArray.push(userId);
+
+    if (saveArray.includes(userId)) {
+      setDeletePostSaves(post.$id)
+      setIsSaved(false)
+      return
     }
-    setPostSave({ postId: post.$id, savedArray });
-    setIsSaved(savedArray);
+    setPostSave({ post: post.$id, user: userId })
+    setIsSaved(true);
   }
 
   return (
@@ -66,15 +80,15 @@ function PostStats({ post, userId }: PostStatsProp) {
           className="cursor-pointer"
         />
         <p className="small-medium lg:base-medium">
-          {isLikeing ? <Loader className="w-4 animate-spin" /> : likes.length}
+          {likes.length}
         </p>
       </div>
 
       <div className="flex gap-2">
         <img
           src={
-            // checkSave(saves, userId)
-            false ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"
+            isSaved
+             ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"
           }
           alt="share"
           width={20}

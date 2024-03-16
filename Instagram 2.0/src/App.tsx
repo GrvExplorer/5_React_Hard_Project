@@ -36,7 +36,8 @@ function App() {
             path="/update-post/:postId"
             element={<CreatePost isUpdate={true} />}
           />
-          <Route path="/post/:postId" element={<PostDetails />} />
+          <Route path="/post-details/:postId" element={<PostDetails />} />
+          
         </Route>
 
         <Route path="*" element={<NotFound />} />

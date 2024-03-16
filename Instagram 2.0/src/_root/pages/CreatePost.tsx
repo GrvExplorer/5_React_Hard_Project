@@ -13,7 +13,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
 import { getPostById, updatePost } from "@/lib/appwrite/api";
-import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations";
+import {
+  useCreatePost,
+  useGetPostById,
+  useUpdatePost,
+} from "@/lib/react-query/queriesAndMutations";
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 import { CreatePostValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,35 +27,21 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 
-function CreatePost({ isUpdate }: { isUpdate: boolean}) {
+function CreatePost({ isUpdate }: { isUpdate: boolean }) {
   const { user } = useUserContext();
-  const { postId } = useParams()
+  const { postId } = useParams();
 
-  const cache = useQueryClient()
 
-    const {data} = useQuery({
-      queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
-      queryFn: () => getPostById(postId),
-      onSuccess: (data) => {
-        cache.invalidateQueries({
-          queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id]
-        })
-      }
-    })
-
+  const { data } = useGetPostById(postId || '')
 
   const { toast } = useToast();
   const navigate = useNavigate();
 
-
   const { mutateAsync: createPost, isLoading: isCreatePostIsLoading } =
     useCreatePost();
 
-
   const { mutateAsync: updatePost, isLoading: isUpdatePostIsLoading } =
     useUpdatePost();
-
-
 
   async function handelCreatePost(
     details: z.infer<typeof CreatePostValidation>,
@@ -63,10 +53,7 @@ function CreatePost({ isUpdate }: { isUpdate: boolean}) {
       });
 
       if (!newPost) {
-        toast({
-          title: `post failed. Please try again.`,
-        });
-        throw new Error("Something went wrong while creating post");
+        throw new Error("post failed. Please try again.");
       }
       toast({
         title: "Post Created",
@@ -74,24 +61,27 @@ function CreatePost({ isUpdate }: { isUpdate: boolean}) {
       });
       navigate("/");
 
-console.log(newPost);
-
-
       return newPost;
     } catch (error) {
       console.log(error);
+      toast({
+        title: `${error.message}`,
+        description:
+          "This may due to file extension allowed type is .png, .svg, .jpg, .jpge",
+        variant: "destructive",
+      });
     }
   }
-  
+
   async function handelUpdatePost(
     details: z.infer<typeof CreatePostValidation>,
   ) {
     try {
-      const getUpdatePost = await updatePost({    
-          ...details,
-          postId: postId,
-          imageId: data?.imageId,
-          imageUrl: data?.imageUrl,
+      const getUpdatePost = await updatePost({
+        ...details,
+        postId: postId,
+        imageId: data?.imageId,
+        imageUrl: data?.imageUrl,
       });
 
       if (!getUpdatePost) {
@@ -112,13 +102,13 @@ console.log(newPost);
     }
   }
 
-  let form = useForm({
+  const form = useForm({
     resolver: zodResolver(CreatePostValidation),
     defaultValues: {
       caption: isUpdate ? data?.caption : "",
-      file: isUpdate? [] : [],
+      file: isUpdate ? [] : [],
       location: isUpdate ? data?.location : "",
-      tags: isUpdate ? data?.tags.join(',') : "",
+      tags: isUpdate ? data?.tags.join(",") : "",
     },
   });
 
@@ -143,13 +133,15 @@ console.log(newPost);
             src="/assets/icons/gallery-add.svg"
             alt=""
           />
-          {postId ? 'Update': 'Create'} Post
+          {postId ? "Update" : "Create"} Post
         </h1>
 
         <Form {...form}>
           <form
             className="flex flex-col gap-10"
-            onSubmit={form.handleSubmit(isUpdate ? handelUpdatePost : handelCreatePost)}
+            onSubmit={form.handleSubmit(
+              isUpdate ? handelUpdatePost : handelCreatePost,
+            )}
           >
             <FormField
               control={form.control}
@@ -171,9 +163,10 @@ console.log(newPost);
                 <FormItem>
                   <FormLabel>Add Photos</FormLabel>
                   <FormControl className="file_uploader-box border-none bg-dark-3">
-        
-                    <FileUploader fieldChange={field.onChange} mediaUrl={isUpdate ? data?.imageUrl : ''} />
-
+                    <FileUploader
+                      fieldChange={field.onChange}
+                      mediaUrl={isUpdate ? data?.imageUrl : ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -214,9 +207,7 @@ console.log(newPost);
                     <Loader className="mr-2 h-4 w-4 animate-spin" /> Loading...
                   </div>
                 ) : (
-                  <>
-                  {postId ? 'Update': 'Create'} Post
-                  </>
+                  <>{postId ? "Update" : "Create"} Post</>
                 )}
               </Button>
             </div>
