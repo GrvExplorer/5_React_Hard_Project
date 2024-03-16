@@ -22,7 +22,7 @@
 - React-dropzone for file uploading
 - Shadcn UI
 
-### Continued development
+### Futher development
 
 - Form component , edit component, updatePost Api function , deletePost, post details, 
 - Save of post 
@@ -37,9 +37,6 @@
 - Explore Page
 - 
 
-### Acknowledgements 
-- [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')
-
 # My Progress
 
 -  Signup UI and functionality
@@ -53,9 +50,11 @@
 
 # TODO's: 
 
-  - TODO: Rebuild the post collection in Appwrite
-  - TODO: Basic TanstackQuery and Appwrite 
+  - TODO: complete save state propertie of post 
 
+
+### Acknowledgements 
+- [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')
 
 
 # Feedback for me
