@@ -37,7 +37,7 @@
 - Explore Page
 - 
 
-# My Progress
+### My Progress
 
 -  Signup UI and functionality
 -  Login UI and functionality
@@ -48,12 +48,12 @@
 -  update post 
 
 
-# TODO's: 
+### TODO's: 
 
   - TODO: complete save state propertie of post 
 
 
-### Acknowledgements 
+# Acknowledgements 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')
 
 
