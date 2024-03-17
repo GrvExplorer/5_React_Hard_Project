@@ -180,11 +180,26 @@ export async function getPostById(postId: string) {
   }
 }
 
+export async function getUserSaves(userId: string) {
+  try {
+    const userSavedPost = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+    )
+    if (!userSavedPost) throw new Error;
+
+    return userSavedPost
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getUserDetails() {}
 
 export async function setUserDetails() {}
 
-export async function getUserSaves() {}
 
 export async function getUserLikes() {}
 
@@ -360,7 +375,7 @@ export async function setDeletePostSaves(postId: string) {
       postId,
     );
 
-    if (!deletePostSave) throw new Error("Not able to Save");
+    if (!deletePostSave) throw new Error("Not able to remove save");
 
     return deletePostSave;
   } catch (error) {

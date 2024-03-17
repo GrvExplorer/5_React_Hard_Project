@@ -24,9 +24,9 @@
 
 ### Futher development
 
-- Form component , edit component, updatePost Api function , deletePost, post details, 
-- Save of post 
 
+-  updatePost Api function , deletePost, post details, 
+- Saved page ( show save of current user )
 - Home page
 - User fun likes and saves 
 - User Profile page
@@ -35,7 +35,7 @@
 - See others save and likes
 - Root layout 
 - Explore Page
-- 
+- Search Post
 
 ### My Progress
 
@@ -46,12 +46,16 @@
 -  Create Post UI and functionality
 -  Post UI 
 -  update post 
-
+-  Save of post 
+-  Form component , edit component, invalidating on edit post
 
 ### TODO's: 
 
-  - TODO: complete save state propertie of post 
-
+  - TODO: updatePost Api function ( refactor ) 4:32:55
+  - TODO: post details , deletePost
+  - TODO: Save Page ( show save of current user )
+  - TODO: Explore Page
+  - TODO: Search Post
 
 # Acknowledgements 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')

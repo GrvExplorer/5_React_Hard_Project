@@ -15,6 +15,7 @@ import {
   getAllUsers,
   getPostById,
   getRecentPosts,
+  getUserSaves,
   setDeletePostSaves,
   setPostLikes,
   setPostSaves,
@@ -43,6 +44,13 @@ export const useSignOutAccount = () => {
   });
 };
 
+export const useGetUserSaves = (userId: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USER_SAVE_POSTS],
+    queryFn: () => getUserSaves(userId)
+  })
+};
+
 export const useGetUserPosts = () => {
   return;
 };
@@ -55,9 +63,6 @@ export const useSetUserDetails = () => {
   return;
 };
 
-export const useGetUserSaves = () => {
-  return;
-};
 
 export const useGetUserLikes = () => {
   return;
@@ -132,10 +137,6 @@ export function useGetPostById(postId: string) {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
     queryFn: () => getPostById(postId),
-    onSuccess: (data) => {
-      cache.invalidateQueries({
-        queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
-      });
-    },
+    enabled: !!postId,
   });
 }

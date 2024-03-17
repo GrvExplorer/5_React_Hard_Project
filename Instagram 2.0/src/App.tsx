@@ -12,7 +12,9 @@ import {
   People,
   PostDetails,
   Saved,
+  UpdatePost,
 } from "./_root/pages";
+
 
 function App() {
   return (
@@ -30,11 +32,11 @@ function App() {
           <Route path="/saved" element={<Saved />} />
           <Route
             path="/create-post"
-            element={<CreatePost isUpdate={false} />}
+            element={<CreatePost />}
           />
           <Route
             path="/update-post/:postId"
-            element={<CreatePost isUpdate={true} />}
+            element={<UpdatePost />}
           />
           <Route path="/post-details/:postId" element={<PostDetails />} />
           
