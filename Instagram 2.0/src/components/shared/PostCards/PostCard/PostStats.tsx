@@ -59,8 +59,8 @@ function PostStats({ post, userId }: PostStatsProp) {
       setIsSaved(false)
       return
     }
-    setPostSave({ post: post.$id, user: userId })
     setIsSaved(true);
+    setPostSave({ post: post.$id, user: userId })
   }
 
   return (
@@ -95,9 +95,6 @@ function PostStats({ post, userId }: PostStatsProp) {
           className="cursor-pointer"
           onClick={(e) => handlePostSave(e)}
         />
-        <p className="small-medium lg:base-medium">
-          {false ? <Loader className="w-4 animate-spin" /> : ""}
-        </p>
       </div>
     </div>
   );

@@ -66,6 +66,8 @@ export async function getFilePreview(fileId: string) {
 
 export async function deleteFile(fileId: string) {
   try {
+    if (!fileId) throw new Error();
+
     const deleteFile = await storage.deleteFile(
       appwriteConfig.storageId,
       fileId,
@@ -186,11 +188,10 @@ export async function getUserSaves(userId: string) {
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       userId,
-    )
-    if (!userSavedPost) throw new Error;
+    );
+    if (!userSavedPost) throw new Error();
 
-    return userSavedPost
-    
+    return userSavedPost;
   } catch (error) {
     console.log(error);
   }
@@ -199,7 +200,6 @@ export async function getUserSaves(userId: string) {
 export async function getUserDetails() {}
 
 export async function setUserDetails() {}
-
 
 export async function getUserLikes() {}
 
@@ -274,36 +274,24 @@ export async function getRecentPosts() {
 
 export async function updatePost(post: IUpdatePost) {
   try {
-    if (post.file.length !== 0) {
+
+    const fileImageChange = post.file.length > 0
+
+    let image = {
+      imageUrl: post.imageUrl,
+      imageId: post.imageId,
+    };
+
+    if (fileImageChange) {
       const uploadedFile = await uploadFile(post.file[0]);
       if (!uploadedFile) throw Error;
-
-      // const getFile = await getUploadedFile(post.imageId)
 
       const fileUrl = await getFilePreview(uploadedFile.$id);
       if (!fileUrl) throw Error;
 
-      const tags = post.tags?.replace(/ /g, "").split(",") || [];
+      image.imageId = uploadedFile.$id
+      image.imageUrl = fileUrl
 
-      const updatePost = await databases.updateDocument(
-        appwriteConfig.databaseId,
-        appwriteConfig.postCollectionId,
-        post.postId,
-        {
-          caption: post.caption,
-          location: post.location,
-          tags: tags,
-          imageUrl: fileUrl,
-          imageId: uploadedFile.$id,
-        },
-      );
-
-      if (!updatePost) {
-        await deleteFile(uploadedFile.$id);
-        throw Error;
-      }
-
-      return updatePost;
     }
 
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
@@ -316,10 +304,16 @@ export async function updatePost(post: IUpdatePost) {
         caption: post.caption,
         location: post.location,
         tags: tags,
-        imageUrl: post.imageUrl,
-        imageId: post.imageId,
+        imageUrl: image.imageUrl,
+        imageId:  image.imageId,
       },
     );
+
+    if (!updatePost && fileImageChange) {
+      await deleteFile(image.imageId);
+      console.log("Photo deleted from storage");
+      throw Error;
+    }
 
     return updatePost;
   } catch (error) {
@@ -383,23 +377,23 @@ export async function setDeletePostSaves(postId: string) {
   }
 }
 
-// export async function deletePost() {
-//   try {
+export async function deletePost(postId: string, postImageId: string) {
+  try {
 
-//     const deletedPhoto = deleteFile(post.imageId)
+    const deletedPhoto = deleteFile(postImageId)
 
-//     if (!deletedPhoto) throw new Error("No able to delete the post due to photo");
+    if (!deletedPhoto) throw new Error("No able to delete the post due to photo");
 
-//     const statusCode = await databases.deleteDocument(
-//       appwriteConfig.databaseId,
-//       appwriteConfig.postCollectionId,
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+    )
 
-//     )
+    if (!statusCode) throw new Error
 
-//     if (!statusCode) throw new Error
-
-//     return { status: 'Ok'};
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+    return { status: 'Ok'};
+  } catch (error) {
+    console.log(error);
+  }
+}

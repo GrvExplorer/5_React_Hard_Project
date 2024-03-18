@@ -48,7 +48,7 @@ function PostCard({ post }: PostCardProps) {
           to={`/update-post/${post.$id}`}
           className={`${user.id !== post.creator.$id && "hidden"}`}
           onClick={() => {cache.invalidateQueries({
-            queryKey: ['getPostById']
+            queryKey: ['getPostById', post.$id]
           })}}
         >
           <img

@@ -22,6 +22,7 @@ import FileUploader from "../FileUploader";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
+import React from "react";
 
 function FormController({
   isUpdate,
@@ -97,6 +98,15 @@ function FormController({
     }
   }
 
+  async function handleCancel(e: React.MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation()
+    if (!isUpdate) {
+      form.reset()
+      return;
+    }
+    navigate('/')
+  }
+
   return (
     <div>
       <Form {...form}>
@@ -161,7 +171,9 @@ function FormController({
             )}
           />
           <div className="flex items-center justify-end gap-4">
-            <Button className="shad-button_dark_4">Cancel</Button>
+            <Button className="shad-button_dark_4"
+            onClick={(e) => handleCancel(e)}
+            >Cancel</Button>
             <Button className="shad-button_primary" type="submit">
               {isCreatePostIsLoading || isUpdatePostIsLoading ? (
                 <div className="flex-center gap-2">

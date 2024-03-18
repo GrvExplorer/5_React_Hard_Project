@@ -12,6 +12,7 @@ import { string } from "zod";
 import {
   createPost,
   createUserAccount,
+  deletePost,
   getAllUsers,
   getPostById,
   getRecentPosts,
@@ -47,8 +48,8 @@ export const useSignOutAccount = () => {
 export const useGetUserSaves = (userId: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_USER_SAVE_POSTS],
-    queryFn: () => getUserSaves(userId)
-  })
+    queryFn: () => getUserSaves(userId),
+  });
 };
 
 export const useGetUserPosts = () => {
@@ -62,7 +63,6 @@ export const useGetUserDetails = () => {
 export const useSetUserDetails = () => {
   return;
 };
-
 
 export const useGetUserLikes = () => {
   return;
@@ -140,3 +140,10 @@ export function useGetPostById(postId: string) {
     enabled: !!postId,
   });
 }
+
+export const useDeletePost = () => {
+  return useMutation({
+    mutationFn: (postId: string, postImageId: string) =>
+      deletePost(postId, postImageId),
+  });
+};

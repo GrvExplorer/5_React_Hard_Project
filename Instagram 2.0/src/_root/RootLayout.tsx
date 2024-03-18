@@ -39,7 +39,7 @@ function RootLayout() {
 
 
   return (
-    <div className="grid grid-cols-2 gap-10 ">
+    <div className="grid grid-cols-3 gap-10 ">
       <div className="hidden w-80 flex-col justify-between bg-dark-3  pb-4 pl-8 pt-10 md:flex fixed h-screen left-0 top-0">
         <div className="mr-8 flex flex-col gap-20">
           <Link to="/" className="w-80">
@@ -107,7 +107,7 @@ function RootLayout() {
         </div>
       </div>
       <div className=""></div>
-      <div className="mt-10 mb-8 w-full">
+      <div className="mt-10 mb-8 w-full col-start-2 col-end-4">
         <Outlet />
       </div>
     </div>

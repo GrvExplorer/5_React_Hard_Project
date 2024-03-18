@@ -25,7 +25,7 @@
 ### Futher development
 
 
--  updatePost Api function , deletePost, post details, 
+- deletePost, post details, 
 - Saved page ( show save of current user )
 - Home page
 - User fun likes and saves 
@@ -47,12 +47,13 @@
 -  Post UI 
 -  update post 
 -  Save of post 
--  Form component , edit component, invalidating on edit post
+-  Form component , edit component, invalidating on edit post, updatePost Api function 
+
 
 ### TODO's: 
 
-  - TODO: updatePost Api function ( refactor ) 4:32:55
-  - TODO: post details , deletePost
+  - TODO: Grid in css and tailwindcss
+  - TODO: post details , deletePost (half) 
   - TODO: Save Page ( show save of current user )
   - TODO: Explore Page
   - TODO: Search Post
