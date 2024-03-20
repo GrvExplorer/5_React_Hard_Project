@@ -22,12 +22,8 @@
 - React-dropzone for file uploading
 - Shadcn UI
 
-### Futher development
+### Further development
 
-
-- deletePost, post details, 
-- Saved page ( show save of current user )
-- Home page
 - User fun likes and saves 
 - User Profile page
 - People Pages 
@@ -47,16 +43,19 @@
 -  Post UI 
 -  update post 
 -  Save of post 
--  Form component , edit component, invalidating on edit post, updatePost Api function 
+-  Form component , edit component, invalidating on edit post, updatePost Api function
+- deletePost, post details, 
+- Saved page ( show save of current user )
+- Home page
 
 
 ### TODO's: 
 
-  - TODO: Grid in css and tailwindcss
-  - TODO: post details , deletePost (half) 
-  - TODO: Save Page ( show save of current user )
   - TODO: Explore Page
   - TODO: Search Post
+  - TODO: People Page
+  - TODO: User Profile
+  - TODO: Follow
 
 # Acknowledgements 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')

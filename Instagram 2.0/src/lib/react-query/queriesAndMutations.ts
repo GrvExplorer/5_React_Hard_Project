@@ -47,7 +47,7 @@ export const useSignOutAccount = () => {
 
 export const useGetUserSaves = (userId: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.GET_USER_SAVE_POSTS],
+    queryKey: [QUERY_KEYS.GET_USER_SAVE_POSTS, userId],
     queryFn: () => getUserSaves(userId),
   });
 };

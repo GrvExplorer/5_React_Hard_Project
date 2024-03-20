@@ -7,6 +7,7 @@ import {
   useSetPostSaves,
 } from "@/lib/react-query/queriesAndMutations";
 import { checkLiked } from "@/lib/utils";
+import { useQueryClient } from "@tanstack/react-query";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -17,9 +18,14 @@ type PostStatsProp = {
 };
 
 function PostStats({ post, userId }: PostStatsProp) {
+
+  const { user } = useUserContext()
+
   const likesList = post.likes.map((user: Models.Document) => user.$id);
   const saveList = post.save.map(({user}: Models.Document) => user.$id);
   const saveArray = [...saveList]
+
+  const cache = useQueryClient()
 
   const [likes, setLikes] = useState<string[]>(likesList);
   const [isSaved, setIsSaved] = useState(false);
@@ -61,6 +67,9 @@ function PostStats({ post, userId }: PostStatsProp) {
     }
     setIsSaved(true);
     setPostSave({ post: post.$id, user: userId })
+    cache.invalidateQueries({
+      queryKey: ['getUserSavePosts', user.id]
+    })
   }
 
   return (

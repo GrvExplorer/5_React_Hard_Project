@@ -11,6 +11,7 @@ import {
   NotFound,
   People,
   PostDetails,
+  ProfilePage,
   Saved,
   UpdatePost,
 } from "./_root/pages";
@@ -39,6 +40,7 @@ function App() {
             element={<UpdatePost />}
           />
           <Route path="/post-details/:postId" element={<PostDetails />} />
+          <Route path="/profile/:profileId" element={<ProfilePage />} />
           
         </Route>
 
