@@ -27,11 +27,13 @@
 - User fun likes and saves 
 - User Profile page
 - People Pages 
+- Edit Profile of user
 - Follow and unfollow
 - See others save and likes
 - Root layout 
 - Explore Page
 - Search Post
+- Other Sign in options 
 
 ### My Progress
 
@@ -56,6 +58,10 @@
   - TODO: People Page
   - TODO: User Profile
   - TODO: Follow
+  - TODO: Edit Profile
+  - TODO: Verify emails
+  - TODO: Other Auth
+  - TODO: Responsive and UX
 
 # Acknowledgements 
 - [JavaScript Mastery]('https://youtu.be/_W3R2VwRyF4?si=4WSsg16rxEsbIUV-')

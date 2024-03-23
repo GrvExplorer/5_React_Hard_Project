@@ -321,7 +321,22 @@ export async function updatePost(post: IUpdatePost) {
   }
 }
 
-export async function getPopularPosts() {}
+export async function getPopularPosts() {
+try {
+  const popular = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.postCollectionId,
+  )
+
+  if (!popular) throw new Error
+
+  return popular;
+  
+} catch (error) {
+  console.log(error);
+}
+
+}
 
 export async function setPostLikes(postId: string, likesArray: string[]) {
   try {

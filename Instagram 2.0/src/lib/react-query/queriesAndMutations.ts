@@ -14,6 +14,7 @@ import {
   createUserAccount,
   deletePost,
   getAllUsers,
+  getPopularPosts,
   getPostById,
   getRecentPosts,
   getUserSaves,
@@ -94,7 +95,10 @@ export const useGetRecentPosts = () => {
 };
 
 export const useGetPopularPosts = () => {
-  return;
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_POPULAR_POSTS],
+    queryFn: getPopularPosts
+  })
 };
 export const useSetPostLikes = () => {
   return useMutation({

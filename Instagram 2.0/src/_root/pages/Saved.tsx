@@ -9,7 +9,10 @@ function Saved() {
   const { user } = useUserContext();
   const { data, isLoading } = useGetUserSaves(user.id);
 
+  console.log(data);
+  
   return (
+
     <>
       <div className="">
         <h1 className="mb-10 text-3xl font-bold">Save Page</h1>

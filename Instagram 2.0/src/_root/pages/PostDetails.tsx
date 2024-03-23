@@ -8,13 +8,14 @@ import {
 import { multiFormatDateString } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function PostDetails() {
   const { postId } = useParams();
   const cache = useQueryClient();
 
   const { toast } = useToast();
+  const navigate = useNavigate()
 
   const { user } = useUserContext();
   const { data: post, isLoading: postDetailsLoading } = useGetPostById(
@@ -22,6 +23,9 @@ function PostDetails() {
   );
 
   const { mutateAsync: deletePost } = useDeletePost();
+
+  console.log(post);
+  
 
   return (
     <>
@@ -31,7 +35,11 @@ function PostDetails() {
         </div>
       ) : (
         <>
-          <div className="flex flex-col gap-4 md:flex-row pr-8 ">
+          <div className="mb-8 flex gap-3 cursor-pointer" onClick={() => navigate(-1)}>
+            <img src="/assets/icons/back.svg" alt="back" className="" />
+            <p className="">Back</p>
+          </div>
+          <div className="flex flex-col gap-4 pr-8 md:flex-row ">
             <div className="">
               <img
                 src={post?.imageUrl || "/assets/icons/profile-placeholder.svg"}
@@ -39,7 +47,7 @@ function PostDetails() {
                 className="post-card_img"
               />
             </div>
-            <div className="flex flex-col md:w-420 justify-between px-6 py-2 border rounded-2xl border-gray-700 ">
+            <div className="flex flex-col justify-between rounded-2xl border border-gray-700 px-6 py-2 md:w-420 ">
               <div className="">
                 {/* creator  */}
                 <div className="flex-between">
@@ -111,7 +119,6 @@ function PostDetails() {
                   </div>
                 </div>
 
-                <Link to={`/post-details/${post?.$id}`}>
                   <div className="small-medium lg:base-medium py-5">
                     {/* Caption and tags */}
                     <p className="">{post?.caption}</p>
@@ -126,7 +133,7 @@ function PostDetails() {
                       ))}
                     </ul>
                   </div>
-                </Link>
+      
               </div>
               <PostStats post={post} userId={user.id} />
             </div>
