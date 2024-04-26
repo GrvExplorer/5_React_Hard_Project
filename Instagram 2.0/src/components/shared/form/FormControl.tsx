@@ -16,8 +16,8 @@ import { CreatePostValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Models } from "appwrite";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
-import { string, z } from "zod";
+import { useNavigate} from "react-router-dom";
+import { z } from "zod";
 import FileUploader from "../FileUploader";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ function FormController({
   data
 }: {
   isUpdate: boolean;
-  data: Models.Document;
+  data: Models.Document | undefined;
 }) {
   const { user } = useUserContext();
   const { toast } = useToast();
@@ -90,7 +90,7 @@ function FormController({
     } catch (error) {
       console.log(error);
       toast({
-        title: `${error.message}`,
+        title: `${error?.message}`,
         description:
           "This may due to file extension allowed type is .png, .svg, .jpg, .jpge",
         variant: "destructive",

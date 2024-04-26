@@ -357,7 +357,7 @@ export async function setPostLikes(postId: string, likesArray: string[]) {
     console.log(error);
   }
 }
-export async function setPostSaves(post: string, user: string) {
+export async function setPostSaves(post: string | undefined, user: string) {
   try {
     const postSaved = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -392,7 +392,7 @@ export async function setDeletePostSaves(postId: string) {
   }
 }
 
-export async function deletePost(postId: string, postImageId: string) {
+export async function deletePost(postId: string | undefined, postImageId: string) {
   try {
 
     const deletedPhoto = deleteFile(postImageId)

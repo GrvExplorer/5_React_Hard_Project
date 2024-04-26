@@ -113,7 +113,7 @@ export const useSetPostLikes = () => {
 };
 export const useSetPostSaves = () => {
   return useMutation({
-    mutationFn: ({ post, user }: { post: string; user: string }) =>
+    mutationFn: ({ post, user }: { post: string | undefined; user: string }) =>
       setPostSaves(post, user),
   });
 };
@@ -147,7 +147,7 @@ export function useGetPostById(postId: string) {
 
 export const useDeletePost = () => {
   return useMutation({
-    mutationFn: (postId: string, postImageId: string) =>
+    mutationFn: (postId: string | undefined, postImageId: string) =>
       deletePost(postId, postImageId),
   });
 };

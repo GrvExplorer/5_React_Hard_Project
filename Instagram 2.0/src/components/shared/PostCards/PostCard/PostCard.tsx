@@ -6,7 +6,7 @@ import PostStats from "./PostStats";
 import { useQueryClient } from "@tanstack/react-query";
 
 type PostCardProps = {
-  post: Models.Document;
+  post: Models.Document | undefined;
 };
 
 function PostCard({ post }: PostCardProps) {

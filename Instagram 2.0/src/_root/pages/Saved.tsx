@@ -1,4 +1,4 @@
-import PostCard from "@/components/shared/PostCards/PostCard/PostCard";
+
 import SaveCard from "@/components/ui/SaveCard";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserSaves } from "@/lib/react-query/queriesAndMutations";

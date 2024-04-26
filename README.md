@@ -1,5 +1,5 @@
 # 5 Hard Project
-    Give it a ⭐ if you like this project.
+    Give it a ⭐ if you like these project.
 
 ### 1. YouTube 2.0
 <p align="left"> <a href="https://youtube-2-0-livid.vercel.app" target="_blank" rel="noreferrer"> <img src="./assets/youtube_banner.png" alt="banner" /> </a> </p>
@@ -16,6 +16,9 @@ Basic Stage Completed Add Features Later On ( refactor)
 
 ### 4. Instagram 2.0
 
-    working on this starting date: 28/01/2024
+<p align="left"> <a href="" target="_blank" rel="noreferrer"> <img src="./assets/instagram_banner.png" alt="banner" /> </a> </p>
+Basic Stage Completed Add Features Later On (refactor)
 
-### 5. Crypto 2.0
+
+### 5. Admin Dashboard
+    Starts At 26/04/2024

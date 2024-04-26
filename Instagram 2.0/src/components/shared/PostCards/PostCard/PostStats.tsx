@@ -13,7 +13,7 @@ import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 type PostStatsProp = {
-  post: Models.Document;
+  post: Models.Document | undefined;
   userId: string;
 };
 
@@ -21,8 +21,8 @@ function PostStats({ post, userId }: PostStatsProp) {
 
   const { user } = useUserContext()
 
-  const likesList = post.likes.map((user: Models.Document) => user.$id);
-  const saveList = post.save.map(({user}: Models.Document) => user.$id);
+  const likesList = post?.likes.map((user: Models.Document) => user.$id);
+  const saveList = post?.save.map(({user}: Models.Document) => user.$id);
   const saveArray = [...saveList]
 
   const cache = useQueryClient()
@@ -52,7 +52,7 @@ function PostStats({ post, userId }: PostStatsProp) {
       likesArray.push(userId);
     }
     setLikes(likesArray);
-    setPostLike({ postId: post.$id, likesArray });
+    setPostLike({ postId: post?.$id, likesArray });
   }
 
   
