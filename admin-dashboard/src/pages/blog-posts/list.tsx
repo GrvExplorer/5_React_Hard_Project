@@ -7,11 +7,12 @@ import {
   ShowButton,
   useTable,
 } from "@refinedev/antd";
-import { BaseRecord } from "@refinedev/core";
+import { BaseRecord, useList } from "@refinedev/core";
 import { Space, Table } from "antd";
 import { POSTS_LIST_QUERY } from "./queries";
 
 export const BlogPostList = () => {
+
   const { tableProps } = useTable({
     syncWithLocation: true,
     meta: {
