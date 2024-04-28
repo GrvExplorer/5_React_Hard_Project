@@ -33,8 +33,8 @@ import {
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { dataProvider, liveProvider } from "./providers/data";
 import { authProvider } from "./providers/auth";
+import { dataProvider, liveProvider } from "./providers/data";
 
 function App() {
   return (
@@ -83,55 +83,25 @@ function App() {
                 <Route
                   element={
                     <Authenticated
-                      key="authenticated-inner"
+                      key="authenticated-layout"
                       fallback={<CatchAllNavigate to="/login" />}
-                    >
-                      <ThemedLayoutV2
-                      // Header={}
-                      >
-                        <Outlet />
-                      </ThemedLayoutV2>
-                    </Authenticated>
+                    />
                   }
                 >
-                  <Route
-                    index
-                    element={<NavigateToResource resource="blog_posts" />}
-                  />
-                  <Route path="/blog-posts">
-                    <Route index element={<BlogPostList />} />
-                    <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
-                    <Route path="show/:id" element={<BlogPostShow />} />
-                  </Route>
-                  <Route path="/categories">
-                    <Route index element={<CategoryList />} />
-                    <Route path="create" element={<CategoryCreate />} />
-                    <Route path="edit/:id" element={<CategoryEdit />} />
-                    <Route path="show/:id" element={<CategoryShow />} />
-                  </Route>
-                  <Route path="*" element={<ErrorComponent />} />
+                  
                 </Route>
-                <Route
-                  element={
-                    <Authenticated
-                      key="authenticated-outer"
-                      fallback={<Outlet />}
-                    >
-                      <NavigateToResource />
-                    </Authenticated>
-                  }
-                >
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
-                </Route>
+
+                <Route index element={<BlogPostShow />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
               </Routes>
 
               <RefineKbar />
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
+
             <DevtoolsPanel />
           </DevtoolsProvider>
         </AntdApp>
