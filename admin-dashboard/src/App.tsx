@@ -4,7 +4,7 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
   ErrorComponent,
-  ThemedLayoutV2,
+  ThemedLayoutHeaderV2,
   ThemedSiderV2,
   useNotificationProvider,
 } from "@refinedev/antd";
@@ -18,6 +18,7 @@ import routerBindings, {
 } from "@refinedev/react-router-v6";
 import { App as AntdApp } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import LayoutHeader from "./components/layout";
 import {
   BlogPostCreate,
   BlogPostEdit,
@@ -83,15 +84,18 @@ function App() {
                 <Route
                   element={
                     <Authenticated
-                      key="authenticated-layout"
+                      key="authenticated-layout-header"
                       fallback={<CatchAllNavigate to="/login" />}
-                    />
+                    >
+                      <LayoutHeader>
+                        <Outlet />
+                      </LayoutHeader>
+                    </Authenticated>
                   }
                 >
-                  
+                  <Route index element={<BlogPostShow />}></Route>
                 </Route>
 
-                <Route index element={<BlogPostShow />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />

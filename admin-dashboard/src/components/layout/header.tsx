@@ -1,5 +1,5 @@
 import CurrentUser from "./current-user"
-function header() {
+function Header() {
   return (
     <div>
       <CurrentUser />
@@ -7,4 +7,4 @@ function header() {
   )
 }
 
-export default header
+export default Header

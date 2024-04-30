@@ -1,11 +1,11 @@
 import { AuthProvider } from "@refinedev/core";
 
 export const authCredentials = {
-email: 'michael.scott@dundermifflin.com',
-password: 'demodemo',
-}
+  email: "michael.scott@dundermifflin.com",
+  password: "demodemo",
+};
 
-const TOKEN_KEY = 'refine-auth'
+const TOKEN_KEY = "refine-auth";
 
 export const authProvider: AuthProvider = {
   register: async ({ username, email, password }) => {
@@ -54,13 +54,13 @@ export const authProvider: AuthProvider = {
       };
     }
     return null;
-  }, 
-  
+  },
+
   logout: async () => {
-    localStorage.removeItem(TOKEN_KEY)
+    localStorage.removeItem(TOKEN_KEY);
     return {
       success: true,
-      redirectTo: '/login'
+      redirectTo: "/login",
     };
   },
 

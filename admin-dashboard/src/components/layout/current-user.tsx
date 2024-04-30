@@ -1,9 +1,14 @@
-
 import { SettingOutlined } from "@ant-design/icons";
 import { useGetIdentity } from "@refinedev/core";
 import { Button, Popover } from "antd";
+import { useState } from "react";
+import { AccountSettings } from "./account-setting";
+import CustomAvatar from "./custom-avatar";
+import { User } from ''
 
 function CurrentUser() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { data: user } = useGetIdentity<User>();
 
   const content = (
     <div
@@ -26,7 +31,7 @@ function CurrentUser() {
           icon={<SettingOutlined />}
           type="text"
           block
-          // onClick={() => setIsOpen(true)}
+          onClick={() => setIsOpen(true)}
         >
           Account Settings
         </Button>
@@ -43,7 +48,19 @@ function CurrentUser() {
         overlayStyle={{ zIndex: 999 }}
         content={content}
       >
-Joe Do
+        <CustomAvatar
+          name={user?.name}
+          src={user?.avatarUrl}
+          size="default"
+          style={{ cursor: "pointer" }}
+        />
+        {/* {user && (
+          <AccountSettings
+            opened={isOpen}
+            setOpened={setIsOpen}
+            userId={user?.id}
+          />
+        )} */}
       </Popover>
     </>
   );

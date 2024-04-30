@@ -8,6 +8,7 @@ import {
 import { useShow } from "@refinedev/core";
 import { Typography } from "antd";
 import { POST_SHOW_QUERY } from "./queries";
+import { Outlet } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -23,6 +24,7 @@ export const BlogPostShow = () => {
 
   return (
     <Show isLoading={isLoading}>
+      <Outlet />
       <Title level={5}>{"ID"}</Title>
       <NumberField value={record?.id ?? ""} />
       <Title level={5}>{"Title"}</Title>
