@@ -2,12 +2,7 @@ import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
-import {
-  ErrorComponent,
-  ThemedLayoutHeaderV2,
-  ThemedSiderV2,
-  useNotificationProvider,
-} from "@refinedev/antd";
+import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
 import routerBindings, {
@@ -19,23 +14,15 @@ import routerBindings, {
 import { App as AntdApp } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import LayoutHeader from "./components/layout";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
-import { ForgotPassword } from "./pages/forgotPassword";
-import { Login } from "./pages/login";
-import { Register } from "./pages/register";
+import { resources } from "./config/resources";
+import { ForgotPassword } from "./pages/_auth/forgotPassword";
+import { Login } from "./pages/_auth/login";
+import { Register } from "./pages/_auth/register";
+import { Companies } from "./pages/companies";
+import { Home } from "./pages/home";
 import { authProvider } from "./providers/auth";
 import { dataProvider, liveProvider } from "./providers/data";
+import List from "./pages/tasks/list";
 
 function App() {
   return (
@@ -47,31 +34,10 @@ function App() {
             <Refine
               dataProvider={dataProvider}
               liveProvider={liveProvider}
+              authProvider={authProvider}
+              resources={resources}
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
-              authProvider={authProvider}
-              resources={[
-                {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-                {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-              ]}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
@@ -93,7 +59,18 @@ function App() {
                     </Authenticated>
                   }
                 >
-                  <Route index element={<BlogPostShow />}></Route>
+                  <Route index element={<Home />} />
+                  <Route path="/companies" element={<Companies />}></Route>
+                  <Route
+                    path="/tasks"
+                    element={
+                      <List>
+                        <Outlet />
+                      </List>
+                    }
+                  >
+
+                  </Route>
                 </Route>
 
                 <Route path="/login" element={<Login />} />
@@ -105,7 +82,6 @@ function App() {
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
-
             <DevtoolsPanel />
           </DevtoolsProvider>
         </AntdApp>

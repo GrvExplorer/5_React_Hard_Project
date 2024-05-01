@@ -5,7 +5,7 @@ import { CATEGORY_SHOW_QUERY } from "./queries";
 
 const { Title } = Typography;
 
-export const CategoryShow = () => {
+export const Companies = () => {
   const { queryResult } = useShow({
     meta: {
       gqlQuery: CATEGORY_SHOW_QUERY,

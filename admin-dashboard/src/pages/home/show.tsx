@@ -12,7 +12,7 @@ import { Outlet } from "react-router-dom";
 
 const { Title } = Typography;
 
-export const BlogPostShow = () => {
+export const Home = () => {
   const { queryResult } = useShow({
     meta: {
       gqlQuery: POST_SHOW_QUERY,

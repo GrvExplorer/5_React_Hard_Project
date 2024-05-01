@@ -4,7 +4,7 @@ import { Button, Popover } from "antd";
 import { useState } from "react";
 import { AccountSettings } from "./account-setting";
 import CustomAvatar from "./custom-avatar";
-import { User } from ''
+import { User } from 'graphql/schema.types'
 
 function CurrentUser() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,13 +54,13 @@ function CurrentUser() {
           size="default"
           style={{ cursor: "pointer" }}
         />
-        {/* {user && (
+        {user && (
           <AccountSettings
             opened={isOpen}
             setOpened={setIsOpen}
             userId={user?.id}
           />
-        )} */}
+        )}
       </Popover>
     </>
   );

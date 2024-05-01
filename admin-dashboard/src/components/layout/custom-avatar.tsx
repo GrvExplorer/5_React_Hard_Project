@@ -1,5 +1,5 @@
 import { Avatar as AntdAvatar, AvatarProps } from 'antd'
-import { getNameInitials } from '../../utils/get-name-initials';
+import { getNameInitials } from '../../utilities/get-name-initials';
 
 type Props = AvatarProps & {
   name?: string;
